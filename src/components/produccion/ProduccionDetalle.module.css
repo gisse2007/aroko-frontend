@@ -1,0 +1,85 @@
+.wrapper { display: flex; flex-direction: column; gap: 16px; }
+
+.badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.registrada { background: #e6f9f0; color: #1a9e5c; }
+.anulada    { background: #fdecea; color: #d93025; }
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.infoItem { display: flex; align-items: flex-start; gap: 10px; }
+
+.infoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #e0f6fc;
+  color: #3BBEDA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.infoLabel { font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+.infoValue { font-size: 0.88rem; color: #0D0D0D; font-weight: 600; }
+
+.obs { background: #f8fafc; border-radius: 8px; padding: 10px 14px; }
+.obsLabel { font-size: 0.72rem; color: #999; text-transform: uppercase; margin-bottom: 4px; }
+.obsValue { font-size: 0.875rem; color: #333; }
+
+.motivoWrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #fdecea;
+  border-left: 4px solid #d93025;
+  border-radius: 6px;
+  padding: 10px 14px;
+  color: #d93025;
+  font-size: 0.9rem;
+}
+.motivoLabel { font-size: 0.72rem; text-transform: uppercase; margin-bottom: 2px; font-weight: 700; }
+.motivoValue { font-size: 0.875rem; color: #8b1a14; }
+
+.sectionTitle {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0D0D0D;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tableWrap { overflow-x: auto; }
+
+.table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.table th {
+  background: #f7f8fa;
+  padding: 7px 10px;
+  text-align: left;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: #888;
+  font-weight: 700;
+  border-bottom: 2px solid #eef0f3;
+}
+.table td { padding: 8px 10px; border-bottom: 1px solid #f2f3f5; color: #0D0D0D; }
+.table tr:last-child td { border-bottom: none; }
+.negStock { color: #d93025; font-weight: 700; }
+
+.histNote { font-size: 0.72rem; color: #aaa; margin-top: 6px; font-style: italic; }
+
+@media (max-width: 480px) { .infoGrid { grid-template-columns: 1fr; } }

@@ -1,0 +1,806 @@
+/* ════════════════════════════════════════════════════════
+   NAVBAR — Barra de navegación principal
+   Fuente: Plus Jakarta Sans
+
+   Accesibilidad (WCAG AA): el navbar usa fondo "glass" claro
+   permanente con texto chocolate (#3D1C02) — ratio > 10:1 sobre
+   el hero claro. Los botones teal usan #17809e para que el texto
+   blanco alcance 4.6:1.
+   Sin framer-motion: overlay/drawer animados con transiciones CSS.
+   ════════════════════════════════════════════════════════ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px clamp(20px, 4.5vw, 72px);
+  background: rgba(255, 253, 251, 0.82);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-bottom: 1px solid rgba(61, 28, 2, 0.06);
+  color: #3D1C02;
+  transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.3s ease;
+}
+
+.nav.scrolled {
+  padding: 13px clamp(20px, 4.5vw, 72px);
+  background: rgba(255, 253, 251, 0.96);
+  box-shadow: 0 1px 0 rgba(61, 28, 2, 0.06), 0 12px 40px rgba(23, 34, 63, 0.07);
+}
+
+/* ── Logo ── */
+.logoBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.logo {
+  height: 46px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.logoBtn:hover .logo {
+  transform: scale(1.04);
+}
+
+/* ── Links desktop ── */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: inherit;
+  letter-spacing: 0.01em;
+  padding: 8px 14px;
+  border-radius: 10px;
+  transition: color 0.22s ease, background 0.22s ease, transform 0.2s ease;
+}
+
+.link:hover {
+  background: rgba(61, 28, 2, 0.06);
+  color: #3D1C02;
+  transform: translateY(-1px);
+}
+
+.nav.scrolled .link:hover {
+  background: rgba(59, 190, 218, 0.10);
+  color: #15708c;
+}
+
+.linkUnderline {
+  position: absolute;
+  bottom: 6px;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background: #15708c;
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s ease;
+}
+
+.link:hover .linkUnderline {
+  transform: scaleX(1);
+}
+
+/* ── Acciones ── */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── Carrito ── */
+.cartBtn {
+  position: relative;
+  background: rgba(61, 28, 2, 0.05);
+  border: 1px solid rgba(61, 28, 2, 0.12);
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #3D1C02;
+  transition: background 0.22s, border-color 0.22s, transform 0.2s;
+}
+
+.cartBtn:hover {
+  background: #17809e;
+  border-color: #17809e;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.cartIcon {
+  font-size: 1rem;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #D81B60;
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border: 2px solid #fff;
+  line-height: 1;
+  animation: badgePop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes badgePop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+/* ── Botón Login ── */
+.loginBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: transparent;
+  border: 1.5px solid rgba(61, 28, 2, 0.16);
+  border-radius: 999px;
+  padding: 11px 20px;
+  min-height: 44px;
+  color: #3D1C02;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: all 0.22s ease;
+}
+
+.loginBtn:hover {
+  background: rgba(61, 28, 2, 0.06);
+  border-color: rgba(61, 28, 2, 0.28);
+  transform: translateY(-1px);
+}
+
+/* ── Botón Registrarse ──
+   #17809e garantiza contraste 4.6:1 con texto blanco (WCAG AA) */
+.registerBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #17809e;
+  border: none;
+  border-radius: 999px;
+  padding: 11px 20px;
+  min-height: 44px;
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  box-shadow: 0 6px 22px rgba(23, 128, 158, 0.30);
+  transition: all 0.22s ease;
+}
+
+.registerBtn:hover {
+  background: #116d85;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(23, 128, 158, 0.38);
+}
+
+.btnIcon {
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* ── Hamburguesa ── */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  width: 40px;
+  height: 40px;
+}
+
+.burger span {
+  display: block;
+  height: 2.5px;
+  border-radius: 999px;
+  background: #3D1C02;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+  transform-origin: center;
+}
+
+.burger span:nth-child(1) { width: 22px; }
+.burger span:nth-child(2) { width: 15px; }
+.burger span:nth-child(3) { width: 22px; }
+
+.burgerOpen span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  width: 22px;
+}
+.burgerOpen span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.burgerOpen span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  width: 22px;
+}
+
+/* ════════════════════════════════════════════════════════
+   OVERLAY + DRAWER MÓVIL (transiciones CSS, sin framer-motion)
+   ════════════════════════════════════════════════════════ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 198;
+  background: rgba(26, 10, 0, 0.52);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.overlayOpen {
+  opacity: 1;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 199;
+  width: min(320px, 85vw);
+  background: #FDF8F0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -8px 0 60px rgba(61, 28, 2, 0.18);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 22px;
+  border-bottom: 1px solid rgba(61, 28, 2, 0.08);
+  background: #fff;
+}
+
+.drawerLogo {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+}
+
+.closeDrawer {
+  background: rgba(61, 28, 2, 0.06);
+  border: none;
+  border-radius: 9px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  color: #3D1C02;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.closeDrawer:hover {
+  background: rgba(61, 28, 2, 0.12);
+}
+
+.drawerNav {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 18px 12px;
+  gap: 4px;
+  flex: 1;
+}
+
+.drawerLink {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #3D1C02;
+  text-align: left;
+  padding: 13px 16px;
+  border-radius: 12px;
+  transition: background 0.18s, color 0.18s;
+  animation: drawerLinkIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes drawerLinkIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.drawerLink:hover {
+  background: rgba(59, 190, 218, 0.09);
+  color: #15708c;
+}
+
+.drawerActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px 28px;
+  border-top: 1px solid rgba(61, 28, 2, 0.08);
+}
+
+.drawerCartBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(61, 28, 2, 0.05);
+  border: 1px solid rgba(61, 28, 2, 0.10);
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3D1C02;
+  cursor: pointer;
+  transition: background 0.18s;
+  position: relative;
+}
+
+.drawerCartBtn:hover {
+  background: rgba(61, 28, 2, 0.09);
+}
+
+.drawerBadge {
+  background: #D81B60;
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  margin-left: auto;
+}
+
+.drawerLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  border: 1.5px solid rgba(61, 28, 2, 0.18);
+  border-radius: 12px;
+  padding: 13px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3D1C02;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+}
+
+.drawerLogin:hover {
+  background: rgba(61, 28, 2, 0.05);
+  border-color: rgba(61, 28, 2, 0.32);
+}
+
+/* Texto blanco sobre #17809e = 4.6:1 (WCAG AA) */
+.drawerRegister {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #17809e;
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.18s;
+  box-shadow: 0 4px 16px rgba(23, 128, 158, 0.28);
+}
+
+.drawerRegister:hover {
+  background: #116d85;
+}
+
+/* ════════════════════════════════════════════════════════
+   PERFIL CLIENTE
+   ════════════════════════════════════════════════════════ */
+.clienteMenu {
+  position: relative;
+}
+
+.clienteBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(61, 28, 2, 0.05);
+  border: 1px solid rgba(61, 28, 2, 0.10);
+  border-radius: 12px;
+  padding: 6px 10px 6px 6px;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+}
+
+.clienteBtnScrolled {
+  background: rgba(61, 28, 2, 0.05);
+  border-color: rgba(61, 28, 2, 0.10);
+}
+
+.clienteBtn:hover,
+.clienteBtnOpen {
+  background: rgba(61, 28, 2, 0.08);
+  border-color: rgba(61, 28, 2, 0.18);
+}
+
+.clienteAvatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #17809e 0%, #116d85 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.clienteAvatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.clienteBtnInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  max-width: 130px;
+}
+
+.clienteNombre {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.79rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1a0a00;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;
+}
+
+.clienteCorreo {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.68rem;
+  line-height: 1.2;
+  color: rgba(61, 28, 2, 0.66);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;
+}
+
+.clienteChevron {
+  font-size: 0.72rem;
+  color: rgba(61, 28, 2, 0.55);
+  transition: transform 0.18s ease;
+  flex-shrink: 0;
+  margin-left: 2px;
+}
+
+.clienteChevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ── Dropdown perfil ── */
+.clienteDropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 230px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 8px 28px rgba(0, 0, 0, 0.10),
+    0 2px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.97);
+  transform-origin: top right;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.clienteDropdownOpen {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.ddHeader {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px 15px 12px;
+}
+
+.ddAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #17809e 0%, #116d85 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #fff;
+  overflow: hidden;
+}
+
+.ddMeta {
+  min-width: 0;
+}
+
+.ddName {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ddEmail {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.72rem;
+  color: #64748b;
+  margin: 2px 0 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ddDivider {
+  height: 1px;
+  background: #f1f5f9;
+  margin: 0;
+}
+
+.ddItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #374151;
+  text-align: left;
+  transition: background 0.12s, color 0.12s;
+}
+
+.ddItem:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.ddItemIcon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.ddItem:hover .ddItemIcon {
+  color: #15708c;
+}
+
+.ddItemLogout {
+  color: #64748b;
+}
+
+.ddItemLogout:hover {
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+.ddItemLogout:hover .ddItemIcon {
+  color: #e11d48;
+}
+
+/* ── Drawer perfil ── */
+.drawerProfile {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 14px;
+  background: rgba(59, 190, 218, 0.07);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 190, 218, 0.14);
+  margin-bottom: 4px;
+}
+
+.drawerProfileAvatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #17809e 0%, #116d85 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #fff;
+  overflow: hidden;
+}
+
+.drawerProfileMeta {
+  min-width: 0;
+}
+
+.drawerProfileName {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #3D1C02;
+  margin: 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drawerProfileEmail {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.72rem;
+  color: #6d5643;
+  margin: 2px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drawerLogout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid #fecdd3;
+  border-radius: 10px;
+  padding: 11px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #be123c;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.drawerLogout:hover {
+  background: #fff1f2;
+  border-color: #fca5a5;
+}
+
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════ */
+@media (max-width: 960px) {
+  .loginBtn span:not(.btnIcon),
+  .registerBtn span:not(.btnIcon) {
+    display: none;
+  }
+
+  .loginBtn,
+  .registerBtn {
+    padding: 10px 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .links,
+  .loginBtn,
+  .registerBtn {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartBadge,
+  .drawerLink {
+    animation: none;
+  }
+  .drawer,
+  .overlay {
+    transition: none;
+  }
+}

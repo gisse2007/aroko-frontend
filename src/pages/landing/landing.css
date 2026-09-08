@@ -1,0 +1,26 @@
+/* ================================================
+   LANDING ROOT — reset limpio
+   El contenedor principal no hace nada especial,
+   cada sección se encarga de su propio layout.
+================================================ */
+
+:root {
+  --lf:   'Plus Jakarta Sans', system-ui, sans-serif;
+  --lc1:  #3BBEDA;   /* azul principal */
+  --lc1d: #2a9cbf;   /* azul oscuro    */
+  --lc2:  #3D1C02;   /* chocolate      */
+  --lc3:  #C47A2B;   /* caramelo       */
+  --lc4:  #F5C97A;   /* dorado         */
+  --lbg:  #FDF8F0;   /* crema          */
+  --lm:   #7e6a57;   /* muted          */
+  --lb:   rgba(61,28,2,0.08); /* borde */
+  --lmax: 1200px;
+}
+
+.landingRoot {
+  font-family: var(--lf);
+  color: var(--lc2);
+  background: #fffdfb;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}

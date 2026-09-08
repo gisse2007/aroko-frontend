@@ -1,0 +1,58 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.estadoBadge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.estadoBadge[data-estado="Activo"]   { background: #e6f9f0; color: #1a9e5c; }
+.estadoBadge[data-estado="Inactivo"] { background: #fdecea; color: #d93025; }
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f2f3f5;
+}
+
+.row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.rowIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #e0f6fc;
+  color: #3BBEDA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rowLabel {
+  font-size: 0.72rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+
+.rowValue {
+  font-size: 0.9rem;
+  color: #0D0D0D;
+  font-weight: 500;
+}
+
+.empty { color: #ccc; font-style: italic; font-weight: 400; }

@@ -1,0 +1,79 @@
+.toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  left: auto;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  box-shadow: var(--soft-shadow);
+  animation: slideIn 0.25s ease;
+  max-width: min(380px, calc(100vw - 32px));
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success {
+  background: #e6f9f0;
+  color: #1a6e45;
+  border-left: 4px solid #1a9e5c;
+}
+
+.error {
+  background: #fdecea;
+  color: #8b1a14;
+  border-left: 4px solid var(--danger);
+}
+
+.info {
+  background: #e0f6fc;
+  color: #1a6a80;
+  border-left: 4px solid var(--accent);
+}
+
+.icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.message {
+  flex: 1;
+}
+
+.close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.65;
+  display: flex;
+  padding: 2px;
+  border-radius: 6px;
+}
+
+.close:hover {
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .toast {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+  }
+}

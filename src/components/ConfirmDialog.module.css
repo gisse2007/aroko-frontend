@@ -1,0 +1,141 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 150;
+  padding: 16px;
+  backdrop-filter: blur(2px);
+}
+
+.dialog {
+  background: #fff;
+  border-radius: 14px;
+  padding: 32px 28px 24px;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  animation: pop 0.2s ease;
+}
+
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.iconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.danger  { background: #fdecea; color: #d93025; }
+.warning { background: #fff8e1; color: #e6a817; }
+
+.message {
+  font-size: 0.95rem;
+  color: #0D0D0D;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.actions { display: flex; gap: 10px; width: 100%; }
+
+.cancelBtn {
+  flex: 1;
+  padding: 9px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  color: #555;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.cancelBtn:hover { background: #f4f4f4; }
+
+.confirmBtn {
+  flex: 1;
+  padding: 9px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  color: #fff;
+}
+.confirmBtn.danger  { background: #d93025; }
+.confirmBtn.warning { background: #e6a817; }
+.confirmBtn:hover   { opacity: 0.88; }
+
+/* ── Responsive Design ── */
+@media (max-width: 768px) {
+  .dialog {
+    max-width: 100%;
+    padding: 24px 20px 18px;
+    gap: 14px;
+  }
+
+  .iconWrap {
+    width: 48px;
+    height: 48px;
+    font-size: 1.3rem;
+  }
+
+  .message {
+    font-size: 0.9rem;
+  }
+
+  .cancelBtn,
+  .confirmBtn {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay {
+    padding: 12px;
+  }
+
+  .dialog {
+    max-width: 100%;
+    padding: 20px 16px 14px;
+    gap: 12px;
+    border-radius: 12px;
+  }
+
+  .iconWrap {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+  }
+
+  .message {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+
+  .cancelBtn,
+  .confirmBtn {
+    padding: 7px;
+    font-size: 0.75rem;
+    border-radius: 6px;
+  }
+}

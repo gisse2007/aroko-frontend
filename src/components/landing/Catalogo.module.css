@@ -1,0 +1,530 @@
+/* ════════════════════════════════════════════════════════
+   CATÁLOGO — Sección de productos
+   Fuente: Plus Jakarta Sans
+════════════════════════════════════════════════════════ */
+
+.section {
+  background: #FDF8F0;
+  padding: 96px 0 120px;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 72px);
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #15708c; /* 5.6:1 sobre #FDF8F0 (WCAG AA) */
+  margin-bottom: 14px;
+}
+
+.title {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-weight: 800;
+  color: #3D1C02;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+
+.title em {
+  color: #C47A2B;
+  font-style: normal;
+}
+
+.subtitle {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.97rem;
+  font-weight: 400;
+  color: #6d5643; /* 6.5:1 sobre #FDF8F0 (WCAG AA) — antes #8B6F5E (4.4:1) */
+  line-height: 1.8;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ── Filtros ── */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.searchWrap {
+  position: relative;
+  max-width: 480px;
+  width: 100%;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6d5643;
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  background: #fff;
+  border: 1.5px solid rgba(61, 28, 2, 0.10);
+  border-radius: 999px;
+  padding: 13px 18px 13px 44px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #3D1C02;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.searchInput::placeholder {
+  color: #B89A80;
+}
+
+.searchInput:focus {
+  border-color: #3BBEDA;
+  box-shadow: 0 0 0 4px rgba(59, 190, 218, 0.12);
+}
+
+.cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.catBtn {
+  background: #fff;
+  border: 1.5px solid rgba(61, 28, 2, 0.10);
+  border-radius: 999px;
+  padding: 9px 20px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #8B6F5E;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.catBtn:hover {
+  border-color: #3BBEDA;
+  color: #3BBEDA;
+  background: rgba(59, 190, 218, 0.07);
+}
+
+.catActive {
+  background: #3D1C02;
+  border-color: #3D1C02;
+  color: #fff;
+}
+
+.catActive:hover {
+  background: #4e2405;
+  border-color: #4e2405;
+  color: #fff;
+}
+
+/* ── Sort select ── */
+.sortSelect {
+  background: #fff;
+  border: 1.5px solid rgba(61, 28, 2, 0.10);
+  border-radius: 999px;
+  padding: 9px 38px 9px 20px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #8B6F5E;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%238B6F5E' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.sortSelect:focus {
+  border-color: #3BBEDA;
+}
+
+/* ── Contador de resultados ── */
+.resultCount {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #6d5643; /* WCAG AA sobre #FDF8F0 */
+  margin-bottom: 20px;
+}
+
+/* ── Grid de productos ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+  width: 100%;
+}
+
+/* ── Card producto ── */
+@keyframes cardFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(61, 28, 2, 0.07);
+  box-shadow: 0 8px 28px rgba(23, 34, 63, 0.07);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  display: flex;
+  flex-direction: column;
+  animation: cardFadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 50px rgba(23, 34, 63, 0.11);
+}
+
+.imgWrap {
+  position: relative;
+  height: 230px;
+  overflow: hidden;
+  background: #f8efe2;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.55s ease;
+}
+
+.card:hover .img {
+  transform: scale(1.06);
+}
+
+.imgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      transparent 50%,
+      rgba(16, 8, 0, 0.22) 100%);
+}
+
+.tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(59, 190, 218, 0.13);
+  color: #3BBEDA;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Cuerpo ── */
+.body {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.cardCat {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.70rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9a5a17; /* 5.4:1 sobre blanco (WCAG AA) — antes #C47A2B (3.4:1) */
+}
+
+.name {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #3D1C02;
+  line-height: 1.3;
+  flex: 1;
+  letter-spacing: -0.01em;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(61, 28, 2, 0.06);
+}
+
+.price {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #3D1C02;
+  letter-spacing: -0.02em;
+}
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #3D1C02;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 11px 22px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.22s ease, transform 0.2s ease, box-shadow 0.22s ease;
+  box-shadow: 0 6px 20px rgba(61, 28, 2, 0.15);
+  white-space: nowrap;
+}
+
+.addBtn:hover {
+  background: #17809e;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(23, 128, 158, 0.34);
+}
+
+/* Feedback de tap (reemplaza whileTap de framer-motion) */
+.addBtn:active {
+  transform: scale(0.92);
+}
+
+.addedBtn {
+  background: #16a34a !important;
+  box-shadow: 0 4px 16px rgba(22, 163, 74, 0.28) !important;
+}
+
+/* ── No resultados ── */
+.noResults {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #6d5643;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.95rem;
+  padding: 48px 0;
+}
+
+/* ── Estado vacío ── */
+.emptyState {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 64px 0;
+  color: #6d5643; /* WCAG AA sobre #FDF8F0 */
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Fade-in del estado vacío (reemplaza motion.div) */
+.emptyStateAnim {
+  animation: emptyFadeIn 0.3s ease both;
+}
+
+@keyframes emptyFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.emptyIcon {
+  font-size: 2.8rem;
+}
+
+/* ── Estado error ── */
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 64px 0;
+  color: #e11d48;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.retryBtn {
+  margin-top: 4px;
+  background: #3D1C02;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 28px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.retryBtn:hover {
+  opacity: 0.82;
+}
+
+/* ── Ver más ── */
+.verMasWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 52px;
+}
+
+.verMasBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #3D1C02;
+  border: 2px solid rgba(61, 28, 2, 0.14);
+  border-radius: 999px;
+  padding: 14px 40px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.verMasBtn:hover:not(:disabled) {
+  background: #3D1C02;
+  color: #fff;
+  border-color: #3D1C02;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(61, 28, 2, 0.15);
+}
+
+.verMasBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Spinner inline ── */
+.btnSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Skeleton ── */
+.skeletonCard {
+  pointer-events: none;
+}
+
+.skeletonImg {
+  background: linear-gradient(90deg, #f0ece4 25%, #e8e2d8 50%, #f0ece4 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeletonLine {
+  border-radius: 8px;
+  background: linear-gradient(90deg, #f0ece4 25%, #e8e2d8 50%, #f0ece4 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .searchWrap {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .section {
+    padding: 72px 0 88px;
+  }
+
+  .header {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
+    gap: 12px;
+  }
+
+  .addBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ── Accesibilidad: respetar preferencia de movimiento reducido ── */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .emptyStateAnim {
+    animation: none;
+  }
+}

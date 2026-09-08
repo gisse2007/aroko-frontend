@@ -1,0 +1,80 @@
+.page { display: flex; flex-direction: column; gap: 20px; }
+
+/* ── Encabezado ── */
+.header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.title  { font-size: 1.25rem; font-weight: 700; color: #0D0D0D; }
+
+.addBtn {
+  background: #3BBEDA; color: #fff; border: none; border-radius: 8px;
+  padding: 9px 20px; font-size: 0.875rem; font-weight: 600; cursor: pointer;
+  transition: background 0.15s;
+}
+.addBtn:hover { background: #2aa8c4; }
+
+/* ── Filtros ── */
+.filters { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.searchWrap { position: relative; flex: 1; min-width: 200px; }
+
+.searchIcon {
+  position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+  color: #aaa; font-size: 1rem; pointer-events: none;
+}
+
+.searchInput {
+  width: 100%; padding: 9px 13px 9px 34px;
+  border: 1.5px solid #e0e0e0; border-radius: 8px;
+  font-size: 0.875rem; color: #0D0D0D; outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.searchInput:focus { border-color: #3BBEDA; box-shadow: 0 0 0 3px rgba(59,190,218,0.15); }
+
+.select {
+  padding: 9px 13px; border: 1.5px solid #e0e0e0; border-radius: 8px;
+  font-size: 0.875rem; color: #0D0D0D; background: #fff; outline: none;
+  cursor: pointer; min-width: 160px; transition: border-color 0.18s;
+}
+.select:focus { border-color: #3BBEDA; }
+
+/* ── Badges ── */
+.badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+.activa   { background: #e6f9f0; color: #1a9e5c; }
+.inactiva { background: #fdecea; color: #d93025; }
+
+.empty { color: #6b7280; font-style: italic; }
+
+/* ── Cabeceras ordenables ── */
+.sortBtn {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  font-size: 0.75rem; font-weight: 700; color: #4b5563;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  padding: 0; transition: color 0.15s;
+}
+.sortBtn:hover { color: #3BBEDA; }
+
+.sortIconActive   { color: #3BBEDA; font-size: 0.75rem; }
+.sortIconInactive { color: #9ca3af; font-size: 0.75rem; }
+
+/* ── Toggle estado ── */
+.toggleBtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border: none; border-radius: 8px;
+  cursor: pointer; font-size: 1.1rem; transition: background 0.15s, transform 0.1s;
+}
+.toggleBtn:hover   { transform: scale(1.1); }
+.toggleActiva      { background: #e6f9f0; color: #1a9e5c; }
+.toggleInactiva    { background: #fdecea; color: #d93025; }
+
+/* ── Paginación ── */
+.pagination { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+.pageBtn {
+  padding: 7px 16px; border: 1.5px solid #e0e0e0; border-radius: 8px;
+  background: #fff; font-size: 0.82rem; font-weight: 600; cursor: pointer;
+  color: #0D0D0D; transition: background 0.15s, border-color 0.15s;
+}
+.pageBtn:hover:not(:disabled) { background: #e0f6fc; border-color: #3BBEDA; color: #3BBEDA; }
+.pageBtn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.pageInfo { font-size: 0.82rem; color: #666; }

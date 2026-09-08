@@ -1,0 +1,179 @@
+/* ════════════════════════════════════════════════════════
+   FOOTER — Pie de página
+   Fuente: Plus Jakarta Sans
+════════════════════════════════════════════════════════ */
+
+.footer {
+  background: #100800;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 88px 0 0;
+  width: 100%;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 48px;
+  padding: 0 clamp(20px, 5vw, 72px) 52px;
+  align-items: start;
+}
+
+/* ── Marca ── */
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.logo {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+}
+
+.tagline {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.82;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 300px;
+}
+
+.socials {
+  display: flex;
+  gap: 10px;
+}
+
+.social {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  color: rgba(255, 255, 255, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: background 0.22s, color 0.22s, border-color 0.22s, transform 0.2s;
+}
+
+.social:hover {
+  background: #3BBEDA;
+  border-color: #3BBEDA;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ── Columnas ── */
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.colTitle {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62); /* ~8:1 sobre #100800 (WCAG AA) — antes 0.38 (3.7:1) */
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  padding: 0;
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #3BBEDA;
+}
+
+/* ── Contacto ── */
+.contact {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.72;
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: #3BBEDA;
+  font-size: 0.9rem;
+}
+
+.contactLink {
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  transition: color 0.2s ease;
+}
+
+.contactLink:hover {
+  color: #3BBEDA;
+}
+
+/* ── Bottom bar ── */
+.bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 22px clamp(20px, 5vw, 72px) 24px;
+  text-align: center;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55); /* ~6.5:1 sobre #100800 (WCAG AA) — antes 0.28 (2.6:1) */
+  letter-spacing: 0.01em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+  .brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding-top: 64px;
+  }
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}

@@ -1,0 +1,93 @@
+.page { display: flex; flex-direction: column; gap: 20px; }
+
+/* ── KPI ── */
+.kpi {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  border-left: 4px solid #3BBEDA;
+}
+
+.kpiIcon { font-size: 1.8rem; color: #3BBEDA; flex-shrink: 0; }
+.kpiLabel { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+.kpiValue { font-size: 1.4rem; font-weight: 700; color: #0D0D0D; }
+
+/* ── Encabezado ── */
+.header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.title  { font-size: 1.25rem; font-weight: 700; color: #0D0D0D; }
+
+.addBtn {
+  background: #3BBEDA; color: #fff; border: none; border-radius: 8px;
+  padding: 9px 20px; font-size: 0.875rem; font-weight: 600; cursor: pointer;
+  transition: background 0.15s;
+}
+.addBtn:hover { background: #2aa8c4; }
+
+/* ── Filtros ── */
+.filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+.searchWrap { position: relative; flex: 1; min-width: 220px; }
+
+.searchIcon {
+  position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+  color: #aaa; font-size: 1rem; pointer-events: none;
+}
+
+.searchInput {
+  width: 100%; padding: 9px 34px 9px 34px;
+  border: 1.5px solid #e0e0e0; border-radius: 8px;
+  font-size: 0.875rem; color: #0D0D0D; outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.searchInput:focus { border-color: #3BBEDA; box-shadow: 0 0 0 3px rgba(59,190,218,0.15); }
+
+.clearBtn {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: #aaa; cursor: pointer;
+  font-size: 1rem; display: flex; align-items: center;
+}
+.clearBtn:hover { color: #d93025; }
+
+.searchBtn {
+  padding: 9px 16px; background: #3BBEDA; color: #fff; border: none;
+  border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer;
+  transition: background 0.15s; white-space: nowrap;
+}
+.searchBtn:hover { background: #2aa8c4; }
+
+.select, .dateInput {
+  padding: 9px 12px; border: 1.5px solid #e0e0e0; border-radius: 8px;
+  font-size: 0.875rem; color: #0D0D0D; background: #fff; outline: none;
+  cursor: pointer; transition: border-color 0.18s;
+}
+.select    { min-width: 150px; }
+.dateInput { min-width: 135px; }
+.select:focus, .dateInput:focus { border-color: #3BBEDA; }
+
+.searchError { font-size: 0.8rem; color: #d93025; font-weight: 500; margin-top: -10px; }
+
+/* ── Badges ── */
+.badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+.activa  { background: #e6f9f0; color: #1a9e5c; }
+.anulada { background: #fdecea; color: #d93025; }
+
+/* ── Acciones por fila ── */
+.rowActions { display: flex; gap: 5px; align-items: center; }
+
+.actionBtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border: none; border-radius: 7px;
+  cursor: pointer; font-size: 1rem;
+  transition: background 0.15s, transform 0.1s;
+}
+.actionBtn:hover { transform: scale(1.1); }
+
+.anularBtn { background: #fdecea; color: #d93025; }
+.anularBtn:hover { background: #fbd5d2; }
+
+.pdfBtn { background: #fff3e0; color: #D0A279; }
+.pdfBtn:hover { background: #ffe8c8; }

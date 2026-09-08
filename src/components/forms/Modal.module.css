@@ -1,0 +1,161 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  background: var(--surface);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 580px;
+  max-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  animation: slideUp 0.22s ease;
+}
+
+.modal[data-size="lg"] {
+  max-width: 860px;
+}
+
+.modal[data-size="xl"] {
+  max-width: 1100px;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.closeBtn {
+  background: #f4f4f4;
+  border: none;
+  border-radius: 10px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+  font-size: 1rem;
+  transition: background 0.15s;
+}
+
+.closeBtn:hover {
+  background: #fdecea;
+  color: var(--danger);
+}
+
+.body {
+  padding: 24px 24px 26px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ── Responsive Design ── */
+@media (max-width: 768px) {
+  .overlay {
+    padding: 16px;
+  }
+
+  .modal {
+    max-width: 100%;
+    max-height: calc(100vh - 32px);
+    border-radius: 12px;
+  }
+
+  .modal[data-size="lg"] {
+    max-width: 100%;
+  }
+
+  .modal[data-size="xl"] {
+    max-width: 100%;
+  }
+
+  .header {
+    padding: 14px 16px;
+  }
+
+  .title {
+    font-size: 0.95rem;
+  }
+
+  .closeBtn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.95rem;
+  }
+
+  .body {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay {
+    padding: 10px;
+    align-items: flex-end;
+  }
+
+  .modal {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+  }
+
+  .modal[data-size="lg"],
+  .modal[data-size="xl"] {
+    max-width: 100%;
+  }
+
+  .header {
+    padding: 12px 14px;
+  }
+
+  .title {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .closeBtn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+
+  .body {
+    padding: 12px 14px;
+  }
+}

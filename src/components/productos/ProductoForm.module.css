@@ -1,0 +1,454 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Grid principal ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+/* ── Label genérico ── */
+.label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+/* ── Upload de imagen ── */
+.fileInput {
+  display: none;
+}
+
+.uploadZone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 120px;
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  background: #f9fafb;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  padding: 20px;
+  text-align: center;
+}
+
+.uploadZone:hover {
+  border-color: #3BBEDA;
+  background: #f0fbfe;
+}
+
+.uploadZoneActive {
+  border-color: #3BBEDA;
+  background: #e0f6fc;
+}
+
+.uploadIcon {
+  font-size: 1.6rem;
+  color: #9ca3af;
+  transition: color 0.18s;
+}
+
+.uploadZone:hover .uploadIcon {
+  color: #3BBEDA;
+}
+
+.uploadText {
+  font-size: 0.82rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.uploadHint {
+  font-size: 0.72rem;
+  color: #9ca3af;
+}
+
+/* ── Preview imagen ── */
+.previewWrap {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid #e0e8f0;
+  background: #f8fafc;
+}
+
+.previewImg {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+.previewOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.previewLabel {
+  font-size: 0.72rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+.previewChangBtn {
+  font-size: 0.72rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  padding: 3px 9px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+
+.previewChangBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Sección receta ── */
+.recetaSection {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.recetaHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 16px;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sectionTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.sectionTitleIcon {
+  color: #3BBEDA;
+  font-size: 1rem;
+}
+
+.recetaBody {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.noInsumos {
+  font-size: 0.82rem;
+  color: #6b7280;
+  font-style: italic;
+  text-align: center;
+  padding: 8px 0;
+}
+
+/* ── Fila agregar insumo ── */
+.recetaRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.insumoSelect {
+  flex: 2;
+  min-width: 160px;
+  padding: 9px 12px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 9px;
+  font-size: 0.84rem;
+  color: #111827;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  font-family: inherit;
+}
+
+.insumoSelect:focus {
+  border-color: #3BBEDA;
+  box-shadow: 0 0 0 3px rgba(59, 190, 218, 0.14);
+}
+
+.numInput {
+  flex: 1;
+  min-width: 100px;
+  padding: 9px 12px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 9px;
+  font-size: 0.84rem;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  font-family: inherit;
+}
+
+.numInput:focus {
+  border-color: #3BBEDA;
+  box-shadow: 0 0 0 3px rgba(59, 190, 218, 0.14);
+}
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  background: #3BBEDA;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  font-family: inherit;
+}
+
+.addBtn:hover {
+  background: #2aa8c4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 190, 218, 0.3);
+}
+
+.addBtn:active {
+  transform: translateY(0);
+}
+
+/* ── Mensajes feedback ── */
+.msgOk {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  color: #166534;
+  font-weight: 600;
+  background: #dcfce7;
+  padding: 6px 10px;
+  border-radius: 7px;
+}
+
+.msgError {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  color: #991b1b;
+  font-weight: 500;
+  background: #fef2f2;
+  padding: 6px 10px;
+  border-radius: 7px;
+}
+
+/* ── Tabla receta ── */
+.tableWrap {
+  overflow-x: auto;
+  border-radius: 9px;
+  border: 1px solid #e2e8f0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+}
+
+.table thead tr {
+  background: #f1f5f9;
+}
+
+.table th {
+  padding: 9px 12px;
+  text-align: left;
+  font-size: 0.71rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #374151;
+  font-weight: 700;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #111827;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background: #f0fbfe;
+}
+
+/* ── Badge unidad en tabla ── */
+.unitBadge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #0e7490;
+  background: #e0f6fc;
+  padding: 1px 7px;
+  border-radius: 20px;
+  margin-left: 5px;
+}
+
+/* ── Botón eliminar fila ── */
+.removeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.removeBtn:hover {
+  background: #fecaca;
+  transform: scale(1.08);
+}
+
+/* ── Contador receta ── */
+.recetaCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  background: #3BBEDA;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+/* ── Acciones ── */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.cancelBtn {
+  background: #f1f5f9;
+  color: #374151;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 9px;
+  padding: 9px 22px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  font-family: inherit;
+}
+
+.cancelBtn:hover {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+.submitBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #3BBEDA;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  padding: 10px 26px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  font-family: inherit;
+  box-shadow: 0 1px 3px rgba(59, 190, 218, 0.25);
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #2aa8c4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(59, 190, 218, 0.35);
+}
+
+.submitBtn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submitBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── Spinner en submit ── */
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 560px) {
+  .grid { grid-template-columns: 1fr; }
+  .fullWidth { grid-column: 1; }
+  .recetaRow { flex-direction: column; }
+  .insumoSelect,
+  .numInput,
+  .addBtn { width: 100%; flex: none; }
+}

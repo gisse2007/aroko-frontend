@@ -1,0 +1,41 @@
+.tipoBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 16px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  background: #f4f4f4;
+  color: #555;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.tipoBtn:hover {
+  background: #e8f7fb;
+  border-color: #3BBEDA;
+  color: #2aa8c4;
+}
+
+.tipoBtnActivo {
+  background: #3BBEDA;
+  border-color: #3BBEDA;
+  color: #fff;
+}
+
+.tipoBtnActivo:hover {
+  background: #2aa8c4;
+  border-color: #2aa8c4;
+  color: #fff;
+}
+
+.tipoBtnIcon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}

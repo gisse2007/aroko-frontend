@@ -1,0 +1,69 @@
+.bg {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px 36px;
+  overflow: hidden;
+  background-color: #0D0D0D;
+}
+
+.bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(59, 190, 218, 0.14) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(196, 122, 43, 0.16) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-radius: 18px;
+  padding: 38px 32px 32px;
+  width: 100%;
+  max-width: 430px;
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+  animation: fadeUp 0.35s ease;
+}
+
+@media (max-width: 520px) {
+  .bg {
+    padding: 22px 16px 24px;
+  }
+
+  .card {
+    padding: 26px 20px 22px;
+    border-radius: 20px;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logoWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.logo {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+}

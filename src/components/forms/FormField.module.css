@@ -1,0 +1,121 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #374151;
+  letter-spacing: 0.02em;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  color: #0D0D0D;
+  background: var(--surface);
+  border: 1.5px solid #e0e0e0;
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  appearance: none;
+}
+
+.input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+}
+
+.input:hover,
+.textarea:hover,
+.select:hover {
+  border-color: #c0c0c0;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 190, 218, 0.15);
+}
+
+.inputError {
+  border-color: var(--danger) !important;
+  box-shadow: 0 0 0 3px rgba(217, 48, 37, 0.12) !important;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.error {
+  font-size: 0.78rem;
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.error::before {
+  content: "⚠ ";
+}
+
+/* ── Responsive Design ── */
+@media (max-width: 768px) {
+  .label {
+    font-size: 0.78rem;
+  }
+
+  .input,
+  .textarea,
+  .select {
+    padding: 9px 12px;
+    font-size: 0.85rem;
+    border-radius: 10px;
+  }
+
+  .textarea {
+    min-height: 80px;
+  }
+
+  .error {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .field {
+    gap: 6px;
+  }
+
+  .label {
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .input,
+  .textarea,
+  .select {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    border-width: 1.5px;
+  }
+
+  .textarea {
+    min-height: 70px;
+  }
+
+  .error {
+    font-size: 0.65rem;
+  }
+}

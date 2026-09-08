@@ -1,0 +1,171 @@
+:root {
+  /* Tipografía — una sola familia en todo el proyecto */
+  --font: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* Paleta base */
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --surface-soft: #f8f5ef;
+  --surface-warm: #FDF8F0;
+
+  /* Texto */
+  --text: #1f2937;
+  --text-muted: #4b5563;
+  --text-subtle: #6b7280;
+
+  /* Bordes */
+  --border: #e6e3dd;
+  --border-strong: #c7c3bb;
+  --border-soft: rgba(61, 28, 2, 0.08);
+
+  /* Acento principal — azul cálido */
+  --accent: #3BBEDA;
+  --accent-d: #2a9cbf;
+  --accent-soft: rgba(59, 190, 218, 0.14);
+  --accent-glow: rgba(59, 190, 218, 0.28);
+
+  /* Café / marca */
+  --chocolate: #3D1C02;
+  --caramel: #C47A2B;
+  --gold: #F5C97A;
+  --beige: #F5ECD7;
+  --cream: #FDF8F0;
+
+  /* Estados */
+  --danger: #e11d48;
+  --danger-soft: #fff1f2;
+  --success: #16a34a;
+  --success-soft: #f0fdf4;
+  --warning: #b45309;
+
+  /* Radio */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 999px;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 16px 40px rgba(15, 23, 42, 0.10);
+  --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.12);
+
+  /* Animaciones */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --duration-fast: 0.15s;
+  --duration: 0.25s;
+  --duration-slow: 0.4s;
+  --transition: var(--duration) var(--ease);
+
+  /* Layout */
+  --page-padding: 20px;
+  --max-width: 1200px;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
+  line-height: 1.7;
+  background-image: radial-gradient(circle at top left, rgba(59, 190, 218, 0.08), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(196, 122, 43, 0.06), transparent 28%);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  outline: none;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(59, 190, 218, 0.55);
+  outline-offset: 2px;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img,
+picture,
+svg,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: rgba(59, 190, 218, 0.2);
+  color: #1f2937;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.35);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.55);
+}

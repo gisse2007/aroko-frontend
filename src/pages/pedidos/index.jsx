@@ -1,0 +1,11 @@
+export const Pedidos = () => <h3>Pedidos</h3>;
+export const Clientes = () => <h3>Clientes</h3>;
+export const Abonos = () => <h3>Abonos</h3>;
+export const Devoluciones = () => <h3>Devoluciones</h3>;
+export const Ventas = () => <h3>Ventas</h3>;
+export const Productos = () => <h3>Productos</h3>;
+export const CategoriasProductos = () => <h3>Categoría de productos</h3>;
+export const Domicilio = () => <h3>Domicilio</h3>;
+export const Usuarios = () => <h3>Usuarios</h3>;
+export const Empleados = () => <h3>Empleados</h3>;
+export const Roles = () => <h3>Roles</h3>;

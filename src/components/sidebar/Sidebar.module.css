@@ -1,0 +1,401 @@
+/* Sidebar-scoped tokens — renamed to avoid overriding global --text */
+:root {
+  --sidebar-bg: #0D0D0D;
+  --sidebar-width: 232px;
+  --sidebar-collapsed: 58px;
+  --sidebar-active: #3BBEDA;
+  --sidebar-text: #ffffff;
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.06);
+  --sidebar-transition: 0.22s ease;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: width var(--sidebar-transition);
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  font-family: 'Inter', -apple-system, sans-serif;
+  z-index: 10;
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed);
+}
+
+/* ── Header ── */
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.logo {
+  height: 46px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.toggleBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  padding: 7px;
+  border-radius: 8px;
+  transition: background var(--sidebar-transition), color var(--sidebar-transition);
+  flex-shrink: 0;
+}
+
+.toggleBtn:hover {
+  background: var(--sidebar-hover-bg);
+  color: var(--sidebar-text);
+}
+
+/* ── Menu ── */
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+  scroll-behavior: smooth;
+}
+
+.menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menu::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 3px;
+}
+
+.menu::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.menuBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 16px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.82);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background var(--sidebar-transition), color var(--sidebar-transition);
+  white-space: nowrap;
+  font-family: inherit;
+  border-radius: 12px;
+  letter-spacing: 0.005em;
+}
+
+.menuBtn:hover {
+  background: var(--sidebar-hover-bg);
+  color: #ffffff;
+}
+
+.menuBtnActive,
+.menuBtn.active {
+  color: var(--sidebar-active);
+  background: rgba(59, 190, 218, 0.1);
+}
+
+.icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  display: flex;
+  opacity: 0.9;
+}
+
+.label {
+  flex: 1;
+  text-align: left;
+}
+
+.chevron {
+  font-size: 0.8rem;
+  display: flex;
+  opacity: 0.7;
+}
+
+/* ── Submenu ── */
+.submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.subLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px 9px 36px;
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 400;
+  transition: background var(--sidebar-transition), color var(--sidebar-transition);
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.subLink:hover {
+  background: var(--sidebar-hover-bg);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.subLink.active {
+  color: var(--sidebar-active);
+  border-left: 2px solid var(--sidebar-active);
+  padding-left: 34px;
+}
+
+/* ── Landing link ── */
+.landingWrap {
+  flex-shrink: 0;
+  padding: 10px 12px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.landingBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(59, 190, 218, 0.2);
+  background: rgba(59, 190, 218, 0.08);
+  color: rgba(59, 190, 218, 0.95);
+  font-size: 0.87rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+  font-family: inherit;
+}
+
+.landingBtn:hover {
+  background: rgba(59, 190, 218, 0.16);
+  border-color: rgba(59, 190, 218, 0.4);
+  color: #ffffff;
+}
+
+.landingIcon {
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    box-shadow: none;
+  }
+
+  .sidebar.collapsed {
+    width: 100%;
+  }
+
+  .sidebarHeader {
+    padding: 0 18px;
+  }
+
+  .landingWrap {
+    padding: 12px 18px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    box-shadow: none;
+  }
+
+  .sidebar.collapsed {
+    width: 100%;
+  }
+
+  .menu {
+    padding: 14px 0 16px;
+  }
+
+  .menuBtn {
+    padding: 12px 14px;
+    gap: 8px;
+  }
+
+  .subLink {
+    padding: 10px 14px 10px 36px;
+  }
+
+  .subLink.active {
+    padding-left: 34px;
+  }
+
+  .landingBtn {
+    gap: 8px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    position: relative;
+    height: auto;
+    box-shadow: none;
+  }
+
+  .sidebar.collapsed {
+    width: 100%;
+  }
+
+  .sidebarHeader {
+    padding: 0 12px;
+    height: 54px;
+  }
+
+  .logo {
+    height: 40px;
+  }
+
+  .toggleBtn {
+    padding: 6px;
+    font-size: 0.95rem;
+  }
+
+  .menu {
+    padding: 10px 0 12px;
+  }
+
+  .menuBtn {
+    padding: 10px 12px;
+    font-size: 0.75rem;
+    gap: 8px;
+  }
+
+  .label {
+    font-size: 0.75rem;
+  }
+
+  .icon {
+    font-size: 0.95rem;
+  }
+
+  .chevron {
+    font-size: 0.75rem;
+  }
+
+  .subLink {
+    padding: 8px 12px 8px 32px;
+    font-size: 0.7rem;
+    gap: 8px;
+  }
+
+  .subLink.active {
+    padding-left: 30px;
+  }
+
+  .landingWrap {
+    padding: 10px 10px 12px;
+  }
+
+  .landingBtn {
+    padding: 9px 11px;
+    font-size: 0.7rem;
+    border-radius: 10px;
+    gap: 7px;
+  }
+
+  .landingIcon {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .sidebar {
+    width: 100%;
+    position: relative;
+    height: auto;
+    box-shadow: none;
+  }
+
+  .sidebar.collapsed {
+    width: 100%;
+  }
+
+  .sidebarHeader {
+    height: 52px;
+    padding: 0 10px;
+  }
+
+  .logo {
+    height: 36px;
+  }
+
+  .toggleBtn {
+    padding: 5px;
+    font-size: 0.9rem;
+  }
+
+  .menu {
+    padding: 8px 0 10px;
+  }
+
+  .menuBtn {
+    padding: 8px 10px;
+    font-size: 0.7rem;
+    gap: 6px;
+  }
+
+  .subLink {
+    padding: 7px 10px 7px 28px;
+    font-size: 0.65rem;
+  }
+
+  .subLink.active {
+    padding-left: 26px;
+  }
+
+  .landingWrap {
+    padding: 8px 8px 10px;
+  }
+
+  .landingBtn {
+    padding: 8px 10px;
+    font-size: 0.65rem;
+    gap: 6px;
+  }
+}

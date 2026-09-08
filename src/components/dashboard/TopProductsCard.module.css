@@ -1,0 +1,90 @@
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px 20px;
+  border: 1px solid #e5e7eb;
+}
+
+.heading {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 16px;
+  letter-spacing: 0.01em;
+}
+
+.list { display: flex; flex-direction: column; gap: 13px; }
+
+.row { display: flex; align-items: flex-start; gap: 10px; }
+
+.rank {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #d1d5db;
+  width: 20px;
+  padding-top: 3px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.row:first-child .rank { color: #3BBEDA; }
+.row:nth-child(2) .rank { color: #94a3b8; }
+.row:nth-child(3) .rank { color: #b45309; }
+
+.info { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+
+.nameRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
+.sold { font-size: 0.7rem; color: #9ca3af; flex-shrink: 0; }
+
+.barTrack {
+  height: 4px;
+  background: #f3f4f6;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  background: #3BBEDA;
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  opacity: 0.7;
+}
+
+.stock { font-size: 0.68rem; color: #9ca3af; }
+
+.skeleton {
+  height: 40px;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.3s infinite;
+  border-radius: 7px;
+}
+
+.empty {
+  font-size: 0.82rem;
+  color: #9ca3af;
+  text-align: center;
+  padding: 24px 0;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

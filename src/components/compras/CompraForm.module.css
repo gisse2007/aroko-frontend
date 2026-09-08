@@ -1,0 +1,274 @@
+.form { display: flex; flex-direction: column; gap: 20px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* ── Upload ── */
+.uploadWrap { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+.uploadLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border: 1.5px dashed #3BBEDA;
+  border-radius: 8px;
+  color: #0e7490;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.uploadLabel:hover { background: #e0f6fc; }
+
+.fileInput { display: none; }
+.fileName  { font-size: 0.78rem; color: #374151; }
+
+/* ── Sección insumos ── */
+.insumoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.sectionTitle { font-size: 0.9rem; font-weight: 700; color: #111827; }
+
+.noInsumos { font-size: 0.82rem; color: #4b5563; font-style: italic; }
+
+.insumoRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 10px;
+  align-items: end;
+}
+
+/* Cada campo dentro de insumoRow lleva su propio label */
+.insumoField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.insumoRowBtn {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 4px;
+}
+
+.insumoLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.unidadBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  background: #e0f6fc;
+  color: #0e7490;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+/* ── Vista previa del cálculo ── */
+.previewCalc {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: #166534;
+}
+
+.previewIcon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.insumoSelect {
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: #111827;
+  background: #fff;
+  outline: none;
+  box-sizing: border-box;
+}
+.insumoSelect:focus { border-color: #3BBEDA; }
+
+.numInput {
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: #111827;
+  outline: none;
+  box-sizing: border-box;
+}
+.numInput:focus { border-color: #3BBEDA; box-shadow: 0 0 0 3px rgba(59,190,218,0.12); }
+
+.addInsumoBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 18px;
+  background: #3BBEDA;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.addInsumoBtn:hover { background: #2aa8c4; }
+
+@media (max-width: 900px) {
+  .insumoRow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid { grid-template-columns: 1fr; }
+  .insumoRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.insumoOk    { font-size: 0.78rem; color: #166534; font-weight: 600; }
+.detalleError { font-size: 0.78rem; color: #b91c1c; font-weight: 500; }
+
+/* ── Tabla insumos ── */
+.tableWrap { overflow-x: auto; }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.table th {
+  background: #f1f5f9;
+  padding: 7px 10px;
+  text-align: left;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: #374151;
+  font-weight: 700;
+}
+.table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #111827;
+}
+.table tr:last-child td { border-bottom: none; }
+.table tbody tr:hover   { background: #f0fbfe; }
+
+.removeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: #fdecea;
+  color: #b91c1c;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.15s;
+}
+.removeBtn:hover { background: #fbd5d2; }
+
+/* ── Totales ── */
+.totales {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  padding: 10px 4px 0;
+  font-size: 0.85rem;
+  color: #374151;
+  flex-wrap: wrap;
+}
+.totalFinal { font-size: 1rem; color: #111827; font-weight: 700; }
+
+/* ── Acciones ── */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 4px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.submitBtn {
+  background: #3BBEDA;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 24px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.submitBtn:hover:not(:disabled) { background: #2aa8c4; }
+.submitBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.cancelBtn {
+  background: #f1f5f9;
+  color: #374151;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.cancelBtn:hover { background: #e2e8f0; }
+
+/* ── DevolucionForm extras ── */
+.fullWidth { grid-column: 1 / -1; }
+
+.detalleEmpty {
+  font-size: 0.82rem;
+  color: #4b5563;
+  font-style: italic;
+  padding: 4px 0;
+}
+
+.maxHint {
+  font-size: 0.78rem;
+  color: #0e7490;
+  font-weight: 500;
+  margin-top: -4px;
+}
