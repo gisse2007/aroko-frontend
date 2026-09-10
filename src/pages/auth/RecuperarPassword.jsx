@@ -4,7 +4,8 @@ import {
   FiMail,
   FiArrowLeft,
   FiLock,
-  FiKey
+  FiKey,
+  FiShield,
 } from "react-icons/fi";
 
 import AuthLayout from "../../layouts/AuthLayout";
@@ -101,6 +102,11 @@ export default function RecuperarPassword() {
 
     <AuthLayout>
 
+      <div className={styles.authHeading}>
+        <span className={styles.authHeadingIcon}><FiShield /></span>
+        <span className={styles.authEyebrow}>Cuenta segura</span>
+      </div>
+
       <h2 className={styles.title}>
         Recuperar contraseña
       </h2>
@@ -110,6 +116,12 @@ export default function RecuperarPassword() {
           ? "Ingresa tu correo y te enviaremos un código"
           : "Ingresa el código y tu nueva contraseña"}
       </p>
+
+      <div className={styles.stepper} aria-label={`Paso ${step} de 2`}>
+        <span className={`${styles.step} ${step >= 1 ? styles.stepActive : ""}`}>1</span>
+        <span className={styles.stepLine} />
+        <span className={`${styles.step} ${step >= 2 ? styles.stepActive : ""}`}>2</span>
+      </div>
 
       <form
         onSubmit={
