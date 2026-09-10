@@ -76,7 +76,6 @@ export async function fetchCatalogo(params = {}) {
  * @param {{ limit?: number }} params
  * @returns {{ products: [] }}
  */
-export async function fetchNuevos({ limit = 8 } = {}) {
 export async function fetchNuevos({ limit = 6 } = {}) {
   const key = `nuevos:${limit}`;
 

@@ -280,7 +280,6 @@
 }
 
 /* ── Ver más ── */
-.verMasWrap {
 /* ── Carousel Controls & Track ── */
 .carouselContainer {
   position: relative;
@@ -338,7 +337,6 @@
 }
 
 /* Texto blanco sobre #17809e = 4.6:1 (WCAG AA) — antes #3BBEDA (2.2:1) */
-.verMasBtn {
 .carouselNavBtn:hover:not(:disabled) {
   background: #C47A2B;
   color: #fff;
@@ -397,34 +395,50 @@
   flex-wrap: wrap;
 }
 
-.btnTemporadaCta {
+.btnTemporadaCta,
+.btnNuevosCta,
+.verMasBtn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #17809e;
-  background: #15708c;
-  color: #fff;
-  border: none;
-  border: 1px solid #15708c;
   border-radius: 999px;
-  padding: 14px 42px;
   padding: 13px 32px;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 0.92rem;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(23, 128, 158, 0.28);
-  box-shadow: 0 8px 24px rgba(21, 112, 140, 0.26);
-  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, color 0.22s ease;
 }
 
+.btnTemporadaCta {
+  background: #15708c;
+  color: #fff;
+  border: 1px solid #15708c;
+  box-shadow: 0 8px 24px rgba(21, 112, 140, 0.26);
+}
+
+.btnNuevosCta,
+.verMasBtn {
+  background: #fff;
+  color: #c47a2b;
+  border: 1.5px solid #c47a2b;
+  box-shadow: 0 6px 20px rgba(196, 122, 43, 0.12);
+}
+
+.btnTemporadaCta:hover,
+.btnNuevosCta:hover,
 .verMasBtn:hover {
-  background: #116d85;
+  transform: translateY(-2px);
+}
+
 .btnTemporadaCta:hover {
   background: #0f5469;
-  transform: translateY(-2px);
-  box-shadow: 0 14px 36px rgba(23, 128, 158, 0.36);
-  box-shadow: 0 12px 30px rgba(21, 112, 140, 0.36);
+}
+
+.btnNuevosCta:hover,
+.verMasBtn:hover {
+  background: #c47a2b;
+  color: #fff;
 }
 
 /* ── Responsive ── */
@@ -433,33 +447,12 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 22px;
   }
-.btnNuevosCta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #fff;
-  color: #C47A2B;
-  border: 1.5px solid #C47A2B;
-  border-radius: 999px;
-  padding: 13px 32px;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  font-size: 0.92rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(196, 122, 43, 0.12);
-  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, color 0.22s ease;
 }
 
 @media (max-width: 720px) {
   .section {
     padding: 76px 0 68px;
   }
-.btnNuevosCta:hover {
-  background: #C47A2B;
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(196, 122, 43, 0.28);
-}
 
   .inner {
     padding: 0 18px;
@@ -479,12 +472,7 @@
   pointer-events: none;
 }
 
-.skeletonImg {
-  background: linear-gradient(90deg, #f0ece4 25%, #e8e2d8 50%, #f0ece4 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.4s infinite;
-}
-
+.skeletonImg,
 .skeletonLine {
   background: linear-gradient(90deg, #f0ece4 25%, #e8e2d8 50%, #f0ece4 75%);
   background-size: 200% 100%;

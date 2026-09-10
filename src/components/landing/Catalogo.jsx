@@ -1,7 +1,6 @@
 import { memo, useCallback, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 // Tree-shaking: iconos importados individualmente desde react-icons/fi
-import { FiSearch, FiShoppingCart, FiCheck, FiAlertCircle } from "react-icons/fi";
 import { FiSearch, FiShoppingCart, FiCheck, FiAlertCircle, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import styles from "./Catalogo.module.css";
 import CatalogoSkeleton from "./CatalogoSkeleton";

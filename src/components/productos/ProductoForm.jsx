@@ -6,7 +6,6 @@ import { resolveImageUrl } from "../../utils/image";
 import styles from "./ProductoForm.module.css";
 
 const REQUIRED = "Debe completar todos los campos requeridos.";
-const MAX_IMGS = 5;
 const MAX_IMGS = 3;
 
 /** Convierte el campo imagen (string o array) a array de URLs resueltas */
