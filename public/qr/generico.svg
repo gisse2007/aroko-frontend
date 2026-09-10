@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" role="img" aria-label="Código QR genérico">
+  <rect width="29" height="29" fill="#fff"/>
+  <g fill="#111">
+    <path d="M1 1h9v9H1zM3 3v5h5V3zM5 5h1v1H5zM19 1h9v9h-9zM21 3v5h5V3zM23 5h1v1h-1zM1 19h9v9H1zM3 21v5h5v-5zM5 23h1v1H5z"/>
+    <path d="M12 1h2v2h-2zM15 1h2v4h-2zM11 5h3v2h-3zM12 8h2v3h-2zM16 7h2v3h-2zM11 12h2v2h-2zM14 11h3v3h-3zM18 12h2v2h-2zM22 12h2v2h-2zM26 12h2v3h-2zM11 16h4v2h-4zM16 15h2v4h-2zM19 16h3v2h-3zM23 16h2v4h-2zM26 17h2v2h-2zM12 20h2v3h-2zM15 21h3v2h-3zM19 21h2v2h-2zM22 22h3v2h-3zM26 21h2v5h-2zM11 25h3v3h-3zM15 25h2v2h-2zM18 26h4v2h-4z"/>
+  </g>
+</svg>
