@@ -25,8 +25,11 @@ function getInitials(user) {
 }
 
 function isCliente(user) {
-  const rol = (user?.rol ?? user?.nombre_rol ?? "").toUpperCase();
-  return rol === "CLIENTE" || rol === "";
+  const rolSource = user?.rol ?? user?.nombre_rol ?? user?.rol_nombre ?? user?.role;
+  const rol = typeof rolSource === "object"
+    ? rolSource?.nombre ?? rolSource?.name ?? rolSource?.rol_nombre ?? ""
+    : rolSource;
+  return String(rol).trim().toUpperCase() === "CLIENTE" || !String(rol).trim();
 }
 
 /* ── ClienteMenu ── */
