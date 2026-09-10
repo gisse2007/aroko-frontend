@@ -7,7 +7,7 @@ export function useProveedores() {
   const [data, setData]                   = useState([]);
   const [loading, setLoading]             = useState(false);
   const [search, setSearch]               = useState("");
-  const [filterEstado, setFilterEstado]   = useState("");
+  const [filterEstado, setFilterEstado]   = useState("ACTIVO");
   const [page, setPage]                   = useState(1);
   const mountedRef = useRef(true);
 

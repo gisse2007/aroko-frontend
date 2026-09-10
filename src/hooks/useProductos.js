@@ -11,7 +11,7 @@ export function useProductos() {
 
   const [search, setSearch] = useState("");
   const [filterCategoria, setFilterCategoria] = useState("");
-  const [filterEstado, setFilterEstado] = useState("");
+  const [filterEstado, setFilterEstado] = useState("ACTIVO");
   const mountedRef = useRef(true);
 
   const fetchAll = useCallback(async () => {

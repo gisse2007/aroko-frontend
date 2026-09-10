@@ -7,7 +7,7 @@ export function useClientes() {
   const [data,        setData]        = useState([]);
   const [loading,     setLoading]     = useState(false);
   const [search,      setSearch]      = useState("");
-  const [filterEstado, setFilterEstado] = useState("");
+  const [filterEstado, setFilterEstado] = useState("ACTIVO");
   const mountedRef = useRef(true);
 
   const fetchAll = useCallback(async () => {

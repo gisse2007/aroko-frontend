@@ -125,12 +125,10 @@ export default function ProductoForm({
 
     // Agrega solo los archivos nuevos (File objects)
     const archivosNuevos = previews.filter((p) => p.file).map((p) => p.file);
-    if (archivosNuevos.length) {
-      archivosNuevos.forEach((f) => formData.append("imagenes", f));
-    } else if (!previews.length) {
-      // Sin imágenes — campo vacío para indicar que se elimina
-      formData.append("imagenes", "");
-    }
+    archivosNuevos.forEach((file) => formData.append("imagenes", file));
+    formData.append("imagenes_existentes", JSON.stringify(
+      previews.filter((preview) => !preview.file).map((preview) => preview.src)
+    ));
 
     onSubmit(formData, receta);
   };

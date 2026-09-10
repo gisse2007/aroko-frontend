@@ -5,7 +5,7 @@ export function useUsuarios() {
   const [data, setData]                   = useState([]);
   const [loading, setLoading]             = useState(false);
   const [search, setSearch]               = useState("");
-  const [filterEstado, setFilterEstado]   = useState("");
+  const [filterEstado, setFilterEstado]   = useState("ACTIVO");
   const [filterRol, setFilterRol]         = useState("");
   const mountedRef = useRef(true);
 
