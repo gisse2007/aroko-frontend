@@ -1,6 +1,8 @@
 import { memo, useCallback, useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 // Tree-shaking: iconos importados individualmente desde react-icons/fi
 import { FiSearch, FiShoppingCart, FiCheck, FiAlertCircle } from "react-icons/fi";
+import { FiSearch, FiShoppingCart, FiCheck, FiAlertCircle, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import styles from "./Catalogo.module.css";
 import CatalogoSkeleton from "./CatalogoSkeleton";
 import { useCatalogo } from "../../hooks/useCatalogo";
@@ -22,11 +24,34 @@ const ProductCard = memo(function ProductCard({ p, added, onAdd }) {
   const nombre    = p.nombre;
   const categoria = p.categoria_nombre;
   const precio    = Number(p.precio ?? 0);
+  const [imgIndex, setImgIndex] = useState(0);
 
   const imagen = resolveImageUrl(p.imagen) || 'https://placehold.co/400x300?text=Sin+imagen';
+  // Array de imágenes (máximo 3)
+  const rawList = Array.isArray(p.imagenes) && p.imagenes.length > 0
+    ? p.imagenes
+    : (p.imagen ? [p.imagen] : []);
+
+  const listaImagenes = rawList.slice(0, 3).map((img) => resolveImageUrl(img) || 'https://placehold.co/400x300?text=Sin+imagen');
+  const imagenActual = listaImagenes[imgIndex] || listaImagenes[0] || 'https://placehold.co/400x300?text=Sin+imagen';
 
   const handleAdd = () => {
     onAdd(p);
+  };
+
+  const handlePrevImg = (e) => {
+    e.stopPropagation();
+    setImgIndex((prev) => (prev === 0 ? listaImagenes.length - 1 : prev - 1));
+  };
+
+  const handleNextImg = (e) => {
+    e.stopPropagation();
+    setImgIndex((prev) => (prev === listaImagenes.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleDotClick = (idx, e) => {
+    e.stopPropagation();
+    setImgIndex(idx);
   };
 
   return (
@@ -35,6 +60,7 @@ const ProductCard = memo(function ProductCard({ p, added, onAdd }) {
       <div className={styles.imgWrap}>
         <img
           src={imagen}
+          src={imagenActual}
           alt={nombre}
           className={styles.img}
           loading="lazy"
@@ -43,6 +69,39 @@ const ProductCard = memo(function ProductCard({ p, added, onAdd }) {
           height="300"
         />
         <div className={styles.imgOverlay} />
+
+        {/* Mini-carrusel cuando hay más de una imagen */}
+        {listaImagenes.length > 1 && (
+          <>
+            <button
+              type="button"
+              className={`${styles.miniArrow} ${styles.miniArrowLeft}`}
+              onClick={handlePrevImg}
+              aria-label="Imagen anterior"
+            >
+              <FiChevronLeft />
+            </button>
+            <button
+              type="button"
+              className={`${styles.miniArrow} ${styles.miniArrowRight}`}
+              onClick={handleNextImg}
+              aria-label="Imagen siguiente"
+            >
+              <FiChevronRight />
+            </button>
+            <div className={styles.miniDots}>
+              {listaImagenes.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  className={`${styles.miniDot} ${imgIndex === idx ? styles.miniDotActive : ""}`}
+                  onClick={(e) => handleDotClick(idx, e)}
+                  aria-label={`Ver imagen ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       <div className={styles.body}>
@@ -67,6 +126,7 @@ const ProductCard = memo(function ProductCard({ p, added, onAdd }) {
   );
 });
 
+
 // ─── Componente principal ─────────────────────────────────────────────────────
 export default function Catalogo({ onAddToCart }) {
   const [categorias,  setCategorias]  = useState([{ id_categoria: 0, nombre: "Todos" }]);
@@ -83,6 +143,8 @@ export default function Catalogo({ onAddToCart }) {
       .catch(() => {});
   }, []);
 
+  const [searchParams] = useSearchParams();
+
   const {
     query,       setQuery,
     /* categoriaId intentionally unused */ setCategoriaId,
@@ -95,6 +157,14 @@ export default function Catalogo({ onAddToCart }) {
     verMas:      verMasSearch,
     isSearching,
   } = useCatalogoBusqueda();
+
+  // Si viene ?order_by=recientes en la URL, aplicarlo automáticamente
+  useEffect(() => {
+    const ob = searchParams.get("order_by");
+    if (ob) {
+      setOrderBy(ob);
+    }
+  }, [searchParams, setOrderBy]);
 
   const {
     productos, loading, loadingMore, hasMore, error: errorCatalogo, verMas,

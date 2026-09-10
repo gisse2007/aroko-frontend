@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { label: "Inicio",    action: "scroll", target: "inicio"    },
   { label: "Catálogo",  action: "route",  target: "/catalogo" },
   { label: "Novedades", action: "scroll", target: "novedades" },
+  { label: "Temporada", action: "route",  target: "/temporada" },
   { label: "Nosotros",  action: "route",  target: "/nosotros" },
 ];
 

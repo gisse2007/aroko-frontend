@@ -106,6 +106,7 @@ function AppRoutes() {
         {/* Públicas — lazy */}
         <Route path="/catalogo"  element={<CatalogoPage />} />
         <Route path="/nosotros"  element={<NosotrosPage />} />
+        <Route path="/temporada" element={<NovedadesPage />} />
         <Route path="/novedades" element={<NovedadesPage />} />
 
         {/* Perfil cliente */}

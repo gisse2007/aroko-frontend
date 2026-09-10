@@ -1,26 +1,58 @@
 import { useState } from "react";
+import { useState, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { FiShoppingCart, FiCheck } from "react-icons/fi";
+import { FiShoppingCart, FiCheck, FiPackage } from "react-icons/fi";
 import Navbar     from "../../components/landing/Navbar";
 import Footer     from "../../components/landing/Footer";
 import CartDrawer from "../../components/landing/CartDrawer";
 import CheckoutModal from "../../components/landing/CheckoutModal";
 import { useCart } from "../../context/CartContext";
+import { fetchTemporada } from "../../services/catalogoService";
+import { resolveImageUrl } from "../../utils/image";
 import "../landing/landing.css";
 import styles from "./NovedadesPage.module.css";
 
 const NOVEDADES = [];
+const PLACEHOLDER = "https://placehold.co/400x300?text=Sin+imagen";
+
 export default function NovedadesPage() {
   const { items, add, remove, updateQty, total, count, clear } = useCart();
   const [cartOpen,     setCartOpen]     = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [added,    setAdded]    = useState({});
+  const [products,     setProducts]     = useState([]);
+  const [loading,      setLoading]      = useState(true);
+  const [added,        setAdded]        = useState({});
+
+  useEffect(() => {
+    fetchTemporada()
+      .then((res) => {
+        setProducts(res.products ?? []);
+      })
+      .catch(() => {
+        setProducts([]);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   const handleAdd = (p) => {
     add(p);
     setAdded((prev) => ({ ...prev, [p.id]: true }));
     setTimeout(() => setAdded((prev) => ({ ...prev, [p.id]: false })), 1400);
+    const precio = Number(p.precio ?? 0);
+    add({
+      id:         p.id_producto,
+      name:       p.nombre,
+      price:      precio,
+      priceLabel: `$${precio.toLocaleString("es-CO")}`,
+      img:        resolveImageUrl(p.imagen) || PLACEHOLDER,
+    });
+    setAdded((prev) => ({ ...prev, [p.id_producto]: true }));
+    setTimeout(() => setAdded((prev) => ({ ...prev, [p.id_producto]: false })), 1400);
   };
 
   return (
@@ -37,6 +69,7 @@ export default function NovedadesPage() {
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             Lo más reciente
+            Edición especial
           </motion.span>
           <motion.h1
             className={styles.heroTitle}
@@ -44,6 +77,7 @@ export default function NovedadesPage() {
             transition={{ delay: 0.35, duration: 0.6 }}
           >
             Nuestras <em>novedades</em>
+            Nuestra <em>Temporada</em>
           </motion.h1>
           <motion.p
             className={styles.heroSub}
@@ -51,6 +85,7 @@ export default function NovedadesPage() {
             transition={{ delay: 0.5, duration: 0.5 }}
           >
             Creaciones frescas que salen directo del horno a tu mesa, cada semana algo nuevo.
+            Creaciones exclusivas disponibles por tiempo limitado, hechas con el alma.
           </motion.p>
         </div>
         <div className={styles.heroWave}>
@@ -94,8 +129,60 @@ export default function NovedadesPage() {
               </motion.div>
             ))}
           </div>
+          {loading && (
+            <p style={{ textAlign: "center", color: "#888", padding: "40px 0" }}>
+              Cargando productos de temporada…
+            </p>
+          )}
+
+          {!loading && products.length === 0 && (
+            <div style={{ textAlign: "center", padding: "60px 20px" }}>
+              <FiPackage style={{ fontSize: "3rem", color: "#C4A08A", opacity: 0.7 }} />
+              <h3 style={{ marginTop: 12, color: "#3D1C02", fontWeight: 700 }}>Próximamente</h3>
+              <p style={{ color: "#7e6a57" }}>Estamos preparando nuevos productos de temporada.</p>
+            </div>
+          )}
+
+          {!loading && products.length > 0 && (
+            <div className={styles.grid}>
+              {products.map((p, i) => {
+                const imgUrl = resolveImageUrl(p.imagen) || PLACEHOLDER;
+                const precio = Number(p.precio ?? 0);
+                return (
+                  <motion.div
+                    key={p.id_producto}
+                    className={styles.card}
+                    initial={{ opacity: 0, y: 36 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    transition={{ delay: i * 0.07, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div className={styles.imgWrap}>
+                      <img src={imgUrl} alt={p.nombre} className={styles.img} loading="lazy" />
+                      <span className={styles.tag}>Temporada</span>
+                    </div>
+                    <div className={styles.body}>
+                      <h3 className={styles.name}>{p.nombre}</h3>
+                      {p.descripcion && <p className={styles.desc}>{p.descripcion}</p>}
+                      <div className={styles.cardFooter}>
+                        <span className={styles.price}>${precio.toLocaleString("es-CO")}</span>
+                        <motion.button
+                          className={`${styles.addBtn} ${added[p.id_producto] ? styles.addedBtn : ""}`}
+                          onClick={() => handleAdd(p)}
+                          whileTap={{ scale: 0.92 }}
+                        >
+                          {added[p.id_producto] ? <><FiCheck /> Agregado</> : <><FiShoppingCart /> Agregar</>}
+                        </motion.button>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
+
 
       <Footer />
       <CartDrawer

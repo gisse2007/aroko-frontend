@@ -11,6 +11,7 @@ const LINKS = [
   { label: "Catálogo",  id: "catalogo",  route: "/catalogo" },
   { label: "Nosotros",  id: "nosotros",  route: "/nosotros" },
   { label: "Novedades", id: "novedades", route: "/novedades"},
+  { label: "Temporada", id: "temporada", route: "/temporada"},
 ];
 
 function getNombre(user) {

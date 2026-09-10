@@ -37,6 +37,13 @@ export default function SplitAuthLayout({
             alt="Aroko"
             className={styles.panelLogo}
           />
+          <div className={styles.logoBadge}>
+            <img
+              src={logo}
+              alt="Aroko"
+              className={styles.panelLogo}
+            />
+          </div>
           <p className={styles.panelTagline}>{tagline}</p>
         </div>
       </div>

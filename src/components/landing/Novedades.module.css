@@ -281,33 +281,150 @@
 
 /* ── Ver más ── */
 .verMasWrap {
+/* ── Carousel Controls & Track ── */
+.carouselContainer {
+  position: relative;
+  width: 100%;
+}
+
+.carouselViewport {
+  overflow: hidden;
+  width: 100%;
+  border-radius: 26px;
+}
+
+.carouselTrack {
   display: flex;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  gap: 24px;
+}
+
+.carouselSlide {
+  flex: 0 0 calc((100% - 72px) / 4);
+  min-width: 0;
+}
+
+@media (max-width: 1024px) {
+  .carouselSlide {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}
+
+@media (max-width: 640px) {
+  .carouselSlide {
+    flex: 0 0 100%;
+  }
+}
+
+.carouselNavBtn {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(61, 28, 2, 0.12);
+  color: #3D1C02;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
   justify-content: center;
   margin-top: 54px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.25rem;
 }
 
 /* Texto blanco sobre #17809e = 4.6:1 (WCAG AA) — antes #3BBEDA (2.2:1) */
 .verMasBtn {
+.carouselNavBtn:hover:not(:disabled) {
+  background: #C47A2B;
+  color: #fff;
+  border-color: #C47A2B;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carouselNavBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.navPrev {
+  left: -20px;
+}
+
+.navNext {
+  right: -20px;
+}
+
+@media (max-width: 768px) {
+  .navPrev { left: 4px; }
+  .navNext { right: 4px; }
+}
+
+.dotsWrap {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(61, 28, 2, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 0;
+}
+
+.dotActive {
+  width: 26px;
+  background: #C47A2B;
+}
+
+/* ── Acciones Dobles (2 botones) ── */
+.accionesDobles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+
+.btnTemporadaCta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   background: #17809e;
+  background: #15708c;
   color: #fff;
   border: none;
+  border: 1px solid #15708c;
   border-radius: 999px;
   padding: 14px 42px;
+  padding: 13px 32px;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   font-size: 0.92rem;
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(23, 128, 158, 0.28);
+  box-shadow: 0 8px 24px rgba(21, 112, 140, 0.26);
   transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
 }
 
 .verMasBtn:hover {
   background: #116d85;
+.btnTemporadaCta:hover {
+  background: #0f5469;
   transform: translateY(-2px);
   box-shadow: 0 14px 36px rgba(23, 128, 158, 0.36);
+  box-shadow: 0 12px 30px rgba(21, 112, 140, 0.36);
 }
 
 /* ── Responsive ── */
@@ -316,12 +433,33 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 22px;
   }
+.btnNuevosCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  color: #C47A2B;
+  border: 1.5px solid #C47A2B;
+  border-radius: 999px;
+  padding: 13px 32px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(196, 122, 43, 0.12);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, color 0.22s ease;
 }
 
 @media (max-width: 720px) {
   .section {
     padding: 76px 0 68px;
   }
+.btnNuevosCta:hover {
+  background: #C47A2B;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(196, 122, 43, 0.28);
+}
 
   .inner {
     padding: 0 18px;

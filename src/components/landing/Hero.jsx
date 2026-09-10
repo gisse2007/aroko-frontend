@@ -38,6 +38,7 @@ export default function Hero() {
         <div className={`${styles.actions} ${styles.animFadeUp4}`}>
           <button className={styles.ctaPrimary} onClick={() => scrollTo("novedades")}>
             Ver novedades
+            Ver lo nuevo
           </button>
           <button className={styles.ctaSecondary} onClick={() => scrollTo("categorias")}>
             Explorar categorías

@@ -72,10 +72,12 @@ export async function fetchCatalogo(params = {}) {
 /**
  * GET /api/productos/nuevo
  * Devuelve productos marcados como es_nuevo=true o es_temporada=true.
+ * Devuelve productos para la sección "LO NUEVO" (máx 6, prioriza temporada y completa con más recientes).
  * @param {{ limit?: number }} params
  * @returns {{ products: [] }}
  */
 export async function fetchNuevos({ limit = 8 } = {}) {
+export async function fetchNuevos({ limit = 6 } = {}) {
   const key = `nuevos:${limit}`;
 
   const hit = _cache.get(key);
@@ -85,6 +87,39 @@ export async function fetchNuevos({ limit = 8 } = {}) {
   if (pending) return pending;
 
   const request = api.get('/productos/nuevo', { params: { limit } })
+    .then(({ data: res }) => {
+      if (res && Array.isArray(res.products)) {
+        res.products = res.products.map((p) => normalizeProduct(p));
+      }
+      _cache.set(key, { t: Date.now(), res });
+      trimCache();
+      _inflight.delete(key);
+      return res; // { success, products }
+    })
+    .catch((err) => {
+      _inflight.delete(key);
+      throw err;
+    });
+
+  _inflight.set(key, request);
+  return request;
+}
+
+/**
+ * GET /api/productos/temporada
+ * Devuelve productos de temporada exclusivamente.
+ * @returns {{ products: [] }}
+ */
+export async function fetchTemporada() {
+  const key = 'temporada:all';
+
+  const hit = _cache.get(key);
+  if (hit && Date.now() - hit.t < TTL) return hit.res;
+
+  const pending = _inflight.get(key);
+  if (pending) return pending;
+
+  const request = api.get('/productos/temporada')
     .then(({ data: res }) => {
       if (res && Array.isArray(res.products)) {
         res.products = res.products.map((p) => normalizeProduct(p));
