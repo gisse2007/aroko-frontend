@@ -32,11 +32,6 @@ export default function SplitAuthLayout({
         />
         <div className={styles.imgOverlay} />
         <div className={styles.imgContent}>
-          <img
-            src={logo}
-            alt="Aroko"
-            className={styles.panelLogo}
-          />
           <div className={styles.logoBadge}>
             <img
               src={logo}
