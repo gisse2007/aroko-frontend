@@ -125,6 +125,41 @@
   backdrop-filter: blur(4px);
 }
 
+.badgeGroup {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.badgeNuevo {
+  background: #C47A2B;
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(196, 122, 43, 0.35);
+}
+
+.badgeTemporada {
+  background: #15708c;
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(21, 112, 140, 0.35);
+}
+
 /* ── Body ── */
 .body {
   padding: 22px 24px 24px;

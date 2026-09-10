@@ -5,14 +5,10 @@ import { FiShoppingCart, FiCheck, FiPackage } from "react-icons/fi";
 import styles from "./Novedades.module.css";
 import { resolveImageUrl } from "../../utils/image";
 import { whenIdle, cancelIdle } from "../../utils/idle";
-import { fetchCatalogo } from "../../services/catalogoService";
-import { fetchCategoriasProductos } from "../../services/categoriasCache";
+import { fetchNuevos } from "../../services/catalogoService";
 
 const PLACEHOLDER = "https://placehold.co/400x300?text=Sin+imagen";
 const LIMIT = 4;
-
-// Nombres posibles de la categoría novedades (case-insensitive)
-const NOVEDAD_NAMES = ["novedades", "novedad", "nuevo", "nuevos", "new"];
 
 function SkeletonCard() {
   return (
@@ -40,32 +36,8 @@ export default function Novedades({ onAddToCart }) {
   useEffect(() => {
     let cancelled = false;
 
-    const normalizeCatName = (value) =>
-      String(value ?? "").toLowerCase().replace(/\s+/g, " ").trim();
-
     const load = () => {
-      // 1. Buscar la categoría "Novedades" en la BD (cache compartido)
-      fetchCategoriasProductos()
-        .then((todas) => {
-          if (cancelled) return;
-          const activas = todas.filter((c) => c.estado === "ACTIVO" || c.estado === undefined);
-          const catNovedad = activas.find((c) => {
-            const nombre = normalizeCatName(c.nombre ?? c.nombre_categoria ?? "");
-            return NOVEDAD_NAMES.some((key) => nombre === key || nombre.includes(key));
-          });
-
-          if (!catNovedad) {
-            setProducts([]);
-            setLoading(false);
-            return;
-          }
-
-          return fetchCatalogo({
-            categoria_id: catNovedad.id_categoria,
-            page: 1,
-            limit: LIMIT,
-          });
-        })
+      fetchNuevos({ limit: LIMIT })
         .then((res) => {
           if (cancelled || !res) return;
           setProducts(res.products ?? []);
@@ -104,9 +76,9 @@ export default function Novedades({ onAddToCart }) {
 
         <div className={styles.header}>
           <span className={styles.eyebrow}>Lo más reciente</span>
-          <h2 className={styles.title}>Nuestras <em>novedades</em></h2>
+          <h2 className={styles.title}>LO <em>NUEVO</em></h2>
           <p className={styles.subtitle}>
-            Creaciones frescas que salen directo del horno a tu mesa.
+            Productos frescos de temporada y nuestras más recientes creaciones directo del horno.
           </p>
         </div>
 
@@ -157,6 +129,12 @@ export default function Novedades({ onAddToCart }) {
                       {p.categoria_nombre && (
                         <span className={styles.tag}>{p.categoria_nombre}</span>
                       )}
+                      {(p.es_nuevo || p.es_temporada) && (
+                        <div className={styles.badgeGroup}>
+                          {p.es_nuevo && <span className={styles.badgeNuevo}>Nuevo</span>}
+                          {p.es_temporada && <span className={styles.badgeTemporada}>Temporada</span>}
+                        </div>
+                      )}
                     </div>
 
                     <div className={styles.body}>
@@ -196,3 +174,4 @@ export default function Novedades({ onAddToCart }) {
     </section>
   );
 }
+

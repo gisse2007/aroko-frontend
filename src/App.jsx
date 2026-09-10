@@ -71,7 +71,7 @@ function DashboardGuard({ children }) {
   const { user, loading } = useAuthContext();
   if (loading) return <Spinner />;
   if (!user || !localStorage.getItem("token")) return <Navigate to="/login" replace />;
-  if (getRol(user) === "CLIENTE") return <Navigate to="/landing" replace />;
+  if (getRol(user) === "CLIENTE") return <Navigate to="/" replace />;
   return children;
 }
 
@@ -79,7 +79,7 @@ function RoleRoute({ allowed, children }) {
   const { user, loading } = useAuthContext();
   if (loading) return <Spinner />;
   if (!user || !localStorage.getItem("token")) return <Navigate to="/login" replace />;
-  if (!canAccessByRole(user, allowed)) return <Navigate to="/" replace />;
+  if (!canAccessByRole(user, allowed)) return <Navigate to="/dashboard" replace />;
   return children;
 }
 
@@ -97,6 +97,7 @@ function AppRoutes() {
     <Suspense fallback={<PageFallback />}>
       <Routes>
         {/* Públicas — carga inmediata */}
+        <Route path="/"          element={<LandingPage />} />
         <Route path="/landing"   element={<LandingPage />} />
         <Route path="/login"     element={<Login />} />
         <Route path="/registro"  element={<Registro />} />
@@ -112,28 +113,28 @@ function AppRoutes() {
         <Route path="/mis-pedidos" element={<ClienteGuard><PerfilCliente initialTab="pedidos" /></ClienteGuard>} />
 
         {/* Dashboard */}
-        <Route path="/" element={<DashboardGuard><DashboardLayout user={user} onLogout={logout} /></DashboardGuard>}>
-          <Route index                       element={<DashboardHome />} />
-          <Route path="empleados"            element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "EMPLEADOS", "USUARIOS"]}><Empleados /></RoleRoute>} />
-          <Route path="roles"                element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "ROLES", "USUARIOS"]}><Roles /></RoleRoute>} />
-          <Route path="proveedores"          element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "COMPRAS", "PROVEEDORES"]}><Proveedores /></RoleRoute>} />
-          <Route path="compras"              element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "COMPRAS"]}><Compras /></RoleRoute>} />
-          <Route path="insumos"              element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "COMPRAS", "INSUMOS"]}><Insumos /></RoleRoute>} />
-          <Route path="categorias-insumos"   element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "COMPRAS", "INSUMOS"]}><CategoriasInsumos /></RoleRoute>} />
-          <Route path="salidas-insumos"      element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "COMPRAS", "SALIDAS", "INSUMOS"]}><Salidas /></RoleRoute>} />
-          <Route path="produccion"           element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "PRODUCCION", "PANADERO"]}><Produccion /></RoleRoute>} />
-          <Route path="pedidos"              element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "PEDIDOS"]}><Pedidos /></RoleRoute>} />
-          <Route path="clientes"             element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "CLIENTES"]}><Clientes /></RoleRoute>} />
-          <Route path="abonos"               element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "ABONOS"]}><Abonos /></RoleRoute>} />
-          <Route path="devoluciones"         element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "DEVOLUCIONES"]}><Devoluciones /></RoleRoute>} />
-          <Route path="ventas"               element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "VENTAS"]}><Ventas /></RoleRoute>} />
-          <Route path="productos"            element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "PRODUCTOS"]}><ProductosPage /></RoleRoute>} />
-          <Route path="categorias-productos" element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "PRODUCTOS"]}><CategoriasProductos /></RoleRoute>} />
-          <Route path="domicilio"            element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "DOMICILIOS"]}><Domicilios /></RoleRoute>} />
-          <Route path="*"                    element={<Navigate to="/" replace />} />
+        <Route element={<DashboardGuard><DashboardLayout user={user} onLogout={logout} /></DashboardGuard>}>
+          <Route path="/dashboard"           element={<DashboardHome />} />
+          <Route path="/empleados"            element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "EMPLEADOS", "USUARIOS"]}><Empleados /></RoleRoute>} />
+          <Route path="/roles"                element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "ROLES", "USUARIOS"]}><Roles /></RoleRoute>} />
+          <Route path="/proveedores"          element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "COMPRAS", "PROVEEDORES"]}><Proveedores /></RoleRoute>} />
+          <Route path="/compras"              element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "COMPRAS"]}><Compras /></RoleRoute>} />
+          <Route path="/insumos"              element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "COMPRAS", "INSUMOS"]}><Insumos /></RoleRoute>} />
+          <Route path="/categorias-insumos"   element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "COMPRAS", "INSUMOS"]}><CategoriasInsumos /></RoleRoute>} />
+          <Route path="/salidas-insumos"      element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "COMPRAS", "SALIDAS", "INSUMOS"]}><Salidas /></RoleRoute>} />
+          <Route path="/produccion"           element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "PRODUCCION", "PANADERO"]}><Produccion /></RoleRoute>} />
+          <Route path="/pedidos"              element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "PEDIDOS"]}><Pedidos /></RoleRoute>} />
+          <Route path="/clientes"             element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "CLIENTES"]}><Clientes /></RoleRoute>} />
+          <Route path="/abonos"               element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "ABONOS"]}><Abonos /></RoleRoute>} />
+          <Route path="/devoluciones"         element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "DEVOLUCIONES"]}><Devoluciones /></RoleRoute>} />
+          <Route path="/ventas"               element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "VENTAS"]}><Ventas /></RoleRoute>} />
+          <Route path="/productos"            element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "PRODUCTOS"]}><ProductosPage /></RoleRoute>} />
+          <Route path="/categorias-productos" element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "PRODUCTOS"]}><CategoriasProductos /></RoleRoute>} />
+          <Route path="/domicilio"            element={<RoleRoute allowed={["ADMIN", "ADMINISTRADOR", "VENTAS", "VENDEDOR", "DOMICILIOS"]}><Domicilios /></RoleRoute>} />
+          <Route path="*"                    element={<Navigate to="/dashboard" replace />} />
         </Route>
 
-        <Route path="*" element={<Navigate to="/landing" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
   );

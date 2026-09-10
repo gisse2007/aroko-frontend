@@ -144,14 +144,14 @@ export default function Navbar({ cartCount = 0, onCartClick, lightBg = false }) 
 
   const handleLogout = () => {
     logout();
-    navigate("/landing", { replace: true });
+    navigate("/", { replace: true });
   };
 
   const handleLink = (link) => {
     closeMenu();
     if (link.route) { navigate(link.route); return; }
-    if (location.pathname !== "/landing") {
-      navigate("/landing");
+    if (location.pathname !== "/" && location.pathname !== "/landing") {
+      navigate("/");
       setTimeout(() => document.getElementById(link.id)?.scrollIntoView({ behavior: "smooth" }), 400);
       return;
     }
@@ -204,7 +204,7 @@ export default function Navbar({ cartCount = 0, onCartClick, lightBg = false }) 
           {esCliente && <ClienteMenu user={session} scrolled={isScrolled} onLogout={handleLogout} />}
 
           {esAdmin && (
-            <button className={styles.registerBtn} onClick={() => navigate("/")}>
+            <button className={styles.registerBtn} onClick={() => navigate("/dashboard")}>
               <FiGrid className={styles.btnIcon} /><span>Ir al panel</span>
             </button>
           )}
@@ -300,7 +300,7 @@ export default function Navbar({ cartCount = 0, onCartClick, lightBg = false }) 
               })()}
 
               {esAdmin && (
-                <button className={styles.drawerRegister} onClick={() => { closeMenu(); navigate("/"); }} tabIndex={open ? 0 : -1}>
+                <button className={styles.drawerRegister} onClick={() => { closeMenu(); navigate("/dashboard"); }} tabIndex={open ? 0 : -1}>
                   <FiGrid /> Ir al panel
                 </button>
               )}

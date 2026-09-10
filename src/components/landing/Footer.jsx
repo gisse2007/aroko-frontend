@@ -27,7 +27,7 @@ export default function Footer() {
         el.scrollIntoView({ behavior: "smooth" });
       } else {
         // Si no estamos en la landing, navegar primero y luego hacer scroll
-        navigate("/landing");
+        navigate("/");
         setTimeout(() => document.getElementById(target)?.scrollIntoView({ behavior: "smooth" }), 400);
       }
     }

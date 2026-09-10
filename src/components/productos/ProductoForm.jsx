@@ -2,16 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { FiTrash2, FiPlusCircle, FiAlertTriangle, FiUploadCloud, FiList, FiX } from "react-icons/fi";
 import FormField from "../forms/FormField";
+import { resolveImageUrl } from "../../utils/image";
 import styles from "./ProductoForm.module.css";
 
 const REQUIRED = "Debe completar todos los campos requeridos.";
 const MAX_IMGS = 5;
-
-const resolveImageUrl = (img) => {
-  if (!img) return null;
-  if (/^https?:\/\//i.test(img)) return img;
-  return `http://localhost:3000${img.startsWith("/") ? img : `/${img}`}`;
-};
 
 /** Convierte el campo imagen (string o array) a array de URLs resueltas */
 const parseImagenes = (imagen, imagenes) => {
@@ -122,6 +117,8 @@ export default function ProductoForm({
     formData.append("categoria_id", Number(values.categoria_id));
     formData.append("precio", precio);
     formData.append("stock_producto", stock);
+    formData.append("es_nuevo", values.es_nuevo ? "true" : "false");
+    formData.append("es_temporada", values.es_temporada ? "true" : "false");
     formData.append("receta", JSON.stringify(
       receta.map((r) => ({ insumo_id: r.insumo_id, cantidad_requerida: r.cantidad_requerida }))
     ));
@@ -216,6 +213,27 @@ export default function ProductoForm({
               </div>
             )}
           </div>
+        </div>
+
+        {/* Destacados / Badges */}
+        <div className={styles.badgesSection}>
+          <label className={styles.checkLabel}>
+            <input
+              type="checkbox"
+              className={styles.checkboxInput}
+              {...reg("es_nuevo")}
+            />
+            <span>Marcar como &quot;Nuevo&quot;</span>
+          </label>
+
+          <label className={styles.checkLabel}>
+            <input
+              type="checkbox"
+              className={styles.checkboxInput}
+              {...reg("es_temporada")}
+            />
+            <span>Marcar como &quot;Temporada&quot;</span>
+          </label>
         </div>
 
       </div>

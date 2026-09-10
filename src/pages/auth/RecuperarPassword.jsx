@@ -9,6 +9,7 @@ import {
 
 import AuthLayout from "../../layouts/AuthLayout";
 import styles from "./Auth.module.css";
+import api from "../../api/axios";
 
 export default function RecuperarPassword() {
 
@@ -37,32 +38,21 @@ export default function RecuperarPassword() {
 
       setLoading(true);
 
-      const response = await fetch(
-        "http://localhost:3000/api/auth/recuperar",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            correo,
-          }),
-        }
-      );
+      const { data } = await api.post("/auth/recuperar", {
+        correo,
+      });
 
-      const data = await response.json();
-
-      if (!data.ok) {
-        setError(data.message);
+      if (data?.ok === false) {
+        setError(data.message || "Error al enviar código.");
         return;
       }
 
       setMsg("Código enviado correctamente.");
       setStep(2);
 
-    } catch {
+    } catch (err) {
 
-      setError("Error al enviar código.");
+      setError(err.response?.data?.message || "Error al enviar código.");
 
     } finally {
 
@@ -84,33 +74,22 @@ export default function RecuperarPassword() {
 
       setLoading(true);
 
-      const response = await fetch(
-        "http://localhost:3000/api/auth/reset-password",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            codigo,
-            nuevaContrasena,
-          }),
-        }
-      );
+      const { data } = await api.post("/auth/reset-password", {
+        codigo,
+        nuevaContrasena,
+      });
 
-      const data = await response.json();
-
-      if (!data.ok) {
-        setError(data.message);
+      if (data?.ok === false) {
+        setError(data.message || "Error al cambiar contraseña.");
         return;
       }
 
       setMsg("Contraseña actualizada correctamente.");
       setTimeout(() => navigate("/login", { replace: true }), 1200);
 
-    } catch {
+    } catch (err) {
 
-      setError("Error al cambiar contraseña.");
+      setError(err.response?.data?.message || "Error al cambiar contraseña.");
 
     } finally {
 

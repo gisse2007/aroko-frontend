@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
+import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowLeft } from "react-icons/fi";
 import AuthLayout from "../../layouts/AuthLayout";
+import SplitAuthLayout from "../../layouts/SplitAuthLayout";
 import styles from "./Auth.module.css";
 import api from "../../api/axios";
 import { useAuthContext } from "../../context/AuthContext";
 import { normalizeUser } from "../../utils/normalizeUser";
 import { BtnLoading } from "../../components/loading/Loading";
+
+// Unsplash: postre gourmet, iluminación oscura cálida, protagonista al centro
+// auto=format sirve AVIF/WebP; w=900,q=80 equilibra nitidez y peso para panel 50 vw
+const LOGIN_IMG =
+  "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=80";
+
 
 export default function Login() {
   const { setUser } = useAuthContext();
@@ -38,7 +45,7 @@ export default function Login() {
       const usuario = data.usuario ?? data;
       localStorage.setItem("token", data.token);
       setUser(usuario); // setUser llama normalizeUser internamente
-      navigate("/", { replace: true });
+      navigate("/dashboard", { replace: true });
 
     } catch (err) {
       const status    = err.response?.status;
@@ -86,7 +93,14 @@ export default function Login() {
   };
 
   return (
-    <AuthLayout>
+    <SplitAuthLayout image={LOGIN_IMG} tagline="El sabor de lo artesanal">
+      <div style={{ marginBottom: "16px" }}>
+        <Link to="/" className={styles.backLink}>
+          <FiArrowLeft />
+          Volver al inicio
+        </Link>
+      </div>
+
       <h2 className={styles.title}>Iniciar sesión</h2>
       <p className={styles.subtitle}>Ingresa tus credenciales para continuar</p>
 
@@ -151,6 +165,6 @@ export default function Login() {
         <Link to="/registro" className={styles.forgotLink}>Regístrate</Link>
       </p>
 
-    </AuthLayout>
+    </SplitAuthLayout>
   );
 }

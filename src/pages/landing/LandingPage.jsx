@@ -3,7 +3,6 @@ import Navbar        from "../../components/landing/Navbar";
 import Hero          from "../../components/landing/Hero";
 import Categories    from "../../components/landing/Categories";
 import Novedades     from "../../components/landing/Novedades";
-import Catalogo      from "../../components/landing/Catalogo";
 import Testimonios   from "../../components/landing/Testimonios";
 import Footer        from "../../components/landing/Footer";
 import { useCart }   from "../../context/CartContext";
@@ -41,7 +40,6 @@ export default function LandingPage() {
       <Hero />
       <Categories />
       <Novedades onAddToCart={add} />
-      <Catalogo  onAddToCart={add} />
       <Testimonios />
       <Footer />
 

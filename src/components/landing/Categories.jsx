@@ -40,10 +40,9 @@ export default function Categories() {
             >
               <img src={cat.img} alt={cat.name} className={styles.img} loading="lazy" width="600" height="400" />
               <div className={styles.overlay} />
-              <div className={styles.content}>
+              <button type="button" className={styles.content} onClick={() => navigate("/catalogo")}>
                 <h3 className={styles.name}>{cat.name}</h3>
-                <button className={styles.btn} onClick={() => navigate("/catalogo")}>Ir</button>
-              </div>
+              </button>
             </div>
           ))}
         </div>

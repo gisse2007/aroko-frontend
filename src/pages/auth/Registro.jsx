@@ -2,11 +2,17 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiPhone, FiCreditCard } from "react-icons/fi";
 import AuthLayout from "../../layouts/AuthLayout";
+import SplitAuthLayout from "../../layouts/SplitAuthLayout";
 import styles from "./Auth.module.css";
 import api from "../../api/axios";
 import { useAuthContext } from "../../context/AuthContext";
 import { useToast } from "../../hooks/useToast";
 import Toast from "../../components/Toast";
+
+// Unsplash: pan artesanal rústico, luz natural cálida, panadería gourmet
+const REGISTRO_IMG =
+  "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=900&q=80";
+
 
 const TIPOS_DOCUMENTO = ["CC", "TI", "CE", "Pasaporte"];
 
@@ -97,7 +103,13 @@ export default function Registro() {
   };
 
   return (
-    <AuthLayout>
+    <SplitAuthLayout image={REGISTRO_IMG} tagline="Tu próximo favorito te espera">
+      <div style={{ marginBottom: "16px" }}>
+        <Link to="/" className={styles.backLink}>
+          ← Volver al inicio
+        </Link>
+      </div>
+
       <h2 className={styles.title}>Crear cuenta</h2>
       <p className={styles.subtitle}>Únete a Aroko y disfruta nuestros productos</p>
 
@@ -236,6 +248,6 @@ export default function Registro() {
         ¿Ya tienes cuenta?{" "}
         <Link to="/login" className={styles.forgotLink}>Inicia sesión</Link>
       </p>
-    </AuthLayout>
+    </SplitAuthLayout>
   );
 }

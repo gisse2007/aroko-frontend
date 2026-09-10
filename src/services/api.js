@@ -1,17 +1,13 @@
-const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000/api";
+import apiAxios from "../api/axios";
 
-async function request(endpoint, options = {}) {
-  const res = await fetch(`${BASE_URL}${endpoint}`, {
-    headers: { "Content-Type": "application/json", ...options.headers },
-    ...options,
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
-}
-
+/**
+ * Cliente de conveniencia que delega en la instancia central de Axios (src/api/axios.js).
+ */
 export const api = {
-  get: (endpoint) => request(endpoint),
-  post: (endpoint, body) => request(endpoint, { method: "POST", body: JSON.stringify(body) }),
-  put: (endpoint, body) => request(endpoint, { method: "PUT", body: JSON.stringify(body) }),
-  delete: (endpoint) => request(endpoint, { method: "DELETE" }),
+  get: (endpoint, config) => apiAxios.get(endpoint, config).then((r) => r.data),
+  post: (endpoint, body, config) => apiAxios.post(endpoint, body, config).then((r) => r.data),
+  put: (endpoint, body, config) => apiAxios.put(endpoint, body, config).then((r) => r.data),
+  delete: (endpoint, config) => apiAxios.delete(endpoint, config).then((r) => r.data),
 };
+
+export default api;
