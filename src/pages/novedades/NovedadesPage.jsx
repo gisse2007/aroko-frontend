@@ -21,7 +21,6 @@ export default function NovedadesPage() {
   const [products,     setProducts]     = useState([]);
   const [loading,      setLoading]      = useState(true);
   const [added,        setAdded]        = useState({});
-
   useEffect(() => {
     fetchTemporada()
       .then((res) => {
@@ -117,7 +116,7 @@ export default function NovedadesPage() {
                     transition={{ delay: i * 0.07, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <div className={styles.imgWrap}>
-                      <img src={imgUrl} alt={p.nombre} className={styles.img} loading="lazy" />
+                      <img src={imgUrl} alt={p.nombre} className={styles.img} loading="lazy" width="400" height="300" onError={(event) => { event.currentTarget.src = PLACEHOLDER; }} />
                       <span className={styles.tag}>Temporada</span>
                     </div>
                     <div className={styles.body}>
@@ -125,11 +124,7 @@ export default function NovedadesPage() {
                       {p.descripcion && <p className={styles.desc}>{p.descripcion}</p>}
                       <div className={styles.cardFooter}>
                         <span className={styles.price}>${precio.toLocaleString("es-CO")}</span>
-                        <motion.button
-                          className={`${styles.addBtn} ${added[p.id_producto] ? styles.addedBtn : ""}`}
-                          onClick={() => handleAdd(p)}
-                          whileTap={{ scale: 0.92 }}
-                        >
+                        <motion.button className={`${styles.addBtn} ${added[p.id_producto] ? styles.addedBtn : ""}`} onClick={() => handleAdd(p)} whileTap={{ scale: 0.92 }}>
                           {added[p.id_producto] ? <><FiCheck /> Agregado</> : <><FiShoppingCart /> Agregar</>}
                         </motion.button>
                       </div>

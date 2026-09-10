@@ -80,6 +80,81 @@
   gap: 22px;
 }
 
+.carouselContainer {
+  position: relative;
+  width: 100%;
+}
+
+.carouselViewport {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 22px;
+}
+
+.carouselTrack {
+  display: flex;
+  gap: 22px;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.carouselSlide {
+  flex: 0 0 calc((100% - 66px) / 4);
+  min-width: 0;
+}
+
+.carouselNavBtn {
+  position: absolute;
+  top: 45%;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(61, 28, 2, 0.12);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: #3D1C02;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.carouselNavBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.carouselNavBtn:hover:not(:disabled) {
+  background: #C47A2B;
+  color: #fff;
+}
+
+.navPrev { left: -20px; }
+.navNext { right: -20px; }
+
+.dotsWrap {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(61, 28, 2, 0.2);
+  cursor: pointer;
+}
+
+.dotActive {
+  width: 26px;
+  background: #C47A2B;
+}
+
 .card {
   background: #fff;
   border-radius: 22px;
@@ -185,3 +260,13 @@
 
 @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 580px)  { .grid { grid-template-columns: 1fr; } }
+
+@media (max-width: 1024px) {
+  .carouselSlide { flex-basis: calc((100% - 22px) / 2); }
+}
+
+@media (max-width: 580px) {
+  .carouselSlide { flex-basis: 100%; }
+  .navPrev { left: 4px; }
+  .navNext { right: 4px; }
+}

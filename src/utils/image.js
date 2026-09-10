@@ -7,8 +7,14 @@
 export function resolveImageUrl(img) {
   if (!img) return null;
   if (typeof img !== "string") return null;
-  if (/^https?:\/\//i.test(img)) return img;
-  const base = (import.meta?.env?.VITE_API_URL && new URL(import.meta.env.VITE_API_URL).origin) || "http://localhost:3000";
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const apiOrigin = apiUrl ? new URL(apiUrl).origin : "http://localhost:3000";
+  if (/^https?:\/\//i.test(img)) {
+    return /^https?:\/\/(localhost|127\.0\.0\.1)(?::\d+)?\//i.test(img)
+      ? `${apiOrigin}${new URL(img).pathname}${new URL(img).search}`
+      : img;
+  }
+  const base = apiOrigin;
   return `${base}${img.startsWith("/") ? img : `/${img}`}`;
 }
 
