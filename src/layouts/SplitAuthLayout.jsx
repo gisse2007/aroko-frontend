@@ -1,5 +1,4 @@
 // src/layouts/SplitAuthLayout.jsx
-import logo from "../assets/logo_Aroko-removebg-preview.png";
 import styles from "./SplitAuthLayout.module.css";
 
 /**
@@ -9,7 +8,7 @@ import styles from "./SplitAuthLayout.module.css";
  *
  * Props:
  *   image    {string}  URL de Unsplash (ya incluye auto=format para AVIF/WebP)
- *   tagline  {string}  Texto secundario bajo el logo (opcional)
+ *   tagline  {string}  Texto secundario sobre la imagen (opcional)
  *   children           Contenido del formulario
  */
 export default function SplitAuthLayout({
@@ -32,13 +31,6 @@ export default function SplitAuthLayout({
         />
         <div className={styles.imgOverlay} />
         <div className={styles.imgContent}>
-          <div className={styles.logoBadge}>
-            <img
-              src={logo}
-              alt="Aroko"
-              className={styles.panelLogo}
-            />
-          </div>
           <p className={styles.panelTagline}>{tagline}</p>
         </div>
       </div>
@@ -46,10 +38,6 @@ export default function SplitAuthLayout({
       {/* ── Panel derecho: formulario ── */}
       <div className={styles.formPanel}>
         <div className={styles.formCard}>
-          {/* Logo visible solo en mobile (panel imagen oculto) */}
-          <div className={styles.mobileLogo}>
-            <img src={logo} alt="Aroko" className={styles.mobileLogoImg} />
-          </div>
           {children}
         </div>
       </div>

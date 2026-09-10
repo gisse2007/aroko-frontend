@@ -52,14 +52,7 @@ function matchesAccessRule(access, rule) {
     const normalizedValue = normalizeAccessValue(value);
     if (!normalizedValue) return false;
 
-    return (
-      normalizedValue === normalizedRule ||
-      normalizedValue.includes(normalizedRule) ||
-      normalizedRule.includes(normalizedValue) ||
-      normalizedValue.split("_").includes(normalizedRule) ||
-      normalizedValue.startsWith(normalizedRule) ||
-      normalizedValue.endsWith(normalizedRule)
-    );
+    return normalizedValue === normalizedRule;
   });
 }
 

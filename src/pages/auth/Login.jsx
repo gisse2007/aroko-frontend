@@ -40,12 +40,14 @@ export default function Login() {
       sessionStorage.removeItem("aroko.authme");
       const { data } = await api.post("/auth/login", { correo: correo.trim(), contrasena });
 
-      // ── 200 OK: admin / empleado / panadero / repartidor ──
+      // ── 200 OK: usuario autenticado ──
       // El backend devuelve { token, usuario: { id_usuario, nombre_usuario, correo, rol/nombre_rol, ... } }
       const usuario = data.usuario ?? data;
       localStorage.setItem("token", data.token);
-      setUser(usuario); // setUser llama normalizeUser internamente
-      navigate("/dashboard", { replace: true });
+      const usuarioNormalizado = normalizeUser(usuario);
+      setUser(usuarioNormalizado);
+      const rol = usuarioNormalizado?.rol ?? "";
+      navigate(rol === "CLIENTE" ? "/landing" : "/dashboard", { replace: true });
 
     } catch (err) {
       const status    = err.response?.status;

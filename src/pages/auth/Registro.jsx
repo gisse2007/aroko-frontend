@@ -65,8 +65,10 @@ export default function Registro() {
       return "El teléfono debe tener máximo 10 dígitos.";
     if (!form.documento.trim() || !/^\d{1,11}$/.test(form.documento.trim()))
       return "El número de documento debe ser numérico (máx. 11 dígitos).";
-    if (!form.contrasena || form.contrasena.length < 6)
-      return "La contraseña debe tener al menos 6 caracteres.";
+    if (!form.contrasena || form.contrasena.length < 8)
+      return "La contraseña debe tener al menos 8 caracteres.";
+    if (!/[A-Z]/.test(form.contrasena) || !/[0-9]/.test(form.contrasena))
+      return "La contraseña debe contener al menos una mayúscula y un número.";
     if (form.contrasena !== form.confirmar)
       return "Las contraseñas no coinciden.";
     return null;
@@ -212,7 +214,7 @@ export default function Registro() {
             <input
               type={showPass ? "text" : "password"}
               className={styles.input}
-              placeholder="Mínimo 6 caracteres"
+              placeholder="Mínimo 8 caracteres, con mayúscula y número"
               value={form.contrasena}
               onChange={set("contrasena")}
             />

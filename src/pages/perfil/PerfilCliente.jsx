@@ -5,7 +5,7 @@ import {
   FiUser, FiPackage, FiSettings, FiLogOut, FiArrowLeft,
   FiMail, FiPhone, FiMapPin, FiFileText, FiShield,
   FiCheckCircle, FiClock, FiXCircle, FiEye,
-  FiHome, FiStar,
+  FiHome, FiStar, FiDollarSign,
 } from "react-icons/fi";
 
 import api from "../../api/axios";
@@ -31,6 +31,11 @@ const TABS = [
     id:"domicilios",
     label:"Mis domicilios",
     icon:FiHome
+  },
+  {
+    id:"abonos",
+    label:"Mis abonos",
+    icon:FiDollarSign
   },
   {
     id:"config",
@@ -495,7 +500,7 @@ function TabPedidos(){
  .finally(()=>setLoading(false));
 
 
- },[]);
+ },[fetchMyOrders]);
 
 
 
@@ -583,9 +588,9 @@ function TabPedidos(){
  </p>
 
 
- {p.fecha_pedido &&
+ {(p.fecha_pedido ?? p.created_at) &&
  <p className={styles.pedidoFecha}>
- {p.fecha_pedido.split("T")[0]}
+ {(p.fecha_pedido ?? p.created_at).split("T")[0]}
  </p>
  }
 
@@ -694,10 +699,30 @@ function TabPedidos(){
  </div>
 
  {
- detalle.tipo_pago &&
+ detalle.paid_amount != null &&
+ <div>
+ <p className={styles.detalleLabel}>Pagado</p>
+ <p className={styles.detalleVal}>
+ ${Number(detalle.paid_amount).toLocaleString("es-CO")}
+ </p>
+ </div>
+ }
+
+ {
+ detalle.pending_amount != null &&
+ <div>
+ <p className={styles.detalleLabel}>Pendiente</p>
+ <p className={styles.detalleVal}>
+ ${Number(detalle.pending_amount).toLocaleString("es-CO")}
+ </p>
+ </div>
+ }
+
+ {
+ (detalle.tipo_pago ?? detalle.payment_type) &&
  <div>
  <p className={styles.detalleLabel}>Tipo de pago</p>
- <p className={styles.detalleVal}>{detalle.tipo_pago}</p>
+ <p className={styles.detalleVal}>{detalle.tipo_pago ?? detalle.payment_type}</p>
  </div>
  }
 
@@ -713,14 +738,14 @@ function TabPedidos(){
 
 
  {
- Array.isArray(detalle.detalle) && detalle.detalle.length>0 &&
+ Array.isArray(detalle.detalle ?? detalle.items) && (detalle.detalle ?? detalle.items).length>0 &&
 
  <div className={styles.detalleItems}>
 
  <p className={styles.detalleLabel}>Productos</p>
 
  {
- detalle.detalle.map((item,idx)=>(
+ (detalle.detalle ?? detalle.items).map((item,idx)=>(
 
  <div key={idx} className={styles.detalleItemRow}>
 
@@ -734,7 +759,7 @@ function TabPedidos(){
 
  <span className={styles.detalleItemSub}>
  ${
- Number(item.subtotal ?? (item.precio * (item.cantidad ?? 1))) || 0
+ Number(item.subtotal ?? ((item.precio ?? item.price) * (item.cantidad ?? item.quantity ?? 1)))
  .toLocaleString("es-CO")
  }
  </span>
@@ -1019,6 +1044,48 @@ function TabDomicilios(){
 
 
 // ==========================================
+// TAB ABONOS
+function TabAbonos(){
+  const [abonos, setAbonos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    api.get("/abonos/mis-abonos")
+      .then(({ data }) => setAbonos(data.data ?? []))
+      .catch(() => setError("No se pudieron cargar tus abonos."))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div className={styles.card}>Cargando abonos...</div>;
+  if (error) return <div className={styles.card}><p>{error}</p></div>;
+
+  return (
+    <div className={styles.tabContent}>
+      <div className={styles.card}>
+        <h3 className={styles.cardTitle}>Mis abonos</h3>
+        {abonos.length === 0 ? (
+          <p>No tienes abonos registrados.</p>
+        ) : (
+          abonos.map((abono) => (
+            <div key={abono.id_abono} className={styles.pedidoRow}>
+              <div className={styles.pedidoIconWrap}><FiDollarSign /></div>
+              <div className={styles.pedidoInfo}>
+                <p className={styles.pedidoId}>Venta {abono.numero_venta ?? "—"}</p>
+                <p>Cuota {abono.numero_cuota ?? "—"} · {abono.metodo_pago ?? "—"}</p>
+                <p className={styles.pedidoFecha}>{String(abono.fecha ?? "").split("T")[0]}</p>
+              </div>
+              <span className={styles.pedidoTotal}>
+                ${Number(abono.valor ?? 0).toLocaleString("es-CO")}
+              </span>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
 // TAB CONFIGURACION
 // ==========================================
 
@@ -1083,7 +1150,6 @@ function TabConfig({user,onLogout}){
 
 
  setUser({
-
  ...user,
 
  nombre_usuario:form.nombre_usuario,
@@ -1105,7 +1171,6 @@ function TabConfig({user,onLogout}){
 
 
  }catch(error){
-
 
  setMensaje(
  error?.response?.data?.message ||
@@ -1436,7 +1501,7 @@ export default function PerfilCliente({
 
 
 
- },[]);
+ },[fetchMyOrders, refreshFromServer]);
 
 
 
