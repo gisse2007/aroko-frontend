@@ -836,6 +836,7 @@ function TabDomicilios(){
   const [domicilios,setDomicilios]=useState([]);
 
   const [loading,setLoading]=useState(true);
+  const [error, setError]=useState("");
   const [page, setPage] = useState(1);
 
 
@@ -848,10 +849,13 @@ function TabDomicilios(){
     .then(({data})=>{
 
       // el backend puede responder con data.data, data.domicilios, o un array directo
-      const lista=
-        data.data ??
-        data.domicilios ??
-        (Array.isArray(data) ? data : []);
+      const lista = Array.isArray(data?.data)
+        ? data.data
+        : Array.isArray(data?.domicilios)
+          ? data.domicilios
+          : Array.isArray(data)
+            ? data
+            : [];
 
       setDomicilios(lista);
       setPage(1);
@@ -860,12 +864,8 @@ function TabDomicilios(){
     })
 
     .catch(error=>{
-
-
-      console.error(
-        "Error cargando domicilios:",
-        error
-      );
+      console.error("Error cargando domicilios:", error);
+      setError(error.response?.data?.message || "No se pudieron cargar tus domicilios.");
 
 
     })
@@ -898,6 +898,14 @@ function TabDomicilios(){
     );
 
 
+  }
+
+  if(error){
+    return (
+      <div className={styles.card}>
+        <p className={styles.msgErr}>{error}</p>
+      </div>
+    );
   }
 
 
@@ -969,12 +977,12 @@ function TabDomicilios(){
 
           :
 
-          domicilios.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((d)=>(
+          domicilios.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((d, index)=>(
 
 
             <div
 
-              key={d.id_domicilio}
+              key={d.id_domicilio ?? d.id ?? index}
 
               className={styles.pedidoRow}
 
@@ -996,7 +1004,7 @@ function TabDomicilios(){
 
                 <p className={styles.pedidoId}>
 
-                  {d.direccion}
+                  {d.direccion ?? d.direccion_entrega ?? d.address ?? "Dirección no disponible"}
 
                 </p>
 
@@ -1006,7 +1014,7 @@ function TabDomicilios(){
 
                   Barrio:
                   {" "}
-                  {d.barrio}
+                  {d.barrio ?? d.neighborhood ?? "No especificado"}
 
                 </p>
 
@@ -1014,13 +1022,13 @@ function TabDomicilios(){
 
 
                 {
-                  d.referencias &&
+                  (d.referencias ?? d.reference) &&
 
                   <p>
 
                     Referencia:
                     {" "}
-                    {d.referencias}
+                    {d.referencias ?? d.reference}
 
                   </p>
 
