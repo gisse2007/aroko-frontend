@@ -95,7 +95,7 @@ export default function NovedadesPage() {
 
           {!loading && products.length === 0 && (
             <div style={{ textAlign: "center", padding: "60px 20px" }}>
-              <FiPackage style={{ fontSize: "3rem", color: "#C4A08A", opacity: 0.7 }} />
+              <FiPackage className={styles.emptyStateIcon} />
               <h3 style={{ marginTop: 12, color: "#3D1C02", fontWeight: 700 }}>Próximamente</h3>
               <p style={{ color: "#7e6a57" }}>Estamos preparando nuevos productos de temporada.</p>
             </div>

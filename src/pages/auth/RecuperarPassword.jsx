@@ -5,7 +5,6 @@ import {
   FiArrowLeft,
   FiLock,
   FiKey,
-  FiShield,
 } from "react-icons/fi";
 
 import AuthLayout from "../../layouts/AuthLayout";
@@ -101,11 +100,6 @@ export default function RecuperarPassword() {
   return (
 
     <AuthLayout>
-
-      <div className={styles.authHeading}>
-        <span className={styles.authHeadingIcon}><FiShield /></span>
-        <span className={styles.authEyebrow}>Cuenta segura</span>
-      </div>
 
       <h2 className={styles.title}>
         Recuperar contraseña
