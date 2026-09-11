@@ -9,8 +9,8 @@ import {
 } from "react-icons/fi";
 
 import api from "../../api/axios";
+
 import { resolveImageUrl } from "../../utils/image";
-import { useAuthContext } from "../../context/AuthContext";
 import { useOrders } from "../../hooks/useOrders";
 import Tooltip from "../../components/Tooltip/Tooltip";
 import styles from "./PerfilCliente.module.css";
@@ -93,6 +93,25 @@ function getRolLabel(user){
 
   return map[r] ?? "Cliente";
 
+}
+
+const PAGE_SIZE = 6;
+
+function Pagination({ page, total, onChange }) {
+  const totalPages = Math.ceil(total / PAGE_SIZE);
+  if (totalPages <= 1) return null;
+
+  return (
+    <div className={styles.pagination} aria-label="Paginación">
+      <button type="button" className={styles.pageButton} onClick={() => onChange(page - 1)} disabled={page === 1}>
+        Anterior
+      </button>
+      <span className={styles.pageStatus}>Página {page} de {totalPages}</span>
+      <button type="button" className={styles.pageButton} onClick={() => onChange(page + 1)} disabled={page === totalPages}>
+        Siguiente
+      </button>
+    </div>
+  );
 }
 
 
@@ -472,6 +491,7 @@ function TabPedidos(){
  const [error,setError]=useState("");
 
  const [detalle,setDetalle]=useState(null);
+ const [page, setPage] = useState(1);
 
  const {fetchMyOrders}=useOrders();
 
@@ -492,6 +512,7 @@ function TabPedidos(){
  return fa.localeCompare(fb);
  });
  setPedidos(ordenados);
+ setPage(1);
 
  })
 
@@ -555,7 +576,7 @@ function TabPedidos(){
 
  :
 
- pedidos.map((p,i)=>{
+ pedidos.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((p,i)=>{
 
  const idPedido=p.id_pedido ?? p.id ?? i;
  const estado=p.estado ?? p.status ?? "—";
@@ -579,7 +600,7 @@ function TabPedidos(){
 
 
  <p className={styles.pedidoId}>
- Pedido #{i+1}
+ Pedido #{(page - 1) * PAGE_SIZE + i + 1}
  </p>
 
 
@@ -623,6 +644,8 @@ function TabPedidos(){
  })
 
  }
+
+ <Pagination page={page} total={pedidos.length} onChange={setPage} />
 
 
 
@@ -813,6 +836,7 @@ function TabDomicilios(){
   const [domicilios,setDomicilios]=useState([]);
 
   const [loading,setLoading]=useState(true);
+  const [page, setPage] = useState(1);
 
 
 
@@ -830,6 +854,7 @@ function TabDomicilios(){
         (Array.isArray(data) ? data : []);
 
       setDomicilios(lista);
+      setPage(1);
 
 
     })
@@ -944,7 +969,7 @@ function TabDomicilios(){
 
           :
 
-          domicilios.map((d)=>(
+          domicilios.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((d)=>(
 
 
             <div
@@ -1022,8 +1047,9 @@ function TabDomicilios(){
 
           ))
 
-
         }
+
+        <Pagination page={page} total={domicilios.length} onChange={setPage} />
 
 
 
@@ -1049,10 +1075,11 @@ function TabAbonos(){
   const [abonos, setAbonos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     api.get("/abonos/mis-abonos")
-      .then(({ data }) => setAbonos(data.data ?? []))
+      .then(({ data }) => { setAbonos(data.data ?? []); setPage(1); })
       .catch(() => setError("No se pudieron cargar tus abonos."))
       .finally(() => setLoading(false));
   }, []);
@@ -1067,7 +1094,7 @@ function TabAbonos(){
         {abonos.length === 0 ? (
           <p>No tienes abonos registrados.</p>
         ) : (
-          abonos.map((abono) => (
+          abonos.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((abono) => (
             <div key={abono.id_abono} className={styles.pedidoRow}>
               <div className={styles.pedidoIconWrap}><FiDollarSign /></div>
               <div className={styles.pedidoInfo}>
@@ -1081,6 +1108,7 @@ function TabAbonos(){
             </div>
           ))
         )}
+        <Pagination page={page} total={abonos.length} onChange={setPage} />
       </div>
     </div>
   );
