@@ -1,5 +1,6 @@
 import { FiAlertTriangle } from "react-icons/fi";
 import styles from "../Detalle.module.css";
+import { formatCantidad } from "../../utils/number";
 
 const Field = ({ label, value, full, highlight }) => (
   <div className={`${styles.fieldCard} ${full ? styles.fieldFull : ""} ${highlight ? styles.highlight : ""}`}>
@@ -42,10 +43,10 @@ export default function InsumoDetalle({ insumo }) {
         <Field label="Precio unitario"   value={`$${Number(precio_unitario).toLocaleString()}`} />
         <Field
           label="Stock actual"
-          value={`${stock_actual} ${unidad_medida}`}
+          value={`${formatCantidad(stock_actual)} ${unidad_medida}`}
           highlight={stockBajo}
         />
-        <Field label="Stock mínimo" value={`${stock_minimo} ${unidad_medida}`} />
+        <Field label="Stock mínimo" value={`${formatCantidad(stock_minimo)} ${unidad_medida}`} />
       </div>
 
     </div>

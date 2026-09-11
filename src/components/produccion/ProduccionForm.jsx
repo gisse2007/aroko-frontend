@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { FiPlus, FiTrash2, FiAlertTriangle } from "react-icons/fi";
 import FormField from "../forms/FormField";
 import { useEmpleadoActual } from "../../hooks/useEmpleadoActual";
+import { formatCantidad } from "../../utils/number";
 import styles from "./ProduccionForm.module.css";
 
 const REQUIRED = "Este campo es obligatorio.";
@@ -173,9 +174,9 @@ export default function ProduccionForm({ empleados = [], productos = [], insumos
                       <span
                         key={r.insumo_id}
                         className={`${styles.previewChip} ${!r.suficiente ? styles.chipInsuf : styles.chipOk}`}
-                        title={`Requerido: ${r.requerido.toFixed(2)} ${r.unidad} | Disponible: ${r.disponible} ${r.unidad}`}
+                        title={`Requerido: ${formatCantidad(r.requerido)} ${r.unidad} | Disponible: ${formatCantidad(r.disponible)} ${r.unidad}`}
                       >
-                        {r.nombre_insumo}: {r.requerido.toFixed(2)} {r.unidad}
+                        {r.nombre_insumo}: {formatCantidad(r.requerido)} {r.unidad}
                         {!r.suficiente && <FiAlertTriangle className={styles.chipIcon} />}
                       </span>
                     ))}

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { FiTrash2, FiPlusCircle, FiAlertTriangle } from "react-icons/fi";
 import FormField from "../forms/FormField";
 import { useEmpleadoActual } from "../../hooks/useEmpleadoActual";
+import { formatCantidad } from "../../utils/number";
 import styles from "../compras/CompraForm.module.css";
 
 const REQUIRED = "Este campo es obligatorio.";
@@ -247,7 +248,7 @@ export default function DevolucionForm({ pedidos = [], empleados = [], onSubmit,
                 {detalle.map((d) => (
                   <tr key={d.producto_id}>
                     <td>{d.nombre_producto}</td>
-                    <td>{d.cantidad}</td>
+                    <td>{formatCantidad(d.cantidad)}</td>
                     <td style={{ color: "#888" }}>{d.max}</td>
                     <td>${d.precio.toLocaleString()}</td>
                     <td>${d.subtotal.toLocaleString()}</td>

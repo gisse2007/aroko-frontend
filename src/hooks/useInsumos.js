@@ -85,8 +85,13 @@ export function useInsumos() {
       nombre_insumo:   values.nombre_insumo.trim(),
       categoria_id:    Number(values.categoria_id),
       unidad_medida:   values.unidad_medida,
+      presentacion_nombre: values.presentacion_nombre?.trim() || null,
+      presentacion_contenido: Number.isFinite(Number(values.presentacion_contenido))
+        ? parseFloat(values.presentacion_contenido)
+        : null,
       stock_actual:    parseFloat(values.stock_actual) || 0,
       stock_minimo:    parseFloat(values.stock_minimo) || 0,
+      stock_minimo_unidad: values.stock_minimo_unidad || "unidad_medida",
       precio_unitario: parseFloat(values.precio_unitario) || 0,
     });
     await fetchAll();
@@ -99,8 +104,13 @@ export function useInsumos() {
       nombre_insumo:   values.nombre_insumo.trim(),
       categoria_id:    Number(values.categoria_id),
       unidad_medida:   values.unidad_medida,
+      presentacion_nombre: values.presentacion_nombre?.trim() || null,
+      presentacion_contenido: Number.isFinite(Number(values.presentacion_contenido))
+        ? parseFloat(values.presentacion_contenido)
+        : null,
       stock_actual:    parseFloat(values.stock_actual) || 0,
       stock_minimo:    parseFloat(values.stock_minimo) || 0,
+      stock_minimo_unidad: values.stock_minimo_unidad || "unidad_medida",
       precio_unitario: parseFloat(values.precio_unitario) || 0,
     });
     await fetchAll();

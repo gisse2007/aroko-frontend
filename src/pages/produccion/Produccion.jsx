@@ -4,6 +4,7 @@ import { useProduccion, ESTADOS_PRODUCCION_LABEL, FILTROS_ESTADO_PRODUCCION } fr
 import { useToast }          from "../../hooks/useToast";
 import { useLoading }        from "../../context/LoadingContext";
 import { generarPDFProduccion } from "../../services/produccionPDF";
+import { formatCantidad } from "../../utils/number";
 import Table              from "../../components/tables/Table";
 import Modal              from "../../components/forms/Modal";
 import ConfirmDialog      from "../../components/ConfirmDialog";
@@ -44,9 +45,9 @@ const COLUMNS = [
     key: "detalle",
     label: "Productos",
     render: (detalle) => (
-      <span title={detalle?.map((d) => `${d.producto_nombre} (${d.cantidad})`).join(", ")}>
+      <span title={detalle?.map((d) => `${d.producto_nombre} (${formatCantidad(d.cantidad)})`).join(", ")}>
         {detalle?.length ?? 0} producto{detalle?.length !== 1 ? "s" : ""} —{" "}
-        {detalle?.reduce((s, d) => s + Number(d.cantidad), 0) ?? 0} uds.
+        {formatCantidad(detalle?.reduce((s, d) => s + Number(d.cantidad), 0) ?? 0)} uds.
       </span>
     ),
   },

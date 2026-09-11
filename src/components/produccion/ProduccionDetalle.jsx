@@ -1,5 +1,6 @@
 import { FiAlertTriangle } from "react-icons/fi";
 import { ESTADOS_PRODUCCION_LABEL } from "../../hooks/useProduccion";
+import { formatCantidad } from "../../utils/number";
 import styles from "../Detalle.module.css";
 
 const ESTADO_CLS = {
@@ -42,7 +43,7 @@ export default function ProduccionDetalle({ produccion }) {
       <div className={styles.fieldsGrid}>
         <Field label="Fecha"          value={fecha?.split("T")[0] ?? fecha} />
         <Field label="Empleado"       value={empleado_nombre} />
-        <Field label="Total unidades" value={`${totalUnidades} uds. en ${detalle.length} producto(s)`} full />
+        <Field label="Total unidades" value={`${formatCantidad(totalUnidades)} uds. en ${detalle.length} producto(s)`} full />
       </div>
 
       {observaciones && (
@@ -73,7 +74,7 @@ export default function ProduccionDetalle({ produccion }) {
               {detalle.map((d, i) => (
                 <tr key={d.producto_id ?? i}>
                   <td>{d.producto_nombre}</td>
-                  <td>{d.cantidad} uds.</td>
+                  <td>{formatCantidad(d.cantidad)} uds.</td>
                 </tr>
               ))}
             </tbody>

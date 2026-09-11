@@ -11,6 +11,7 @@ import Tooltip        from "../../components/Tooltip/Tooltip";
 import InsumoForm     from "../../components/insumos/InsumoForm";
 import InsumoDetalle  from "../../components/insumos/InsumoDetalle";
 import api            from "../../api/axios";
+import { formatCantidad } from "../../utils/number";
 import styles from "./Insumos.module.css";
 
 /* ── Constantes de estado de UI ── */
@@ -25,12 +26,20 @@ const EstadoBadge = ({ value }) => (
 );
 
 /* ── Celda stock con alerta visual ── */
-const StockCell = ({ actual, minimo }) => {
+const StockCell = ({ actual, minimo, presentacionNombre, presentacionContenido }) => {
   const bajo = actual < minimo;
+  const equivalencia = presentacionContenido > 0
+    ? Math.round(Number(actual) / Number(presentacionContenido))
+    : null;
   return (
     <span className={bajo ? styles.stockBajo : styles.stockOk}>
       {bajo && <FiAlertTriangle className={styles.stockIcon} />}
-      {actual}
+      {formatCantidad(actual)}
+      {equivalencia != null && (
+        <small className={styles.presentationEquivalent}>
+          ≈ {formatCantidad(equivalencia)} {presentacionNombre}
+        </small>
+      )}
     </span>
   );
 };
@@ -40,10 +49,17 @@ const COLUMNS = [
   { key: "unidad_medida",   label: "Unidad" },
   {
     key: "stock_actual",
-    label: "Stock actual",
-    render: (v, row) => <StockCell actual={v} minimo={row.stock_minimo} />,
+    label: "Cant. unidad",
+    render: (v, row) => (
+      <StockCell
+        actual={v}
+        minimo={row.stock_minimo}
+        presentacionNombre={row.presentacion_nombre}
+        presentacionContenido={row.presentacion_contenido}
+      />
+    ),
   },
-  { key: "stock_minimo",    label: "Stock mín." },
+  { key: "stock_minimo",    label: "Stock mín.", render: (v) => formatCantidad(v) },
   {
     key: "precio_unitario",
     label: "Precio unit.",

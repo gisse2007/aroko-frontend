@@ -1,5 +1,6 @@
 import { useEmpleados } from "../../hooks/useEmpleados";
 import styles from "../Detalle.module.css";
+import { formatCantidad } from "../../utils/number";
 
 const ESTADO_CLS = { Registrada: styles.registrada, Anulada: styles.anulada };
 
@@ -50,7 +51,7 @@ export default function DevolucionDetalle({ devolucion }) {
               {detalle.map((d) => (
                 <tr key={d.producto_id}>
                   <td>{d.nombre_producto}</td>
-                  <td>{d.cantidad}</td>
+                  <td>{formatCantidad(d.cantidad)}</td>
                   <td>${Number(d.precio).toLocaleString()}</td>
                   <td>${Number(d.subtotal).toLocaleString()}</td>
                 </tr>

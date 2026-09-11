@@ -4,6 +4,7 @@ import { FiTrash2, FiPlusCircle } from "react-icons/fi";
 import FormField from "../forms/FormField";
 import { todayISO } from "../../hooks/usePedidos";
 import { useEmpleadoActual } from "../../hooks/useEmpleadoActual";
+import { formatCantidad } from "../../utils/number";
 import styles from "./PedidoForm.module.css";
 
 const REQUIRED = "Error: Debe completar todos los campos obligatorios.";
@@ -65,7 +66,7 @@ export default function PedidoForm({
     const cant = Number(cantidad);
     if (!cant || cant <= 0) { setDetalleError("La cantidad debe ser mayor a cero."); return; }
     if (cant > prod.stock_producto) {
-      setDetalleError(`Error: Stock insuficiente. Disponible: ${prod.stock_producto}`);
+      setDetalleError(`Error: Stock insuficiente. Disponible: ${formatCantidad(prod.stock_producto)}`);
       return;
     }
     if (detalle.some((d) => d.producto_id === prod.id_producto)) {
@@ -183,7 +184,7 @@ export default function PedidoForm({
             <option value="">— Seleccionar producto —</option>
             {productos.map((p) => (
               <option key={p.id_producto} value={p.id_producto} disabled={p.stock_producto <= 0}>
-                {p.nombre} {p.stock_producto <= 0 ? "(Sin stock)" : `(Stock: ${p.stock_producto})`}
+                {p.nombre} {p.stock_producto <= 0 ? "(Sin stock)" : `(Stock: ${formatCantidad(p.stock_producto)})`}
               </option>
             ))}
           </select>
@@ -211,7 +212,7 @@ export default function PedidoForm({
                 {detalle.map((d) => (
                   <tr key={d.producto_id}>
                     <td>{d.nombre}</td>
-                    <td>{d.cantidad}</td>
+                    <td>{formatCantidad(d.cantidad)}</td>
                     <td>${Number(d.precio).toLocaleString()}</td>
                     <td>${Number(d.subtotal).toLocaleString()}</td>
                     <td>

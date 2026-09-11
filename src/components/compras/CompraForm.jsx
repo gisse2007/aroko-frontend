@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { FiTrash2, FiPlusCircle, FiUpload } from "react-icons/fi";
 import FormField from "../forms/FormField";
 import { useEmpleadoActual } from "../../hooks/useEmpleadoActual";
+import { formatCantidad } from "../../utils/number";
 import styles from "./CompraForm.module.css";
 
 const IVA_OPTS = [
@@ -325,7 +326,7 @@ export default function CompraForm({
                   return (
                     <tr key={d.insumo_id}>
                       <td>{d.nombre_insumo}</td>
-                      <td>{d.cantidad}</td>
+                      <td>{formatCantidad(d.cantidad)}</td>
                       <td>{Number(d.contenido).toLocaleString()}</td>
                       <td>{d.unidad_medida}</td>
                       <td>{stockIngresado.toLocaleString()} {d.unidad_medida}</td>

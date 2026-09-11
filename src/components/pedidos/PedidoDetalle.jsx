@@ -2,6 +2,7 @@ import { FiShoppingBag, FiExternalLink, FiImage } from "react-icons/fi";
 import { ESTADOS_LABEL } from "../../hooks/usePedidos";
 import api from "../../api/axios";
 import styles from "../Detalle.module.css";
+import { formatCantidad } from "../../utils/number";
 
 // Deriva el origen del servidor desde la baseURL de axios (quita /api)
 const SERVER_ORIGIN = api.defaults.baseURL?.replace(/\/api\/?$/, "") ?? "http://localhost:3000";
@@ -122,7 +123,7 @@ export default function PedidoDetalle({ pedido }) {
               {detalle.map((d, i) => (
                 <tr key={d.producto_id ?? i}>
                   <td>{d.nombre}</td>
-                  <td>{d.cantidad}</td>
+                  <td>{formatCantidad(d.cantidad)}</td>
                   <td>${Number(d.precio).toLocaleString("es-CO")}</td>
                   <td>${Number(d.subtotal).toLocaleString("es-CO")}</td>
                 </tr>

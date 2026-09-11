@@ -1,4 +1,5 @@
 import styles from "../Detalle.module.css";
+import { formatCantidad } from "../../utils/number";
 
 const Field = ({ label, value, full }) => (
   <div className={`${styles.fieldCard} ${full ? styles.fieldFull : ""}`}>
@@ -45,7 +46,7 @@ export default function SalidaDetalle({ salida }) {
                 <tr key={d.id_detalle ?? d.insumo_id}>
                   <td>{d.nombre_insumo}</td>
                   <td>{d.unidad_medida}</td>
-                  <td>{d.cantidad}</td>
+                  <td>{formatCantidad(d.cantidad)}</td>
                 </tr>
               ))}
             </tbody>

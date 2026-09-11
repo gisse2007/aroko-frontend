@@ -101,6 +101,14 @@
 .stockOk { color: #1a9e5c; font-weight: 600; }
 .stockIcon { font-size: 0.85rem; }
 
+.presentationEquivalent {
+  display: inline-block;
+  margin-left: 8px;
+  color: #71828a;
+  font-size: 0.72rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
 /* ── Toggle estado ── */
 .toggleBtn {
   display: inline-flex;

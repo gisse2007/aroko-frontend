@@ -4,6 +4,7 @@ import { FiTrash2, FiPlusCircle, FiAlertTriangle, FiUploadCloud, FiList, FiX } f
 import FormField from "../forms/FormField";
 import { resolveImageUrl } from "../../utils/image";
 import styles from "./ProductoForm.module.css";
+import { formatCantidad } from "../../utils/number";
 
 const REQUIRED = "Debe completar todos los campos requeridos.";
 const MAX_IMGS = 3;
@@ -273,7 +274,7 @@ export default function ProductoForm({
                   {receta.map((r) => (
                     <tr key={r.insumo_id}>
                       <td>{r.nombre_insumo}</td>
-                      <td>{r.cantidad_requerida}<span className={styles.unitBadge}>{r.unidad}</span></td>
+                      <td>{formatCantidad(r.cantidad_requerida)}<span className={styles.unitBadge}>{r.unidad}</span></td>
                       <td>
                         <button type="button" className={styles.removeBtn}
                           onClick={() => handleEliminarInsumo(r.insumo_id)} title="Eliminar">

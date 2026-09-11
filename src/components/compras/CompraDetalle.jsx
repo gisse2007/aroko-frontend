@@ -1,6 +1,7 @@
 import { FiImage } from "react-icons/fi";
 import styles from "../Detalle.module.css";
 import { resolveImageUrl } from "../../utils/image";
+import { formatCantidad } from "../../utils/number";
 
 const ESTADO_CLS = { ACTIVA: styles.activa, ANULADA: styles.anulada };
 
@@ -66,10 +67,10 @@ export default function CompraDetalle({ compra }) {
                 return (
                   <tr key={d.insumo_id ?? `${d.nombre_insumo}-${d.cantidad}`}>
                     <td>{d.nombre_insumo}</td>
-                    <td>{d.cantidad}</td>
-                    <td>{d.cantidad_por_unidad ?? "—"}</td>
+                    <td>{formatCantidad(d.cantidad)}</td>
+                    <td>{d.cantidad_por_unidad == null ? "—" : formatCantidad(d.cantidad_por_unidad)}</td>
                     <td>{d.unidad_medida}</td>
-                    <td>{stockIngresado ? `${stockIngresado.toLocaleString()} ${d.unidad_medida}` : "—"}</td>
+                    <td>{stockIngresado ? `${formatCantidad(stockIngresado)} ${d.unidad_medida}` : "—"}</td>
                     <td>${Number(d.precio).toLocaleString()}</td>
                     <td>${Number(d.subtotal).toLocaleString()}</td>
                   </tr>

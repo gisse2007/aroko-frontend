@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { FiTrash2, FiPlusCircle } from "react-icons/fi";
 import FormField from "../forms/FormField";
 import { useEmpleadoActual } from "../../hooks/useEmpleadoActual";
+import { formatCantidad } from "../../utils/number";
 import styles from "../compras/CompraForm.module.css";
 
 const REQUIRED = "Este campo es obligatorio.";
@@ -31,7 +32,7 @@ export default function SalidaForm({ empleados = [], insumosDisponibles = [], on
     if (!ins) return;
 
     if (cant > ins.stock_actual) {
-      setDetalleError(`Stock insuficiente. Disponible: ${ins.stock_actual} ${ins.unidad_medida}.`);
+      setDetalleError(`Stock insuficiente. Disponible: ${formatCantidad(ins.stock_actual)} ${ins.unidad_medida}.`);
       return;
     }
     if (detalle.some((d) => d.insumo_id === ins.id_insumo)) {
@@ -89,7 +90,7 @@ export default function SalidaForm({ empleados = [], insumosDisponibles = [], on
               <option value="">— Seleccionar insumo —</option>
               {insumosActivos.map((i) => (
                 <option key={i.id_insumo} value={i.id_insumo}>
-                  {i.nombre_insumo} (Stock: {i.stock_actual} {i.unidad_medida})
+                  {i.nombre_insumo} (Stock: {formatCantidad(i.stock_actual)} {i.unidad_medida})
                 </option>
               ))}
             </select>
@@ -104,7 +105,7 @@ export default function SalidaForm({ empleados = [], insumosDisponibles = [], on
 
         {insumoSelObj && (
           <p style={{ fontSize: "0.78rem", color: "#1a6a80", marginTop: 2 }}>
-            Stock disponible: <b>{insumoSelObj.stock_actual} {insumoSelObj.unidad_medida}</b>
+            Stock disponible: <b>{formatCantidad(insumoSelObj.stock_actual)} {insumoSelObj.unidad_medida}</b>
           </p>
         )}
 
@@ -120,7 +121,7 @@ export default function SalidaForm({ empleados = [], insumosDisponibles = [], on
                   <tr key={d.insumo_id}>
                     <td>{d.nombre_insumo}</td>
                     <td>{d.unidad_medida}</td>
-                    <td>{d.cantidad}</td>
+                    <td>{formatCantidad(d.cantidad)}</td>
                     <td>
                       <button type="button" className={styles.removeBtn}
                         onClick={() => handleEliminar(d.insumo_id)} title="Eliminar">

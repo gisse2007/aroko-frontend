@@ -2,6 +2,7 @@ import { FiAlertTriangle, FiList } from "react-icons/fi";
 import styles from "../Detalle.module.css";
 import { STOCK_MINIMO } from "../../hooks/useProductos";
 import { resolveImageUrl } from "../../utils/image";
+import { formatCantidad } from "../../utils/number";
 
 const Field = ({ label, value, full, highlight }) => (
   <div
@@ -77,7 +78,7 @@ export default function ProductoDetalle({ producto }) {
         <Field label="Precio" value={`$${Number(precio).toLocaleString()}`} />
         <Field
           label="Stock"
-          value={`${stock_producto} uds.`}
+          value={`${formatCantidad(stock_producto)} uds.`}
           highlight={stockBajo}
         />
         <Field label="Estado" value={estado} />
@@ -110,7 +111,7 @@ export default function ProductoDetalle({ producto }) {
                     <td>{i + 1}</td>
                     <td>{r.nombre_insumo}</td>
                     <td>
-                      {r.cantidad_requerida} {r.unidad}
+                      {formatCantidad(r.cantidad_requerida)} {r.unidad}
                     </td>
                   </tr>
                 ))}

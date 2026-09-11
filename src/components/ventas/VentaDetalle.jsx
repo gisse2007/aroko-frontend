@@ -1,5 +1,6 @@
 import { FiAlertTriangle, FiShoppingBag } from "react-icons/fi";
 import styles from "../Detalle.module.css";
+import { formatCantidad } from "../../utils/number";
 
 const ESTADO_CLS = { REGISTRADA: styles.activo, ANULADA: styles.anulada };
 
@@ -60,7 +61,7 @@ export default function VentaDetalle({ venta }) {
               {detalle.map((d) => (
                 <tr key={d.producto_id}>
                   <td>{d.nombre}</td>
-                  <td>{d.cantidad}</td>
+                  <td>{formatCantidad(d.cantidad)}</td>
                   <td>${Number(d.precio).toLocaleString()}</td>
                   <td>${Number(d.subtotal).toLocaleString()}</td>
                 </tr>

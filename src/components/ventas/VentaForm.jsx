@@ -4,6 +4,7 @@ import { FiTrash2, FiPlusCircle, FiAlertTriangle, FiLock } from "react-icons/fi"
 import FormField from "../forms/FormField";
 import { ESTADOS_LABEL } from "../../hooks/usePedidos";
 import { useEmpleadoActual } from "../../hooks/useEmpleadoActual";
+import { formatCantidad } from "../../utils/number";
 import styles from "./VentaForm.module.css";
 
 const REQUIRED = "Este campo es obligatorio.";
@@ -54,7 +55,7 @@ export default function VentaForm({ clientes = [], empleados = [], productos = [
     const cant = Number(cantidad);
     if (!cant || cant <= 0) { setDetalleError("La cantidad debe ser mayor a cero."); return; }
     if (cant > prod.stock_producto) {
-      setDetalleError(`Stock insuficiente. Disponible: ${prod.stock_producto} uds.`); return;
+      setDetalleError(`Stock insuficiente. Disponible: ${formatCantidad(prod.stock_producto)} uds.`); return;
     }
     if (detalle.some((d) => d.producto_id === prod.id_producto)) {
       setDetalleError("El producto ya fue agregado."); return;
@@ -173,7 +174,7 @@ export default function VentaForm({ clientes = [], empleados = [], productos = [
               <option value="">— Seleccionar producto —</option>
               {productos.map((p) => (
                 <option key={p.id_producto} value={p.id_producto} disabled={p.stock_producto <= 0}>
-                  {p.nombre} — ${Number(p.precio).toLocaleString()} (Stock: {p.stock_producto})
+                  {p.nombre} — ${Number(p.precio).toLocaleString()} (Stock: {formatCantidad(p.stock_producto)})
                 </option>
               ))}
             </select>
@@ -202,7 +203,7 @@ export default function VentaForm({ clientes = [], empleados = [], productos = [
                 {detalleEfectivo.map((d) => (
                   <tr key={d.producto_id} className={pedidoSel ? styles.rowLocked : ""}>
                     <td>{d.nombre}</td>
-                    <td>{d.cantidad}</td>
+                    <td>{formatCantidad(d.cantidad)}</td>
                     <td>${Number(d.precio).toLocaleString()}</td>
                     <td>${Number(d.subtotal).toLocaleString()}</td>
                     {!pedidoSel && (

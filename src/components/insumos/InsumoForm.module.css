@@ -39,3 +39,45 @@
   display: flex;
   align-items: center;
 }
+
+.presentationBox,
+.minimumStockBox {
+  margin-top: 4px;
+  padding: 14px;
+  border: 1px solid #dce8eb;
+  border-radius: 8px;
+  background: #f8fcfd;
+}
+
+.presentationTitle {
+  margin: 0 0 10px;
+  color: #244c58;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.presentationTitle span {
+  color: #71828a;
+  font-weight: 400;
+}
+
+.presentationGrid,
+.minimumStockBox {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.presentationHint {
+  margin: 8px 0 0;
+  color: #71828a;
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .presentationGrid,
+  .minimumStockBox {
+    grid-template-columns: 1fr;
+  }
+}

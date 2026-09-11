@@ -32,10 +32,16 @@ export default function InsumoForm({ defaultValues = {}, categorias = [], onSubm
 
   const stockActual = watch("stock_actual");
   const stockMinimo = watch("stock_minimo");
+  const stockMinimoUnidad = watch("stock_minimo_unidad") || "unidad_medida";
+  const presentacionContenido = watch("presentacion_contenido");
+  const unidadMedida = watch("unidad_medida");
+  const stockMinimoReal = stockMinimoUnidad === "presentacion"
+    ? Number(stockMinimo || 0) * Number(presentacionContenido || 0)
+    : Number(stockMinimo || 0);
   const showStockAlert =
     stockActual !== "" && stockMinimo !== "" &&
-    Number(stockActual) < Number(stockMinimo) &&
-    Number(stockActual) >= 0 && Number(stockMinimo) >= 0;
+    Number(stockActual) < stockMinimoReal &&
+    Number(stockActual) >= 0 && stockMinimoReal >= 0;
 
   const reg = (name, rules) => {
     const { ref, ...rest } = register(name, rules);
@@ -99,18 +105,65 @@ export default function InsumoForm({ defaultValues = {}, categorias = [], onSubm
             />
           )}
 
-          <FormField
-            label="Stock mínimo *"
-            name="stock_minimo"
-            type="number"
-            placeholder="0"
-            error={errors.stock_minimo}
-            {...reg("stock_minimo", {
-              required: REQUIRED_MSG,
-              min: { value: 0, message: "El stock no puede ser negativo." },
-              valueAsNumber: true,
-            })}
-          />
+          <div className={`${styles.fullWidth} ${tipoStyles.presentationBox}`}>
+            <p className={tipoStyles.presentationTitle}>Presentación estándar <span>(opcional)</span></p>
+            <div className={tipoStyles.presentationGrid}>
+              <FormField
+                label="Nombre de presentación"
+                name="presentacion_nombre"
+                type="text"
+                placeholder="Ej: Bolsa, Bulto, Cartón"
+                error={errors.presentacion_nombre}
+                {...reg("presentacion_nombre", {
+                  maxLength: { value: 50, message: "Máximo 50 caracteres" },
+                })}
+              />
+              <FormField
+                label={`Contenido estándar (${unidadMedida || "unidad"})`}
+                name="presentacion_contenido"
+                type="number"
+                placeholder="Ej: 1"
+                min="0.01"
+                step="any"
+                error={errors.presentacion_contenido}
+                {...reg("presentacion_contenido", {
+                  min: { value: 0.01, message: "Debe ser mayor a cero." },
+                  valueAsNumber: true,
+                })}
+              />
+            </div>
+            <p className={tipoStyles.presentationHint}>
+              Sirve para mostrar equivalencias y definir el stock mínimo en presentaciones. Las compras pueden usar otro contenido.
+            </p>
+          </div>
+
+          <div className={tipoStyles.minimumStockBox}>
+            <FormField
+              label="Stock mínimo *"
+              name="stock_minimo"
+              type="number"
+              placeholder="0"
+              min="0"
+              step="any"
+              error={errors.stock_minimo}
+              {...reg("stock_minimo", {
+                required: REQUIRED_MSG,
+                min: { value: 0, message: "El stock no puede ser negativo." },
+                valueAsNumber: true,
+              })}
+            />
+            <FormField
+              label="¿En qué unidad quieres definir el mínimo?"
+              name="stock_minimo_unidad"
+              type="select"
+              options={[
+                { value: "unidad_medida", label: `Unidad real (${unidadMedida || "unidad"})` },
+                { value: "presentacion", label: "Presentaciones estándar" },
+              ]}
+              error={errors.stock_minimo_unidad}
+              {...reg("stock_minimo_unidad")}
+            />
+          </div>
 
           <FormField
             label="Precio unitario ($) *"
@@ -129,7 +182,7 @@ export default function InsumoForm({ defaultValues = {}, categorias = [], onSubm
 
         {showStockAlert && esBodega && (
           <div className={styles.stockAlert}>
-            ⚠ El insumo se encuentra por debajo del stock mínimo.
+          ⚠ El insumo se encuentra por debajo del stock mínimo.
           </div>
         )}
 
