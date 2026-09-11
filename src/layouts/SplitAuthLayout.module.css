@@ -111,6 +111,18 @@
   animation: fadeUp 0.35s ease both;
 }
 
+.formLogo {
+  display: flex;
+  justify-content: center;
+  margin: -8px 0 24px;
+}
+
+.formLogoImg {
+  width: auto;
+  height: 58px;
+  object-fit: contain;
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }

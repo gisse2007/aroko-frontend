@@ -7,9 +7,12 @@ import {
   FiKey,
 } from "react-icons/fi";
 
-import AuthLayout from "../../layouts/AuthLayout";
+import SplitAuthLayout from "../../layouts/SplitAuthLayout";
 import styles from "./Auth.module.css";
 import api from "../../api/axios";
+
+const RECUPERAR_IMG =
+  "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=80";
 
 export default function RecuperarPassword() {
 
@@ -99,7 +102,7 @@ export default function RecuperarPassword() {
 
   return (
 
-    <AuthLayout>
+    <SplitAuthLayout image={RECUPERAR_IMG} tagline="Siempre hay algo dulce esperándote">
 
       <h2 className={styles.title}>
         Recuperar contraseña
@@ -232,6 +235,6 @@ export default function RecuperarPassword() {
 
       </form>
 
-    </AuthLayout>
+    </SplitAuthLayout>
   );
 }

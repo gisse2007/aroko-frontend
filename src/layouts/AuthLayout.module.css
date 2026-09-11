@@ -35,16 +35,6 @@
   animation: fadeUp 0.35s ease;
 }
 
-.card::before {
-  content: "";
-  display: block;
-  width: 56px;
-  height: 4px;
-  margin: -38px auto 28px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #3BBEDA, #F5C97A);
-}
-
 @media (max-width: 520px) {
   .bg {
     padding: 22px 16px 24px;

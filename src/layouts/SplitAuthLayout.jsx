@@ -1,4 +1,5 @@
 // src/layouts/SplitAuthLayout.jsx
+import logo from "../assets/logo_Aroko-removebg-preview.png";
 import styles from "./SplitAuthLayout.module.css";
 
 /**
@@ -38,6 +39,9 @@ export default function SplitAuthLayout({
       {/* ── Panel derecho: formulario ── */}
       <div className={styles.formPanel}>
         <div className={styles.formCard}>
+          <div className={styles.formLogo}>
+            <img src={logo} alt="Aroko" className={styles.formLogoImg} />
+          </div>
           {children}
         </div>
       </div>
