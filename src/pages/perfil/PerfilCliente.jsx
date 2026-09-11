@@ -96,7 +96,7 @@ function getRolLabel(user){
 
 }
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 3;
 
 function Pagination({ page, total, onChange }) {
   const totalPages = Math.ceil(total / PAGE_SIZE);

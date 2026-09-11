@@ -15,7 +15,7 @@
   grid-column: 1 / -1;
 }
 
-/* ── Checkboxes Nuevo / Temporada ── */
+/* ── Indicadores del producto ── */
 .badgesSection {
   grid-column: 1 / -1;
   display: flex;

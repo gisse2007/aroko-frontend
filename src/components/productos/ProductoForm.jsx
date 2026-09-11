@@ -117,7 +117,7 @@ export default function ProductoForm({
     formData.append("categoria_id", Number(values.categoria_id));
     formData.append("precio", precio);
     formData.append("stock_producto", stock);
-    formData.append("es_nuevo", values.es_nuevo ? "true" : "false");
+    formData.append("es_nuevo", defaultValues?.id_producto ? (defaultValues.es_nuevo ? "true" : "false") : "true");
     formData.append("es_temporada", values.es_temporada ? "true" : "false");
     formData.append("receta", JSON.stringify(
       receta.map((r) => ({ insumo_id: r.insumo_id, cantidad_requerida: r.cantidad_requerida }))
@@ -215,15 +215,6 @@ export default function ProductoForm({
 
         {/* Destacados / Badges */}
         <div className={styles.badgesSection}>
-          <label className={styles.checkLabel}>
-            <input
-              type="checkbox"
-              className={styles.checkboxInput}
-              {...reg("es_nuevo")}
-            />
-            <span>Marcar como &quot;Nuevo&quot;</span>
-          </label>
-
           <label className={styles.checkLabel}>
             <input
               type="checkbox"
