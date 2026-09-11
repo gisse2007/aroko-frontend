@@ -19,32 +19,25 @@ const VALORES = [
 
 const EQUIPO = [
   {
-    name: "Valentina Torres",
+    name: "Milena Fontalvo",
     role: "Fundadora & Chef Pastelera",
-    desc: "10 años perfeccionando el arte de la repostería francesa con alma colombiana.",
+    desc: "Años perfeccionando el arte de la repostería y panadería con alma colombiana.",
     img: "https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=400&q=80&auto=format&fit=crop&face",
-    initials: "VT",
+    initials: "MF",
   },
   {
-    name: "Andrés Morales",
-    role: "Maestro Panadero",
-    desc: "Especialista en fermentación lenta y panes de masa madre con más de 8 años de experiencia.",
+    name: "Andrés Valoyes",
+    role: "Administrador",
+    desc: "Encargado en la parte Administrativa y logística, asegurando que cada pedido llegue a tiempo y en perfectas condiciones.",
     img: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&q=80&auto=format&fit=crop",
-    initials: "AM",
+    initials: "AV",
   },
   {
-    name: "Camila Ríos",
-    role: "Diseñadora de Tortas",
-    desc: "Convierte cada celebración en una obra de arte comestible, personalizada al detalle.",
+    name: "Ricardo Villalobos",
+    role: "Abogado & Asesor Legal",
+    desc: "Comprometido al area legal y de cumplimiento, asegurando que Aroko opere dentro del marco legal y protegiendo los intereses de la empresa.",
     img: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80&auto=format&fit=crop",
-    initials: "CR",
-  },
-  {
-    name: "Felipe Gómez",
-    role: "Jefe de Producción",
-    desc: "Garantiza que cada producto salga perfecto del horno, cuidando tiempos y estándares.",
-    img: "https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=400&q=80&auto=format&fit=crop",
-    initials: "FG",
+    initials: "RV",
   },
 ];
 
@@ -75,7 +68,7 @@ export default function NosotrosPage() {
             Hechos con <em>amor</em>,<br />entregados con <em>orgullo</em>
           </motion.h1>
           <motion.p className={styles.heroSub} {...fadeUp(0.4)}>
-            Somos Aroko, una panadería y repostería artesanal nacida en Bogotá con el sueño de llevar sabores únicos a cada mesa.
+            Somos Aroko, una panadería y repostería artesanal nacida en Medellín con el sueño de llevar sabores únicos a cada mesa.
           </motion.p>
         </div>
         <div className={styles.heroWave}>
@@ -95,22 +88,16 @@ export default function NosotrosPage() {
                 alt="Panadería Aroko"
               />
               <div className={styles.historiaImgBadge}>
-                <strong>2015</strong>
+                <strong>2024</strong>
                 <span>Fundada</span>
               </div>
             </div>
             <div className={styles.historiaText}>
               <span className={styles.eyebrowDark}>¿Quiénes somos?</span>
-              <h2 className={styles.sectionTitle}>Una historia que<br /><em>sabe a hogar</em></h2>
-              <p>Aroko nació en 2015 en una pequeña cocina del barrio La Candelaria, cuando Valentina Torres decidió convertir su pasión por la repostería en algo más grande.</p>
-              <p>Lo que empezó como tortas para amigos y familia, hoy es una panadería reconocida por su calidad artesanal, sus ingredientes premium y el cariño que ponemos en cada pieza.</p>
+              <h2 className={styles.sectionTitle}>Una receta que<br /><em>nace en familia</em></h2>
+              <p>Aroko nació de la unión de una madre, un hijo y un socio que decidieron convertir una pasión compartida en un sueño real: llevar el sabor de lo casero a cada mesa.</p>
+              <p>Milena Fontalvo, dueña y corazón detrás de cada receta, es quien le da vida a nuestros productos — con ingredientes premium, técnica artesanal y ese cariño que solo se cocina en familia.</p>
               <div className={styles.statsRow}>
-                {[["9+", "Años de experiencia"], ["8k+", "Clientes felices"], ["500+", "Productos únicos"]].map(([n, l]) => (
-                  <div key={l} className={styles.statItem}>
-                    <strong>{n}</strong>
-                    <span>{l}</span>
-                  </div>
-                ))}
               </div>
             </div>
           </motion.div>
@@ -132,7 +119,7 @@ export default function NosotrosPage() {
               <div className={`${styles.mvIcon} ${styles.mvIconGold}`}><FiStar /></div>
               <h3 className={styles.mvTitle}>Visión</h3>
               <p className={styles.mvText}>
-                Ser la panadería artesanal de referencia en Colombia para 2030, reconocida por la excelencia de sus productos, la innovación constante y el impacto positivo en las comunidades donde operamos.
+                Ser la panadería artesanal de referencia en Colombia, reconocida por la excelencia de sus productos, la innovación constante y el impacto positivo en las comunidades donde operamos.
               </p>
             </motion.div>
           </div>

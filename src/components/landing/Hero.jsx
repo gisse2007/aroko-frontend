@@ -5,8 +5,7 @@ import styles from "./Hero.module.css";
 const HERO_IMG = "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1400&q=70";
 
 const STATS = [
-  ["50+",  "Productos"],
-  ["500+", "Clientes felices"],
+  ["30+",  "Productos"],
   ["4.9★",  "Valoración"],
 ];
 
@@ -37,7 +36,7 @@ export default function Hero() {
 
         <div className={`${styles.actions} ${styles.animFadeUp4}`}>
           <button className={styles.ctaPrimary} onClick={() => scrollTo("novedades")}>
-            Ver novedades
+            Ver temporadas
             Ver lo nuevo
           </button>
           <button className={styles.ctaSecondary} onClick={() => scrollTo("categorias")}>

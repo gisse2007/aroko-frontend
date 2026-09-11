@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 // Tree-shaking: iconos importados individualmente desde react-icons/fi
-import { FiShoppingCart, FiX, FiUser, FiUserPlus, FiGrid, FiPackage, FiLogOut, FiChevronDown } from "react-icons/fi";
+import { FiShoppingCart, FiX, FiUser, FiUserPlus, FiGrid, FiPackage, FiHome, FiDollarSign, FiLogOut, FiChevronDown } from "react-icons/fi";
 import logo from "../../assets/logo_Aroko-removebg-preview.png";
 import styles from "./Navbar.module.css";
 import { useAuthContext } from "../../context/AuthContext";
@@ -29,7 +29,8 @@ function isCliente(user) {
   const rol = typeof rolSource === "object"
     ? rolSource?.nombre ?? rolSource?.name ?? rolSource?.rol_nombre ?? ""
     : rolSource;
-  return String(rol).trim().toUpperCase() === "CLIENTE" || !String(rol).trim();
+  const rolNormalizado = String(rol).trim().toUpperCase();
+  return rolNormalizado.includes("CLIENTE") || !rolNormalizado;
 }
 
 /* ── ClienteMenu ── */
@@ -89,6 +90,14 @@ function ClienteMenu({ user, scrolled, onLogout }) {
         <button className={styles.ddItem} onClick={() => { setOpen(false); navigate("/mis-pedidos"); }}>
           <span className={styles.ddItemIcon}><FiPackage /></span>
           Mis pedidos
+        </button>
+        <button className={styles.ddItem} onClick={() => { setOpen(false); navigate("/mis-abonos"); }}>
+          <span className={styles.ddItemIcon}><FiDollarSign /></span>
+          Mis abonos
+        </button>
+        <button className={styles.ddItem} onClick={() => { setOpen(false); navigate("/mis-domicilios"); }}>
+          <span className={styles.ddItemIcon}><FiHome /></span>
+          Mis domicilios
         </button>
 
         <div className={styles.ddDivider} />
@@ -294,6 +303,12 @@ export default function Navbar({ cartCount = 0, onCartClick, lightBg = false }) 
                     </button>
                     <button className={styles.drawerLogin} onClick={() => { closeMenu(); navigate("/mis-pedidos"); }} tabIndex={open ? 0 : -1}>
                       <FiPackage /> Mis pedidos
+                    </button>
+                    <button className={styles.drawerLogin} onClick={() => { closeMenu(); navigate("/mis-abonos"); }} tabIndex={open ? 0 : -1}>
+                      <FiDollarSign /> Mis abonos
+                    </button>
+                    <button className={styles.drawerLogin} onClick={() => { closeMenu(); navigate("/mis-domicilios"); }} tabIndex={open ? 0 : -1}>
+                      <FiHome /> Mis domicilios
                     </button>
                     <button className={styles.drawerLogout} onClick={() => { closeMenu(); handleLogout(); }} tabIndex={open ? 0 : -1}>
                       <FiLogOut /> Cerrar sesión

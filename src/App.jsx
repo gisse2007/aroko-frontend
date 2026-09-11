@@ -125,6 +125,8 @@ function AppRoutes() {
         {/* Perfil cliente */}
         <Route path="/perfil"      element={<ClienteGuard><PerfilCliente /></ClienteGuard>} />
         <Route path="/mis-pedidos" element={<ClienteGuard><PerfilCliente initialTab="pedidos" /></ClienteGuard>} />
+        <Route path="/mis-abonos" element={<ClienteGuard><PerfilCliente initialTab="abonos" /></ClienteGuard>} />
+        <Route path="/mis-domicilios" element={<ClienteGuard><PerfilCliente initialTab="domicilios" /></ClienteGuard>} />
 
         {/* Dashboard */}
         <Route element={<DashboardGuard><DashboardLayout user={user} onLogout={logout} /></DashboardGuard>}>

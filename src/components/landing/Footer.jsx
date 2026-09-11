@@ -4,7 +4,7 @@ import logo from "../../assets/logo_Aroko-removebg-preview.png";
 import styles from "./Footer.module.css";
 
 const SOCIAL_LINKS = {
-  instagram: "https://instagram.com/aroko",
+  instagram: "https://www.instagram.com/arokobakeryco?stkn=MTV5Mzd4anc1NW9xNQ==",
   facebook:  "https://facebook.com/aroko",
 };
 
@@ -82,22 +82,22 @@ export default function Footer() {
           <ul className={styles.list}>
             <li className={styles.contact}>
               <FiMapPin className={styles.icon} />
-              <span>Calle 45 #12-34, Bogotá</span>
+              <span>Carrera 78a #49-19, Laureles-Medellin</span>
             </li>
             <li className={styles.contact}>
               <FiPhone className={styles.icon} />
-              <a href="tel:+573001234567" className={styles.contactLink}>+57 300 123 4567</a>
+              <a href="tel:+573000000000" className={styles.contactLink}>+57 300 000 0000</a>
             </li>
             <li className={styles.contact}>
               <FiMail className={styles.icon} />
-              <a href="mailto:hola@aroko.co" className={styles.contactLink}>hola@aroko.co</a>
+              <a href="mail:arokosas@gmail.co" className={styles.contactLink}>arokosas@gmail.co</a>
             </li>
           </ul>
         </div>
       </div>
 
       <div className={styles.bottom}>
-        <p>© {new Date().getFullYear()} Aroko. Todos los derechos reservados.</p>
+        <p>© {new Date().getFullYear()} Arokobakeryco. Todos los derechos reservados.</p>
       </div>
     </footer>
   );
