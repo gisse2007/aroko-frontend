@@ -9,6 +9,7 @@ import {
 } from "react-icons/fi";
 
 import api from "../../api/axios";
+import { useAuthContext } from "../../context/AuthContext";
 
 import { resolveImageUrl } from "../../utils/image";
 import { useOrders } from "../../hooks/useOrders";
