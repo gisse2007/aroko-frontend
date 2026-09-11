@@ -39,7 +39,11 @@ const Domicilios          = lazy(() => import("./pages/domicilios/Domicilios"));
 const AdminOrders         = lazy(() => import("./pages/admin/AdminOrders"));
 
 function getRol(user) {
-  return String(user?.rol ?? user?.nombre_rol ?? "").trim().toUpperCase();
+  const rolSource = user?.rol ?? user?.nombre_rol ?? user?.rol_nombre ?? user?.role;
+  const rol = typeof rolSource === "object"
+    ? rolSource?.nombre ?? rolSource?.name ?? rolSource?.rol_nombre ?? ""
+    : rolSource;
+  return String(rol).trim().toUpperCase();
 }
 
 const Spinner = () => (
@@ -71,7 +75,7 @@ function DashboardGuard({ children }) {
   const { user, loading } = useAuthContext();
   if (loading) return <Spinner />;
   if (!user || !localStorage.getItem("token")) return <Navigate to="/login" replace />;
-  if (getRol(user) === "CLIENTE") return <Navigate to="/landing" replace />;
+  if (getRol(user).includes("CLIENTE")) return <Navigate to="/landing" replace />;
   if (!canAccessByRole(user, [
     "VER_DASHBOARD",
     "GESTIONAR_USUARIOS",
@@ -99,7 +103,7 @@ function ClienteGuard({ children }) {
   const { user, loading } = useAuthContext();
   if (loading) return <Spinner />;
   if (!user || !localStorage.getItem("token")) return <Navigate to="/login" replace />;
-  if (getRol(user) !== "CLIENTE") return <Navigate to="/dashboard" replace />;
+  if (!getRol(user).includes("CLIENTE")) return <Navigate to="/dashboard" replace />;
   return children;
 }
 

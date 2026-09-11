@@ -73,11 +73,12 @@
 }
 
 .panelTagline {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(1.45rem, 2.8vw, 2.25rem);
   font-weight: 800;
+  font-style: italic;
   color: #C47A2B;
-  letter-spacing: -0.035em;
+  letter-spacing: 0;
   line-height: 1.08;
   margin: 0;
   max-width: 12ch;

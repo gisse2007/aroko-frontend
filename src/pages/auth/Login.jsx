@@ -47,7 +47,7 @@ export default function Login() {
       const usuarioNormalizado = normalizeUser(usuario);
       setUser(usuarioNormalizado);
       const rol = usuarioNormalizado?.rol ?? "";
-      navigate(rol === "CLIENTE" ? "/landing" : "/dashboard", { replace: true });
+      navigate(rol.includes("CLIENTE") ? "/landing" : "/dashboard", { replace: true });
 
     } catch (err) {
       const status    = err.response?.status;
