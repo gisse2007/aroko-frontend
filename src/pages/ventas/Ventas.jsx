@@ -101,10 +101,14 @@ export default function Ventas() {
   const handleAnularCancel = () => { setAnularTarget(null); show("Anulación cancelada.", "info"); };
 
   /* ── PDF ── */
-  const handlePDF = (row) => {
+  const handlePDF = async (row) => {
     const found = ven.findById(row.id_venta) ?? row;
-    const result = generarPDFVenta(found);
-    if (!result?.ok) show("Error al generar el reporte.", "error");
+    const result = await generarPDFVenta(found);
+    if (!result?.ok) {
+      show("Error al generar el reporte.", "error");
+      return;
+    }
+    show("Reporte descargado correctamente.");
   };
 
   /* ── Confirmaciones ── */

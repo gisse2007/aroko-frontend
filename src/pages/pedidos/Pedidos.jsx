@@ -133,10 +133,14 @@ export default function Pedidos() {
   const handleCancelarClick = (row) => setConfirm({ type: CONFIRM.cancelar, row });
 
   /* ── PDF ── */
-  const handlePDF = (row) => {
+  const handlePDF = async (row) => {
     const found = ped.findById(row.id_pedido) ?? row;
-    const result = generarPDFPedido(found);
-    if (!result?.ok) show("Error al generar el PDF.", "error");
+    const result = await generarPDFPedido(found);
+    if (!result?.ok) {
+      show("Error al generar el PDF.", "error");
+      return;
+    }
+    show("Reporte descargado correctamente.");
   };
 
   /* ── Resolver confirmaciones ── */

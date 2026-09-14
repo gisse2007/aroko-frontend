@@ -75,7 +75,11 @@ export default function Compras() {
 
   const handlePDFRow = async (row) => {
     const result = await generarPDFCompra(row);
-    if (!result?.ok) show("Error al generar el reporte.", "error");
+    if (!result?.ok) {
+      show("Error al generar el reporte.", "error");
+      return;
+    }
+    show("Reporte descargado correctamente.");
   };
 
   const handleConfirm = async () => {

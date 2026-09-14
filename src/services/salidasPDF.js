@@ -64,8 +64,8 @@ export async function generarPDFSalida(salida) {
     doc.text(`Generado: ${new Date().toLocaleString()}`, 130, 285);
 
     doc.save(`salida_insumos_${salida.id}.pdf`);
-    return true;
+    return { ok: true };
   } catch {
-    return false;
+    return { ok: false, error: "error_pdf" };
   }
 }

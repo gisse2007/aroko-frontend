@@ -44,6 +44,9 @@ export function useClientes() {
   const findById = useCallback((id) => data.find((c) => c.id_cliente === id) ?? null, [data]);
 
   /* ── CRUD ── */
+  // Este hook centraliza la lógica de clientes para que todas las pantallas
+  // usen la misma estructura. Aquí se hace la creación, edición y carga de
+  // datos, además del filtro local de búsqueda por nombre/documento/email.
   const create = useCallback(async (values) => {
     const { data: res } = await api.post("/clientes", {
       nombre:           values.nombre.trim(),

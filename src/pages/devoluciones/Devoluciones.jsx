@@ -58,9 +58,13 @@ export default function Devoluciones() {
   const handleAnularClick = (row) => setConfirm({ type: CONFIRM.anular, row });
   const handleCancelCreate = () => setConfirm({ type: CONFIRM.cancelCreate, row: null });
 
-  const handlePDF = (row) => {
-    const ok = generarPDFDevolucion(row);
-    if (!ok) show("Error al generar el PDF.", "error");
+  const handlePDF = async (row) => {
+    const result = await generarPDFDevolucion(row);
+    if (!result?.ok) {
+      show("Error al generar el PDF.", "error");
+      return;
+    }
+    show("Reporte descargado correctamente.");
   };
 
   const handleConfirm = () => {

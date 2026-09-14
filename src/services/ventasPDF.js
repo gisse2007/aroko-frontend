@@ -1,6 +1,11 @@
 const PRIMARY   = [59, 190, 218];
 const SECONDARY = [208, 162, 121];
 
+// Genera el comprobante PDF de una venta.
+// Se arma un documento con jsPDF + autoTable, se llenan los datos del cliente,
+// productos, total y estado, y al final se descarga automáticamente en el navegador.
+// Si algo falla, se devuelve un objeto con ok: false para que el frontend
+// muestre el toast correcto y no marque un falso error de descarga.
 export async function generarPDFVenta(venta) {
   if (!venta) return { ok: false, error: "no_existe" };
   try {

@@ -75,9 +75,13 @@ export default function Salidas() {
   };
 
   /* ── PDF ── */
-  const handlePDF = (row) => {
-    const ok = generarPDFSalida(row);
-    if (!ok) show("Error al generar el PDF.", "error");
+  const handlePDF = async (row) => {
+    const result = await generarPDFSalida(row);
+    if (!result?.ok) {
+      show("Error al generar el PDF.", "error");
+      return;
+    }
+    show("Reporte descargado correctamente.");
   };
 
   const handleConfirm = async () => {

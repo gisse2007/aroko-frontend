@@ -122,7 +122,11 @@ export default function Produccion() {
   /* ── PDF ── */
   const handlePDFRow = async (row) => {
     const result = await generarPDFProduccion(row);
-    if (!result?.ok) show("Error al generar el PDF.", "error");
+    if (!result?.ok) {
+      show("Error al generar el PDF.", "error");
+      return;
+    }
+    show("Reporte descargado correctamente.");
   };
 
   /* ── Confirmaciones ── */

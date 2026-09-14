@@ -71,6 +71,10 @@ function GlobalOverlay() {
   return <LoadingOverlay visible={overlay.visible} text={overlay.text} />;
 }
 
+// DashboardGuard controla qué usuarios pueden entrar al panel administrativo.
+// No basta con iniciar sesión: también se valida el rol y los permisos para
+// evitar que un cliente común o un usuario sin acceso pueda navegar por rutas
+// internas de gestión del negocio.
 function DashboardGuard({ children }) {
   const { user, loading } = useAuthContext();
   if (loading) return <Spinner />;

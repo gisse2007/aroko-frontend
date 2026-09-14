@@ -77,8 +77,8 @@ export async function generarPDFDevolucion(dev) {
     doc.text(`Generado: ${new Date().toLocaleString()}`, 130, 285);
 
     doc.save(`devolucion_${dev.pedido_id}_${dev.id}.pdf`);
-    return true;
+    return { ok: true };
   } catch {
-    return false;
+    return { ok: false, error: "error_pdf" };
   }
 }

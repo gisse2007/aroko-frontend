@@ -112,10 +112,14 @@ export default function Abonos() {
   const handleAnularCancel = () => { setAnularTarget(null); show("Anulación cancelada.", "info"); };
 
   /* ── PDF ── */
-  const handlePDF = (row) => {
+  const handlePDF = async (row) => {
     const found = abo.findById(row.id_abono) ?? row;
-    const result = generarPDFAbono(found);
-    if (!result?.ok) show("Error al generar el reporte.", "error");
+    const result = await generarPDFAbono(found);
+    if (!result?.ok) {
+      show("Error al generar el reporte.", "error");
+      return;
+    }
+    show("Reporte descargado correctamente.");
   };
 
   const handleConfirm = () => {
