@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FiArchive, FiPlusCircle } from "react-icons/fi";
 import FormField from "../forms/FormField";
 import styles from "../forms/DynamicForm.module.css";
 import tipoStyles from "./InsumoForm.module.css";
@@ -16,9 +15,8 @@ const UNIDADES = [
 ];
 
 export default function InsumoForm({ defaultValues = {}, categorias = [], onSubmit, onCancel, submitLabel = "Guardar" }) {
-  // Solo mostrar selector de tipo cuando es creación (sin defaultValues con id)
   const isEdit = !!defaultValues?.id_insumo;
-  const [tipo, setTipo] = useState(isEdit ? "bodega" : null);
+  const [tipo] = useState(isEdit ? "bodega" : "nuevo");
 
   const {
     register,
@@ -187,11 +185,6 @@ export default function InsumoForm({ defaultValues = {}, categorias = [], onSubm
         )}
 
         <div className={styles.actions}>
-          {!isEdit && (
-            <button type="button" className={styles.cancelBtn} onClick={() => setTipo(null)}>
-              ← Volver
-            </button>
-          )}
           {onCancel && isEdit && (
             <button type="button" className={styles.cancelBtn} onClick={onCancel}>
               Cancelar
@@ -205,37 +198,5 @@ export default function InsumoForm({ defaultValues = {}, categorias = [], onSubm
     );
   }
 
-  // Selector inicial: bodega o nuevo
-  return (
-    <div className={styles.form}>
-      <p style={{ fontSize: "0.875rem", color: "#555", marginBottom: 16 }}>
-        ¿Qué tipo de insumo deseas registrar?
-      </p>
-      <div style={{ display: "flex", gap: 10, flexDirection: "column" }}>
-        <button
-          type="button"
-          className={`${tipoStyles.tipoBtn} ${tipoStyles.tipoBtnActivo}`}
-          onClick={() => setTipo("bodega")}
-        >
-          <span className={tipoStyles.tipoBtnIcon}><FiArchive /></span>
-          Insumo de bodega — ingresar / actualizar stock
-        </button>
-        <button
-          type="button"
-          className={tipoStyles.tipoBtn}
-          onClick={() => setTipo("nuevo")}
-        >
-          <span className={tipoStyles.tipoBtnIcon}><FiPlusCircle /></span>
-          Insumo nuevo — registrar sin stock inicial
-        </button>
-      </div>
-      {onCancel && (
-        <div className={styles.actions} style={{ marginTop: 16 }}>
-          <button type="button" className={styles.cancelBtn} onClick={onCancel}>
-            Cancelar
-          </button>
-        </div>
-      )}
-    </div>
-  );
+  return null;
 }

@@ -62,13 +62,13 @@ export default function CompraDetalle({ compra }) {
               {items.map((d) => {
                 const stockIngresado = d.stock_ingresado != null
                   ? Number(d.stock_ingresado)
-                  : Number(d.cantidad) * Number(d.cantidad_por_unidad || 0);
+                  : Number(d.cantidad) * Number(d.contenido || 0);
 
                 return (
                   <tr key={d.insumo_id ?? `${d.nombre_insumo}-${d.cantidad}`}>
                     <td>{d.nombre_insumo}</td>
                     <td>{formatCantidad(d.cantidad)}</td>
-                    <td>{d.cantidad_por_unidad == null ? "—" : formatCantidad(d.cantidad_por_unidad)}</td>
+                    <td>{d.contenido == null ? "—" : formatCantidad(d.contenido)}</td>
                     <td>{d.unidad_medida}</td>
                     <td>{stockIngresado ? `${formatCantidad(stockIngresado)} ${d.unidad_medida}` : "—"}</td>
                     <td>${Number(d.precio).toLocaleString()}</td>
