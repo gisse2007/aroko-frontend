@@ -16,6 +16,7 @@ export function useOrders() {
       fd.append("email",        customerInfo.email        ?? "");
       fd.append("telefono",     customerInfo.telefono     ?? "");
       fd.append("direccion",    customerInfo.direccion    ?? "");
+      fd.append("barrio",       customerInfo.barrio       ?? "");
       fd.append("payment_type", customerInfo.payment_type ?? "COMPLETO");
       fd.append("paid_amount",  String(customerInfo.paid_amount ?? customerInfo.total ?? 0));
       if (customerInfo.fecha_entrega) fd.append("fecha_entrega", customerInfo.fecha_entrega);
