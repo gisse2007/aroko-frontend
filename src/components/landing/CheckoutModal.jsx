@@ -33,7 +33,7 @@ const QRS = [
   },
 ];
 
-const EMPTY_FORM = { nombre: "", email: "", telefono: "", direccion: "", fecha_entrega: "" };
+const EMPTY_FORM = { nombre: "", email: "", telefono: "", direccion: "", barrio: "", fecha_entrega: "" };
 
 export default function CheckoutModal({ open, onClose, items, total, onSuccess }) {
   const navigate             = useNavigate();
@@ -56,6 +56,7 @@ export default function CheckoutModal({ open, onClose, items, total, onSuccess }
         email:     user.correo        || "",
         telefono:  user.telefono      || "",
         direccion: user.direccion     || "",
+        barrio:    user.barrio        || "",
         fecha_entrega: "",
       });
       setErrors({});
@@ -80,6 +81,7 @@ export default function CheckoutModal({ open, onClose, items, total, onSuccess }
     if (!form.email.trim())     e.email     = "El correo es obligatorio.";
     if (!form.telefono.trim())  e.telefono  = "El teléfono es obligatorio.";
     if (!form.direccion.trim()) e.direccion = "La dirección es obligatoria.";
+    if (!form.barrio.trim())    e.barrio    = "El barrio es obligatorio.";
     if (!file)                  e.file      = "Adjunta el comprobante de pago.";
 
     if (paymentType === "ABONO") {
@@ -204,8 +206,16 @@ export default function CheckoutModal({ open, onClose, items, total, onSuccess }
               <div className={styles.field}>
                 <label>Dirección de entrega</label>
                 <input value={form.direccion} onChange={setField("direccion")}
-                  placeholder="Calle, carrera, barrio…" className={errors.direccion ? styles.inputErr : ""} />
+                  placeholder="Calle, carrera…" className={errors.direccion ? styles.inputErr : ""} />
                 {errors.direccion && <span className={styles.errMsg}>{errors.direccion}</span>}
+              </div>
+
+              {/* Barrio */}
+              <div className={styles.field}>
+                <label>Barrio</label>
+                <input value={form.barrio} onChange={setField("barrio")}
+                  placeholder="Ej: El Poblado" className={errors.barrio ? styles.inputErr : ""} />
+                {errors.barrio && <span className={styles.errMsg}>{errors.barrio}</span>}
               </div>
 
               {/* Fecha de entrega (opcional) */}
