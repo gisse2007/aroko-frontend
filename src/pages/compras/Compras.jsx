@@ -52,7 +52,20 @@ export default function Compras() {
   const [confirm, setConfirm] = useState({ type: CONFIRM.none, row: null });
 
   const openCreate = () => setModal({ type: MODAL.create, row: null });
-  const openDetail = (row) => setModal({ type: MODAL.detail, row });
+
+  // Abre el modal con los datos ya disponibles (evita pantalla en blanco)
+  // y en cuanto llega el detalle completo (con el detalle de insumos),
+  // actualiza el modal con esa información.
+  const openDetail = async (row) => {
+    setModal({ type: MODAL.detail, row });
+    try {
+      const { data } = await api.get(`/compras/${row.id_compra}`);
+      setModal({ type: MODAL.detail, row: data.data ?? row });
+    } catch (err) {
+      show("Error al cargar el detalle de la compra.", "error");
+    }
+  };
+
   const closeModal = () => setModal({ type: MODAL.none, row: null });
   const handleCancelCreate = () => setConfirm({ type: CONFIRM.cancelCreate, row: null });
 
