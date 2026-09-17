@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FiTrash2, FiPlusCircle, FiUpload } from "react-icons/fi";
+import { FiTrash2, FiPlusCircle, FiUpload, FiPackage } from "react-icons/fi";
 import FormField from "../forms/FormField";
+import Modal from "../forms/Modal";
+import InsumoForm from "../insumos/InsumoForm";
 import { useEmpleadoActual } from "../../hooks/useEmpleadoActual";
 import { formatCantidad } from "../../utils/number";
 import styles from "./CompraForm.module.css";
@@ -15,9 +17,11 @@ const IVA_OPTS = [
 export default function CompraForm({
   proveedores = [],
   insumosDisponibles = [],
+  categoriasInsumos = [],
   empleados = [],
   onSubmit,
   onCancel,
+  onCreateInsumo,
 }) {
   const {
     register,
@@ -38,6 +42,8 @@ export default function CompraForm({
   const [insumoMsg, setInsumoMsg]       = useState("");
   const [fotoFile, setFotoFile]         = useState(null);
   const [fotoNombre, setFotoNombre]     = useState("");
+  const [showCrearInsumo, setShowCrearInsumo] = useState(false);
+  const [crearInsumoError, setCrearInsumoError] = useState("");
 
   const ivaVal = Number(watch("iva") ?? 19);
 
@@ -112,6 +118,23 @@ export default function CompraForm({
     setDetalle((prev) => prev.filter((d) => d.insumo_id !== insumo_id));
   };
 
+  /* ── Crear insumo nuevo sin salir del formulario de compra ── */
+  const handleCrearInsumoSubmit = async (values) => {
+    setCrearInsumoError("");
+    if (!onCreateInsumo) return;
+    try {
+      const nuevo = await onCreateInsumo(values);
+      if (nuevo?.id_insumo != null) {
+        setInsumoSel(String(nuevo.id_insumo));
+      }
+      setShowCrearInsumo(false);
+      setInsumoMsg(`Insumo "${nuevo?.nombre_insumo ?? ""}" creado y disponible en el selector.`);
+      setTimeout(() => setInsumoMsg(""), 3000);
+    } catch (err) {
+      setCrearInsumoError(err?.response?.data?.message || "Error al crear el insumo.");
+    }
+  };
+
   /* ── Foto factura ── */
   const handleFoto = (e) => {
     const file = e.target.files[0];
@@ -147,6 +170,7 @@ export default function CompraForm({
   const REQUIRED = "Este campo es obligatorio.";
 
   return (
+    <>
     <form onSubmit={handleSubmit(onFormSubmit)} noValidate className={styles.form}>
 
       {/* ── Datos principales ── */}
@@ -226,20 +250,32 @@ export default function CompraForm({
             <div className={styles.insumoRow}>
               <div className={styles.insumoField}>
                 <label className={styles.insumoLabel}>Insumo</label>
-                <select
-                  className={styles.insumoSelect}
-                  value={insumoSel}
-                  onChange={(e) => setInsumoSel(e.target.value)}
-                >
-                  <option value="">— Seleccionar insumo —</option>
-                  {insumosDisponibles
-                    .filter((i) => i.estado === "ACTIVO")
-                    .map((i) => (
-                      <option key={i.id_insumo} value={i.id_insumo}>
-                        {i.nombre_insumo} ({i.unidad_medida})
-                      </option>
-                    ))}
-                </select>
+                <div className={styles.insumoSelectRow}>
+                  <select
+                    className={styles.insumoSelect}
+                    value={insumoSel}
+                    onChange={(e) => setInsumoSel(e.target.value)}
+                  >
+                    <option value="">— Seleccionar insumo —</option>
+                    {insumosDisponibles
+                      .filter((i) => i.estado === "ACTIVO")
+                      .map((i) => (
+                        <option key={i.id_insumo} value={i.id_insumo}>
+                          {i.nombre_insumo} ({i.unidad_medida})
+                        </option>
+                      ))}
+                  </select>
+                  {onCreateInsumo && (
+                    <button
+                      type="button"
+                      className={styles.crearInsumoBtn}
+                      onClick={() => { setCrearInsumoError(""); setShowCrearInsumo(true); }}
+                      title="Crear un insumo nuevo sin perder esta compra"
+                    >
+                      <FiPackage /> + Crear insumo
+                    </button>
+                  )}
+                </div>
               </div>
               <div className={styles.insumoField}>
                 <label className={styles.insumoLabel}>Cantidad comprada</label>
@@ -370,5 +406,24 @@ export default function CompraForm({
         </button>
       </div>
     </form>
+
+    {/* ── Crear insumo sin perder el progreso de la compra ──
+         Se renderiza fuera del <form> de la compra para evitar formularios
+         anidados (el submit del insumo no debe disparar el submit de la compra). */}
+    <Modal
+      open={showCrearInsumo}
+      onClose={() => setShowCrearInsumo(false)}
+      title="Crear nuevo insumo"
+      size="lg"
+    >
+      {crearInsumoError && <p className={styles.detalleError}>⚠ {crearInsumoError}</p>}
+      <InsumoForm
+        categorias={categoriasInsumos}
+        onSubmit={handleCrearInsumoSubmit}
+        onCancel={() => setShowCrearInsumo(false)}
+        submitLabel="Crear insumo"
+      />
+    </Modal>
+    </>
   );
 }

@@ -238,7 +238,7 @@ export default function Domicilios() {
         )}
       />
 
-      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo domicilio">
+      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo domicilio" size="lg">
         <DomicilioForm
           clientes={cliHook.data}
           ventas={ventHook.data}
@@ -249,7 +249,7 @@ export default function Domicilios() {
         />
       </Modal>
 
-      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar domicilio">
+      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar domicilio" size="lg">
         <DomicilioForm
           defaultValues={modal.row ?? {}}
           clientes={cliHook.data}

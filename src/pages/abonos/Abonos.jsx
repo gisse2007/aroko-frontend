@@ -205,7 +205,7 @@ export default function Abonos() {
         )}
       />
 
-      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate}
+      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} size="lg"
         title={ventaActiva ? `Registrar abono — ${ventaActiva.numero_venta}` : "Nuevo abono"}>
         <AbonoForm
           ventas={ventas}

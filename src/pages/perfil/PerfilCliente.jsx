@@ -14,6 +14,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import { resolveImageUrl } from "../../utils/image";
 import { useOrders } from "../../hooks/useOrders";
 import Tooltip from "../../components/Tooltip/Tooltip";
+import NotificationBell from "../../components/notificaciones/NotificationBell";
 import styles from "./PerfilCliente.module.css";
 
 
@@ -1676,6 +1677,9 @@ Volver
 
 
 <div className={styles.topbarRight}>
+
+
+<NotificationBell/>
 
 
 <Avatar

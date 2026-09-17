@@ -32,11 +32,32 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Interceptor de respuesta: decrementa el contador siempre (éxito o error)
+// Endpoints públicos de auth: un 401 aquí es una credencial inválida,
+// no una sesión invalidada — nunca deben disparar el logout automático.
+const PUBLIC_AUTH_RE = /\/auth\/(login|register|recuperar|reset-password)(\?|$)/;
+
+// Interceptor de respuesta: decrementa el contador siempre (éxito o error).
+// Además, si cualquier endpoint protegido responde 401 (token expirado o
+// invalidado por un cambio de contraseña — ver token_version en el backend),
+// cierra la sesión localmente de inmediato y redirige a /login, sin esperar
+// a que el usuario interactúe.
 api.interceptors.response.use(
   (response) => { _decrementHttp?.(); return response; },
   (error) => {
     _decrementHttp?.();
+
+    const status = error?.response?.status;
+    const url = error?.config?.url || "";
+
+    if (status === 401 && !PUBLIC_AUTH_RE.test(url) && localStorage.getItem("token")) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("usuario");
+      try { sessionStorage.removeItem("aroko.authme"); } catch { /* noop */ }
+      if (!window.location.pathname.startsWith("/login")) {
+        window.location.href = "/login";
+      }
+    }
+
     return Promise.reject(error);
   },
 );

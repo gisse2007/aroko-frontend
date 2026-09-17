@@ -162,7 +162,7 @@ export default function Proveedores() {
         )}
       />
 
-      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo proveedor">
+      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo proveedor" size="lg">
         <ProveedorForm
           empleados={empleados}
           onSubmit={handleCreate}
@@ -171,7 +171,7 @@ export default function Proveedores() {
         />
       </Modal>
 
-      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar proveedor">
+      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar proveedor" size="lg">
         <ProveedorForm
           defaultValues={modal.row ?? {}}
           empleados={empleados}

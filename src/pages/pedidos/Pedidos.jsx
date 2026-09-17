@@ -290,7 +290,7 @@ export default function Pedidos() {
         )}
       />
 
-      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo pedido">
+      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo pedido" size="lg">
         <PedidoForm
           clientes={clientes}
           empleados={empleados}
@@ -300,7 +300,7 @@ export default function Pedidos() {
         />
       </Modal>
 
-      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar pedido">
+      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar pedido" size="lg">
         <PedidoForm
           defaultValues={modal.row ?? {}}
           defaultDetalle={modal.row?.detalle ?? []}

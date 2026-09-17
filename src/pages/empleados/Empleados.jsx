@@ -202,7 +202,7 @@ export default function Empleados() {
         )}
       />
 
-      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo empleado">
+      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo empleado" size="lg">
         <EmpleadoForm
           roles={roles}
           rolesLoading={rolesLoading}
@@ -212,7 +212,7 @@ export default function Empleados() {
         />
       </Modal>
 
-      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar empleado">
+      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar empleado" size="lg">
         <EmpleadoForm
           defaultValues={modal.row ?? {}}
           roles={roles}

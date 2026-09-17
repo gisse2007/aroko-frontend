@@ -240,12 +240,12 @@ export default function Insumos() {
       />
 
       {/* ── Modal Crear ── */}
-      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo insumo">
+      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo insumo" size="lg">
         <InsumoForm categorias={categorias} onSubmit={handleCreate} onCancel={handleCancelCreate} submitLabel="Registrar" />
       </Modal>
 
       {/* ── Modal Editar ── */}
-      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar insumo">
+      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar insumo" size="lg">
         <InsumoForm
           defaultValues={modal.row ?? {}}
           categorias={categorias}

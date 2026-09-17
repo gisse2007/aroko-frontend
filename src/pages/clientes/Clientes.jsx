@@ -171,7 +171,7 @@ export default function Clientes() {
         )}
       />
 
-      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo cliente">
+      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo cliente" size="lg">
         <ClienteForm
           onSubmit={handleCreate}
           onCancel={handleCancelCreate}
@@ -179,7 +179,7 @@ export default function Clientes() {
         />
       </Modal>
 
-      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar cliente">
+      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar cliente" size="lg">
         <ClienteForm
           defaultValues={modal.row ?? {}}
           onSubmit={handleEdit}

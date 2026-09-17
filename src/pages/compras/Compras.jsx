@@ -38,15 +38,41 @@ export default function Compras() {
   const { showOverlay, hideOverlay } = useLoading();
   const [actionLoading, setActionLoading] = useState(false);
 
-  const [proveedores, setProveedores] = useState([]);
-  const [insumos,     setInsumos]     = useState([]);
-  const [empleados,   setEmpleados]   = useState([]);
+  const [proveedores, setProveedores]         = useState([]);
+  const [insumos,     setInsumos]             = useState([]);
+  const [empleados,   setEmpleados]           = useState([]);
+  const [categoriasInsumos, setCategoriasInsumos] = useState([]);
 
   useEffect(() => {
     api.get("/proveedores").then(({ data }) => setProveedores(data.data ?? [])).catch(() => {});
     api.get("/insumos").then(({ data }) => setInsumos(data.data ?? [])).catch(() => {});
     api.get("/empleados").then(({ data }) => setEmpleados(data.data ?? [])).catch(() => {});
+    api.get("/categorias-insumos").then(({ data }) => setCategoriasInsumos(data.data ?? [])).catch(() => {});
   }, []);
+
+  // Crea un insumo nuevo desde el modal de "Nueva compra" sin perder el
+  // progreso de la compra en curso: solo actualiza la lista de insumos
+  // disponibles, el modal de compra permanece abierto con su detalle intacto.
+  const handleCreateInsumo = async (values) => {
+    const { data } = await api.post("/insumos", {
+      nombre_insumo:   values.nombre_insumo.trim(),
+      categoria_id:    Number(values.categoria_id),
+      unidad_medida:   values.unidad_medida,
+      presentacion_nombre: values.presentacion_nombre?.trim() || null,
+      presentacion_contenido: Number.isFinite(Number(values.presentacion_contenido))
+        ? parseFloat(values.presentacion_contenido)
+        : null,
+      stock_actual:    parseFloat(values.stock_actual) || 0,
+      stock_minimo:    parseFloat(values.stock_minimo) || 0,
+      stock_minimo_unidad: values.stock_minimo_unidad || "unidad_medida",
+      precio_unitario: parseFloat(values.precio_unitario) || 0,
+    });
+    const nuevo = data?.data;
+    if (nuevo?.id_insumo != null) {
+      setInsumos((prev) => (prev.some((i) => i.id_insumo === nuevo.id_insumo) ? prev : [nuevo, ...prev]));
+    }
+    return nuevo;
+  };
 
   const [modal,   setModal]   = useState({ type: MODAL.none,   row: null });
   const [confirm, setConfirm] = useState({ type: CONFIRM.none, row: null });
@@ -194,17 +220,19 @@ export default function Compras() {
         )}
       />
 
-      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nueva compra">
+      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nueva compra" size="xl">
         <CompraForm
           proveedores={proveedores}
           insumosDisponibles={insumos}
+          categoriasInsumos={categoriasInsumos}
           empleados={empleados}
           onSubmit={handleCreate}
           onCancel={handleCancelCreate}
+          onCreateInsumo={handleCreateInsumo}
         />
       </Modal>
 
-      <Modal open={modal.type === MODAL.detail} onClose={closeModal} title="Detalle de compra">
+      <Modal open={modal.type === MODAL.detail} onClose={closeModal} title="Detalle de compra" size="xl">
         <CompraDetalle compra={modal.row} />
       </Modal>
 

@@ -197,7 +197,7 @@ export default function Productos() {
         )}
       />
 
-      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo producto">
+      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo producto" size="lg">
         <ProductoForm
           categorias={categorias}
           insumos={insumos}
@@ -207,7 +207,7 @@ export default function Productos() {
         />
       </Modal>
 
-      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar producto">
+      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar producto" size="lg">
         <ProductoForm
           defaultValues={modal.row ?? {}}
           defaultReceta={modal.row?.receta ?? []}

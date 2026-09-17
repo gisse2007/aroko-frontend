@@ -182,11 +182,11 @@ export default function Usuarios() {
         )}
       />
 
-      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo usuario">
+      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nuevo usuario" size="lg">
         <UsuarioForm roles={roles} onSubmit={handleCreate} onCancel={handleCancelCreate} submitLabel="Registrar" />
       </Modal>
 
-      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar usuario">
+      <Modal open={modal.type === MODAL.edit} onClose={handleCancelEdit} title="Editar usuario" size="lg">
         <UsuarioForm defaultValues={modal.row ?? {}} roles={roles} isEdit
           onSubmit={handleEdit} onCancel={handleCancelEdit} submitLabel="Actualizar" />
       </Modal>

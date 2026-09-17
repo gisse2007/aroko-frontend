@@ -140,7 +140,7 @@ export default function Devoluciones() {
         )}
       />
 
-      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nueva devolución">
+      <Modal open={modal.type === MODAL.create} onClose={handleCancelCreate} title="Nueva devolución" size="lg">
         <DevolucionForm pedidos={ped.data} empleados={emp.data} onSubmit={handleCreate} onCancel={handleCancelCreate} />
       </Modal>
 

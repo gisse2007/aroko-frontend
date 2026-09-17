@@ -143,6 +143,20 @@ export function AuthProvider({ children }) {
     setUserRaw(null);
   }, []);
 
+  // Poll liviano de sesión: mientras haya un usuario logueado, verifica cada
+  // 45s que el token siga siendo válido (token_version). Si el backend
+  // responde 401 (p. ej. la contraseña se cambió en otra pestaña), el
+  // interceptor de axios ya se encarga de limpiar la sesión y redirigir a
+  // /login — aquí solo se dispara la verificación periódica.
+  useEffect(() => {
+    if (!user) return;
+    const interval = setInterval(() => {
+      if (!localStorage.getItem("token")) return;
+      api.get("/auth/verify").catch(() => { /* el interceptor global maneja el 401 */ });
+    }, 45000);
+    return () => clearInterval(interval);
+  }, [user]);
+
   return (
     <AuthContext.Provider value={{ user, loading, setUser, logout, refreshFromServer }}>
       {children}
