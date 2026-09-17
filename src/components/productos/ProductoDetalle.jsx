@@ -24,6 +24,7 @@ export default function ProductoDetalle({ producto }) {
 
   const {
     nombre,
+    descripcion,
     categoria_nombre,
     precio,
     stock_producto,
@@ -31,27 +32,31 @@ export default function ProductoDetalle({ producto }) {
     receta = [],
     stock_bajo,
     imagen,
+    imagenes,
   } = producto;
 
   const stockBajo = stock_bajo || stock_producto < STOCK_MINIMO;
-  const imagenUrl = resolveImageUrl(imagen);
+
+  // Puede llegar como array `imagenes` (varias) o como `imagen` único/pipe-joined
+  const listaImagenes = (
+    Array.isArray(imagenes) && imagenes.length
+      ? imagenes
+      : imagen
+        ? String(imagen).split("|")
+        : []
+  ).map((src) => resolveImageUrl(src)).filter(Boolean);
 
   return (
     <div className={styles.wrapper}>
 
-      {/* Imagen */}
-      {imagenUrl && (
-        <div style={{ width: "100%", marginBottom: "20px" }}>
-          <img
-            src={imagenUrl}
-            alt={nombre}
-            style={{
-              width: "100%",
-              maxHeight: "260px",
-              objectFit: "cover",
-              borderRadius: "14px",
-            }}
-          />
+      {/* Imágenes en cuadrícula */}
+      {listaImagenes.length > 0 && (
+        <div className={styles.imgGrid}>
+          {listaImagenes.map((src, idx) => (
+            <div key={idx} className={styles.imgGridItem}>
+              <img src={src} alt={`${nombre} ${idx + 1}`} className={styles.imgGridImg} />
+            </div>
+          ))}
         </div>
       )}
 
@@ -74,6 +79,7 @@ export default function ProductoDetalle({ producto }) {
 
       <div className={styles.fieldsGrid}>
         <Field label="Nombre del producto" value={nombre} full />
+        <Field label="Descripción" value={descripcion} full />
         <Field label="Categoría" value={categoria_nombre} />
         <Field label="Precio" value={`$${Number(precio).toLocaleString()}`} />
         <Field

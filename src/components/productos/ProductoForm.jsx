@@ -107,6 +107,7 @@ export default function ProductoForm({
 
   const onFormSubmit = (values) => {
     if (!values?.nombre?.trim()) return;
+    if (!values?.descripcion?.trim()) return;
     if (!values?.categoria_id) return;
     const precio = parseFloat(values?.precio);
     if (isNaN(precio) || precio <= 0) return;
@@ -115,6 +116,7 @@ export default function ProductoForm({
 
     const formData = new FormData();
     formData.append("nombre", values.nombre.trim());
+    formData.append("descripcion", values.descripcion.trim());
     formData.append("categoria_id", Number(values.categoria_id));
     formData.append("precio", precio);
     formData.append("stock_producto", stock);
@@ -145,6 +147,18 @@ export default function ProductoForm({
           <FormField label="Nombre del producto *" name="nombre" type="text"
             placeholder="Ej: Pan de trigo" error={errors.nombre}
             {...reg("nombre", { required: REQUIRED, minLength: { value: 2, message: "Mínimo 2 caracteres." } })} />
+        </div>
+
+        {/* Descripción */}
+        <div className={styles.fullWidth}>
+          <FormField label="Descripción *" name="descripcion" type="textarea"
+            placeholder="Describe el producto para que los clientes lo vean en la tienda"
+            error={errors.descripcion}
+            {...reg("descripcion", {
+              required: REQUIRED,
+              minLength: { value: 10, message: "Mínimo 10 caracteres." },
+              maxLength: { value: 500, message: "Máximo 500 caracteres." },
+            })} />
         </div>
 
         {/* Categoría */}

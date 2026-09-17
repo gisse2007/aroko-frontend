@@ -233,6 +233,28 @@
   padding: 0 4px;
 }
 
+/* ── Cuadrícula de imágenes (ej. ProductoDetalle) ── */
+.imgGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 160px));
+  gap: 10px;
+}
+
+.imgGridItem {
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.imgGridImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* ── Not found ── */
 .notFound { color: #b91c1c; font-size: 0.9rem; text-align: center; padding: 20px 0; }
 

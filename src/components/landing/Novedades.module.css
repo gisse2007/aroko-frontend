@@ -183,8 +183,13 @@
   font-size: 0.9rem;
   font-weight: 400;
   color: #7e6a57;
-  line-height: 1.78;
+  line-height: 1.6;
   flex: 1;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ── Footer card ── */
