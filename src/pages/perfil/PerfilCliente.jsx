@@ -98,6 +98,8 @@ function getRolLabel(user){
 
 const PAGE_SIZE = 3;
 
+const TIPOS_DOCUMENTO = ["CC", "TI", "CE", "Pasaporte"];
+
 function Pagination({ page, total, onChange }) {
   const totalPages = Math.ceil(total / PAGE_SIZE);
   if (totalPages <= 1) return null;
@@ -1142,7 +1144,11 @@ function TabConfig({user,onLogout}){
 
   direccion:user?.direccion || "",
 
-  email:user?.correo || ""
+  email:user?.correo || "",
+
+  tipo_documento:user?.tipo_documento || "",
+
+  documento:user?.numero_documento || user?.documento || ""
 
  });
 
@@ -1179,7 +1185,11 @@ function TabConfig({user,onLogout}){
 
    direccion:form.direccion,
 
-   email:form.email
+   email:form.email,
+
+   tipo_documento:form.tipo_documento,
+
+   documento:form.documento
 
   }
  );
@@ -1195,7 +1205,11 @@ function TabConfig({user,onLogout}){
 
  direccion:form.direccion,
 
- correo:form.email
+ correo:form.email,
+
+ tipo_documento:form.tipo_documento,
+
+ numero_documento:form.documento
 
  });
 
@@ -1330,15 +1344,13 @@ function TabConfig({user,onLogout}){
 
  value={form.email}
 
- onChange={
- e=>setForm({
+ readOnly
 
- ...form,
+ disabled
 
- email:e.target.value
+ title="El correo no se puede modificar desde aquí"
 
- })
- }
+ className={styles.inputDisabled}
 
  />
 
@@ -1368,6 +1380,76 @@ function TabConfig({user,onLogout}){
  ...form,
 
  direccion:e.target.value
+
+ })
+ }
+
+ />
+
+
+ </div>
+
+
+
+
+ <div className={styles.field}>
+
+
+ <label>
+ Tipo de documento
+ </label>
+
+
+ <select
+
+ value={form.tipo_documento}
+
+ onChange={
+ e=>setForm({
+
+ ...form,
+
+ tipo_documento:e.target.value
+
+ })
+ }
+
+ >
+
+ <option value="">Seleccionar</option>
+
+ {
+ TIPOS_DOCUMENTO.map(t=>(
+ <option key={t} value={t}>{t}</option>
+ ))
+ }
+
+ </select>
+
+
+ </div>
+
+
+
+
+ <div className={styles.field}>
+
+
+ <label>
+ Número de documento
+ </label>
+
+
+ <input
+
+ value={form.documento}
+
+ onChange={
+ e=>setForm({
+
+ ...form,
+
+ documento:e.target.value.replace(/\D/g,"").slice(0,11)
 
  })
  }

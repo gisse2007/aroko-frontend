@@ -689,6 +689,29 @@
 }
 .field input::placeholder { color: var(--text3); }
 
+.field select {
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s var(--ease);
+  font-family: var(--sans);
+}
+.field select:focus {
+  border-color: var(--blue);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px var(--blue-ring);
+}
+
+.inputDisabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  background: var(--hover) !important;
+}
+
 .formActions { display: flex; justify-content: flex-end; }
 
 .msgOk  { font-size: 0.875rem; color: #16A34A; font-weight: 500; margin: 0; }
