@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import FormField from "../forms/FormField";
 import { useToast } from "../../hooks/useToast";
 import { TIPOS_DOCUMENTO } from "../../hooks/useClientes";
+import { nombreValidationRule } from "../../utils/validarNombre";
 import styles from "../forms/DynamicForm.module.css";
 
 const REQUIRED = "Error: Debe completar todos los campos obligatorios.";
@@ -46,6 +47,7 @@ export default function ClienteForm({
               required: REQUIRED,
               minLength: { value: 3, message: "Mínimo 3 caracteres." },
               maxLength: { value: 100, message: "Máximo 100 caracteres." },
+              ...nombreValidationRule,
             })}
           />
         </div>

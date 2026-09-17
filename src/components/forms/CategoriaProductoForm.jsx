@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import FormField from "../forms/FormField";
+import { nombreValidationRule } from "../../utils/validarNombre";
 import styles from "../forms/DynamicForm.module.css";
 
 export default function CategoriaProductoForm({
@@ -37,6 +38,7 @@ export default function CategoriaProductoForm({
               required: "Debe completar todos los campos requeridos.",
               minLength: { value: 2,   message: "Mínimo 2 caracteres." },
               maxLength: { value: 100, message: "Máximo 100 caracteres." },
+              ...nombreValidationRule,
             })}
           />
         </div>

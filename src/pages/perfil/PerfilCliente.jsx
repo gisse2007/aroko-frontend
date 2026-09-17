@@ -15,6 +15,7 @@ import { resolveImageUrl } from "../../utils/image";
 import { useOrders } from "../../hooks/useOrders";
 import Tooltip from "../../components/Tooltip/Tooltip";
 import NotificationBell from "../../components/notificaciones/NotificationBell";
+import { NOMBRE_REGEX } from "../../utils/validarNombre";
 import styles from "./PerfilCliente.module.css";
 
 
@@ -1167,6 +1168,12 @@ function TabConfig({user,onLogout}){
 
 
  e.preventDefault();
+
+
+ if(!NOMBRE_REGEX.test(form.nombre_usuario.trim())){
+ setMensaje("El nombre solo puede contener letras y espacios (sin números ni caracteres especiales).");
+ return;
+ }
 
 
  setBusy(true);

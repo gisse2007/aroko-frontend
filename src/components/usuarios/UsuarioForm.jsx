@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import FormField from "../forms/FormField";
 import { useToast } from "../../hooks/useToast";
+import { nombreValidationRule } from "../../utils/validarNombre";
 import styles from "../forms/DynamicForm.module.css";
 
 const REQUIRED = "Este campo es obligatorio.";
@@ -34,6 +35,7 @@ export default function UsuarioForm({
         <FormField label="Nombre" name="nombre_usuario" type="text" placeholder="Nombre completo"
           error={errors.nombre_usuario} {...reg("nombre_usuario", {
             maxLength: { value: 100, message: "Máximo 100 caracteres." },
+            ...nombreValidationRule,
           })} />
 
         {/* Teléfono */}

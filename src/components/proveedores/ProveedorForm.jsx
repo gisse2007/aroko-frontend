@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import FormField from "../forms/FormField";
 import { useToast } from "../../hooks/useToast";
 import { useEmpleadoActual } from "../../hooks/useEmpleadoActual";
+import { nombreValidationRule } from "../../utils/validarNombre";
 import styles from "../forms/DynamicForm.module.css";
 
 const REQUIRED_MSG = "Todos los campos obligatorios deben ser diligenciados.";
@@ -52,6 +53,7 @@ export default function ProveedorForm({ defaultValues = {}, empleados = [], onSu
               required: REQUIRED_MSG,
               minLength: { value: 3, message: "Mínimo 3 caracteres" },
               maxLength: { value: 100, message: "Máximo 100 caracteres" },
+              ...nombreValidationRule,
             })}
           />
         </div>

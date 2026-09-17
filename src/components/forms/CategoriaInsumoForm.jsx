@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import FormField from "../forms/FormField";
+import { nombreValidationRule } from "../../utils/validarNombre";
 import styles from "../forms/DynamicForm.module.css";
 
 export default function CategoriaInsumoForm({
@@ -37,6 +38,7 @@ export default function CategoriaInsumoForm({
               required: "El nombre de la categoría es obligatorio.",
               minLength: { value: 3,   message: "El nombre debe tener entre 3 y 120 caracteres." },
               maxLength: { value: 120, message: "El nombre debe tener entre 3 y 120 caracteres." },
+              ...nombreValidationRule,
             })}
           />
         </div>

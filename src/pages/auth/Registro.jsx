@@ -8,6 +8,7 @@ import api from "../../api/axios";
 import { useAuthContext } from "../../context/AuthContext";
 import { useToast } from "../../hooks/useToast";
 import Toast from "../../components/Toast";
+import { NOMBRE_REGEX } from "../../utils/validarNombre";
 
 // Unsplash: pan artesanal rústico, luz natural cálida, panadería gourmet
 const REGISTRO_IMG =
@@ -57,6 +58,8 @@ export default function Registro() {
   const validate = () => {
     if (!form.nombre.trim())
       return "El nombre completo es obligatorio.";
+    if (!NOMBRE_REGEX.test(form.nombre.trim()))
+      return "El nombre solo puede contener letras y espacios (sin números ni caracteres especiales).";
     if (!form.correo.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.correo))
       return "Ingresa un correo electrónico válido.";
     if (!form.tipo_documento)

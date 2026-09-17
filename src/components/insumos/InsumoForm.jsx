@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import FormField from "../forms/FormField";
+import { nombreValidationRule } from "../../utils/validarNombre";
 import styles from "../forms/DynamicForm.module.css";
 import tipoStyles from "./InsumoForm.module.css";
 
@@ -65,6 +66,7 @@ export default function InsumoForm({ defaultValues = {}, categorias = [], onSubm
                 required: REQUIRED_MSG,
                 minLength: { value: 2, message: "Mínimo 2 caracteres" },
                 maxLength: { value: 100, message: "Máximo 100 caracteres" },
+                ...nombreValidationRule,
               })}
             />
           </div>

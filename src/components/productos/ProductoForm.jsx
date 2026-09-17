@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { FiTrash2, FiPlusCircle, FiAlertTriangle, FiUploadCloud, FiList, FiX } from "react-icons/fi";
 import FormField from "../forms/FormField";
 import { resolveImageUrl } from "../../utils/image";
+import { nombreValidationRule } from "../../utils/validarNombre";
 import styles from "./ProductoForm.module.css";
 import { formatCantidad } from "../../utils/number";
 
@@ -146,7 +147,7 @@ export default function ProductoForm({
         <div className={styles.fullWidth}>
           <FormField label="Nombre del producto *" name="nombre" type="text"
             placeholder="Ej: Pan de trigo" error={errors.nombre}
-            {...reg("nombre", { required: REQUIRED, minLength: { value: 2, message: "Mínimo 2 caracteres." } })} />
+            {...reg("nombre", { required: REQUIRED, minLength: { value: 2, message: "Mínimo 2 caracteres." }, ...nombreValidationRule })} />
         </div>
 
         {/* Descripción */}
