@@ -1,37 +1,63 @@
 .card {
-  background: #fff;
-  border-radius: 10px;
+  background: linear-gradient(180deg, #ffffff, var(--surface-soft));
+  border-radius: var(--radius);
   padding: 18px 20px;
   border: 1px solid var(--border);
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-sm);
 }
 
 .heading {
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--chocolate);
   margin-bottom: 16px;
   letter-spacing: 0.01em;
 }
 
-.list { display: flex; flex-direction: column; gap: 13px; }
+.list { display: flex; flex-direction: column; gap: 14px; }
 
-.row { display: flex; align-items: flex-start; gap: 10px; }
+.row { display: flex; align-items: flex-start; gap: 12px; }
 
 .rank {
-  font-size: 0.68rem;
-  font-weight: 700;
+  font-size: 0.72rem;
+  font-weight: 800;
   color: var(--muted-warm);
-  width: 20px;
-  padding-top: 3px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   font-variant-numeric: tabular-nums;
 }
 
-.row:first-child .rank { color: var(--accent); }
-.row:nth-child(2) .rank { color: var(--gold); }
-.row:nth-child(3) .rank { color: var(--caramel); }
+.row:first-child .rank {
+  color: #0d2b33;
+  background: linear-gradient(135deg, var(--accent), #2a9cbf);
+  border-color: transparent;
+  box-shadow: 0 3px 10px rgba(59, 190, 218, 0.4);
+}
+.row:nth-child(2) .rank {
+  color: #5c3d00;
+  background: linear-gradient(135deg, var(--gold), #e0ab52);
+  border-color: transparent;
+  box-shadow: 0 3px 10px rgba(245, 201, 122, 0.4);
+}
+.row:nth-child(3) .rank {
+  color: #fff;
+  background: linear-gradient(135deg, var(--caramel), #a5611e);
+  border-color: transparent;
+  box-shadow: 0 3px 10px rgba(196, 122, 43, 0.35);
+}
 
-.info { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.info { flex: 1; display: flex; flex-direction: column; gap: 6px; padding-top: 2px; }
 
 .nameRow {
   display: flex;
@@ -41,8 +67,8 @@
 }
 
 .name {
-  font-size: 0.82rem;
-  font-weight: 500;
+  font-size: 0.84rem;
+  font-weight: 600;
   color: var(--chocolate);
   white-space: nowrap;
   overflow: hidden;
@@ -53,7 +79,7 @@
 .sold { font-size: 0.7rem; color: var(--muted-warm); flex-shrink: 0; }
 
 .barTrack {
-  height: 4px;
+  height: 5px;
   background: var(--surface-soft);
   border-radius: 3px;
   overflow: hidden;
@@ -61,10 +87,9 @@
 
 .barFill {
   height: 100%;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent), var(--gold));
   border-radius: 3px;
   transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-  opacity: 0.85;
 }
 
 .stock { font-size: 0.68rem; color: var(--muted-warm); }

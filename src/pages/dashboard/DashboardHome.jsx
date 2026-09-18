@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { FiShoppingBag, FiShoppingCart, FiClipboard, FiRefreshCw } from "react-icons/fi";
+import { FiShoppingBag, FiShoppingCart, FiClipboard, FiRefreshCw, FiUsers, FiPackage, FiDollarSign } from "react-icons/fi";
 import KpiPeriodCard   from "../../components/dashboard/KpiPeriodCard";
 import TopProductsCard from "../../components/dashboard/TopProductsCard";
 import StockAlertCard  from "../../components/dashboard/StockAlertCard";
@@ -44,13 +44,13 @@ export default function DashboardHome() {
 
       {/* ── Barra superior: resumen rápido ── */}
       <div className={styles.resumeRow}>
-        <KpiCard title="Clientes activos"   value={resumen.clientes_activos   ?? "—"} />
-        <KpiCard title="Productos activos"  value={resumen.productos_activos  ?? "—"} />
-        <KpiCard title="Pedidos en curso"   value={resumen.pedidos_en_curso   ?? "—"} accent />
-        <KpiCard title="Ventas hoy"         value={resumen.ventas_hoy         ?? "—"} />
+        <KpiCard title="Clientes activos"   value={resumen.clientes_activos   ?? "—"} icon={<FiUsers />} />
+        <KpiCard title="Productos activos"  value={resumen.productos_activos  ?? "—"} icon={<FiPackage />} />
+        <KpiCard title="Pedidos en curso"   value={resumen.pedidos_en_curso   ?? "—"} icon={<FiClipboard />} accent />
+        <KpiCard title="Ventas hoy"         value={resumen.ventas_hoy         ?? "—"} icon={<FiShoppingBag />} />
         <KpiCard title="Ingresos del mes"   value={resumen.ingresos_mes
           ? `$${Math.round(resumen.ingresos_mes).toLocaleString("es-CO")}`
-          : "—"} accent />
+          : "—"} icon={<FiDollarSign />} accent />
       </div>
 
       {error && (
@@ -63,10 +63,13 @@ export default function DashboardHome() {
       )}
 
       {/* ── KPIs periódicos ── */}
-      <section className={styles.kpiGrid}>
-        <KpiPeriodCard title="Ventas"   icon={<FiShoppingBag />}  data={salesData}     loading={loading} />
-        <KpiPeriodCard title="Compras"  icon={<FiShoppingCart />} data={purchasesData} loading={loading} />
-        <KpiPeriodCard title="Pedidos"  icon={<FiClipboard />}    data={ordersData}    loading={loading} />
+      <section>
+        <h2 className={styles.sectionTitle}>Rendimiento por periodo</h2>
+        <div className={styles.kpiGrid}>
+          <KpiPeriodCard title="Ventas"   icon={<FiShoppingBag />}  data={salesData}     loading={loading} />
+          <KpiPeriodCard title="Compras"  icon={<FiShoppingCart />} data={purchasesData} loading={loading} />
+          <KpiPeriodCard title="Pedidos"  icon={<FiClipboard />}    data={ordersData}    loading={loading} />
+        </div>
       </section>
 
       {/* ── Productos + Alertas ── */}

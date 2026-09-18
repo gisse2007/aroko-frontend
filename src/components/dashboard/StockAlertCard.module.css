@@ -1,20 +1,25 @@
 .card {
-  background: #fff;
-  border-radius: 10px;
+  background: linear-gradient(180deg, #ffffff, var(--surface-soft));
+  border-radius: var(--radius);
   padding: 18px 20px;
   border: 1px solid var(--border);
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-sm);
 }
 
 .heading {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 10px;
   margin-bottom: 16px;
 }
 
 .heading h3 {
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--chocolate);
   letter-spacing: 0.01em;
 }
@@ -23,6 +28,13 @@
   color: var(--caramel);
   font-size: 0.95rem;
   flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(196, 122, 43, 0.14);
 }
 
 .list { list-style: none; display: flex; flex-direction: column; gap: 13px; }

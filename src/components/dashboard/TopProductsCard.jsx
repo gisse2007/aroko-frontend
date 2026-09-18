@@ -28,7 +28,7 @@ export default memo(function TopProductsCard({ products = [], loading = false })
                   <div className={styles.barFill} style={{ width: `${(Number(p.sold) / maxSold) * 100}%` }} />
                 </div>
                 <span className={styles.stock}>
-                  Stock: <b style={{ color: Number(p.stock) < 10 ? "#d93025" : "#1a9e5c" }}>{p.stock}</b>
+                  Stock: <b style={{ color: Number(p.stock) < 10 ? "var(--danger)" : "var(--success)" }}>{p.stock}</b>
                 </span>
               </div>
             </div>
