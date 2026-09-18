@@ -15,7 +15,7 @@
 .heading {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #3D1C02;
+  color: var(--chocolate);
   margin: 0;
   letter-spacing: 0.01em;
 }
@@ -23,7 +23,7 @@
 .verBtn {
   font-size: 0.72rem;
   font-weight: 500;
-  color: #8B6F5E;
+  color: var(--muted-warm);
   background: none;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -47,7 +47,7 @@
 .table th {
   text-align: left;
   padding: 7px 10px;
-  color: #8B6F5E;
+  color: var(--muted-warm);
   font-weight: 500;
   font-size: 0.68rem;
   text-transform: uppercase;
@@ -58,7 +58,7 @@
 
 .table td {
   padding: 9px 10px;
-  color: #3D1C02;
+  color: var(--chocolate);
   border-bottom: 1px solid var(--border-soft);
   white-space: nowrap;
 }
@@ -69,13 +69,13 @@
 
 .orderId {
   font-weight: 600;
-  color: #3D1C02;
+  color: var(--chocolate);
   font-variant-numeric: tabular-nums;
 }
 
 .total {
   font-weight: 600;
-  color: #3D1C02;
+  color: var(--chocolate);
   font-variant-numeric: tabular-nums;
 }
 
@@ -90,13 +90,13 @@
 
 .delivered  { background: var(--success-soft); color: var(--success); }
 .confirmed  { background: var(--accent-soft); color: var(--accent-d); }
-.pending    { background: rgba(196, 122, 43, 0.14); color: #C47A2B; }
+.pending    { background: rgba(196, 122, 43, 0.14); color: var(--caramel); }
 .transit    { background: rgba(245, 201, 122, 0.25); color: #8a5a00; }
 .cancelled  { background: var(--danger-soft); color: var(--danger); }
 
 .empty {
   text-align: center;
-  color: #8B6F5E;
+  color: var(--muted-warm);
   font-size: 0.82rem;
   padding: 28px 0;
 }
@@ -136,7 +136,7 @@
   border-radius: 6px;
   background: #fff;
   font-size: 1rem;
-  color: #3D1C02;
+  color: var(--chocolate);
   cursor: pointer;
   transition: background 0.13s, border-color 0.13s;
   line-height: 1;
@@ -144,4 +144,4 @@
 .pageBtn:hover:not(:disabled) { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-d); }
 .pageBtn:disabled { opacity: 0.35; cursor: not-allowed; }
 
-.pageInfo { font-size: 0.72rem; color: #8B6F5E; font-variant-numeric: tabular-nums; }
+.pageInfo { font-size: 0.72rem; color: var(--muted-warm); font-variant-numeric: tabular-nums; }

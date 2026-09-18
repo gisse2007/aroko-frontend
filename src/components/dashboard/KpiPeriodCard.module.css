@@ -42,23 +42,23 @@
   font-size: 0.7rem;
   font-weight: 500;
   cursor: pointer;
-  color: #8B6F5E;
+  color: var(--muted-warm);
   transition: background 0.14s, color 0.14s;
   font-family: inherit;
 }
 
-.tab:hover { color: #3D1C02; }
+.tab:hover { color: var(--chocolate); }
 
 .tab.active {
   background: #fff;
-  color: #3D1C02;
+  color: var(--chocolate);
   font-weight: 600;
   box-shadow: 0 1px 3px rgba(61, 28, 2, 0.12);
 }
 
 .title {
   font-size: 0.72rem;
-  color: #8B6F5E;
+  color: var(--muted-warm);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -73,7 +73,7 @@
 .value {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #3D1C02;
+  color: var(--chocolate);
   letter-spacing: -0.02em;
   line-height: 1;
 }

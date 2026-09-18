@@ -15,12 +15,12 @@
 .heading h3 {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #3D1C02;
+  color: var(--chocolate);
   letter-spacing: 0.01em;
 }
 
 .alertIcon {
-  color: #C47A2B;
+  color: var(--caramel);
   font-size: 0.95rem;
   flex-shrink: 0;
 }
@@ -39,14 +39,14 @@
 .name {
   font-size: 0.82rem;
   font-weight: 500;
-  color: #3D1C02;
+  color: var(--chocolate);
   display: block;
   line-height: 1.3;
 }
 
 .category {
   font-size: 0.68rem;
-  color: #8B6F5E;
+  color: var(--muted-warm);
   margin-top: 1px;
   display: block;
 }
@@ -60,7 +60,7 @@
   flex-shrink: 0;
 }
 
-.warning  { background: rgba(196, 122, 43, 0.14); color: #C47A2B; }
+.warning  { background: rgba(196, 122, 43, 0.14); color: var(--caramel); }
 .critical { background: var(--danger-soft); color: var(--danger); }
 
 .barTrack {
@@ -76,7 +76,7 @@
   transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 
-.barWarning  { background: #C47A2B; opacity: 0.75; }
+.barWarning  { background: var(--caramel); opacity: 0.75; }
 .barCritical { background: var(--danger); opacity: 0.85; }
 
 .skeleton {
@@ -90,7 +90,7 @@
 
 .empty {
   font-size: 0.82rem;
-  color: #8B6F5E;
+  color: var(--muted-warm);
   text-align: center;
   padding: 24px 0;
 }
@@ -102,7 +102,7 @@
 
 .more {
   font-size: 0.72rem;
-  color: #8B6F5E;
+  color: var(--muted-warm);
   text-align: center;
   padding: 8px 0 2px;
   border-top: 1px solid var(--border);

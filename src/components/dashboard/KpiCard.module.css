@@ -29,13 +29,13 @@
 
 .icon {
   font-size: 1.1rem;
-  color: #8B6F5E;
+  color: var(--muted-warm);
   margin-bottom: 2px;
 }
 
 .title {
   font-size: 0.72rem;
-  color: #8B6F5E;
+  color: var(--muted-warm);
   font-weight: 500;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -44,7 +44,7 @@
 .value {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #3D1C02;
+  color: var(--chocolate);
   letter-spacing: -0.02em;
   line-height: 1.2;
 }

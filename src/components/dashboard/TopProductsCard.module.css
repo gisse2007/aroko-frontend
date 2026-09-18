@@ -8,7 +8,7 @@
 .heading {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #3D1C02;
+  color: var(--chocolate);
   margin-bottom: 16px;
   letter-spacing: 0.01em;
 }
@@ -20,7 +20,7 @@
 .rank {
   font-size: 0.68rem;
   font-weight: 700;
-  color: #8B6F5E;
+  color: var(--muted-warm);
   width: 20px;
   padding-top: 3px;
   flex-shrink: 0;
@@ -28,8 +28,8 @@
 }
 
 .row:first-child .rank { color: var(--accent); }
-.row:nth-child(2) .rank { color: #F5C97A; }
-.row:nth-child(3) .rank { color: #C47A2B; }
+.row:nth-child(2) .rank { color: var(--gold); }
+.row:nth-child(3) .rank { color: var(--caramel); }
 
 .info { flex: 1; display: flex; flex-direction: column; gap: 5px; }
 
@@ -43,14 +43,14 @@
 .name {
   font-size: 0.82rem;
   font-weight: 500;
-  color: #3D1C02;
+  color: var(--chocolate);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 160px;
 }
 
-.sold { font-size: 0.7rem; color: #8B6F5E; flex-shrink: 0; }
+.sold { font-size: 0.7rem; color: var(--muted-warm); flex-shrink: 0; }
 
 .barTrack {
   height: 4px;
@@ -67,7 +67,7 @@
   opacity: 0.85;
 }
 
-.stock { font-size: 0.68rem; color: #8B6F5E; }
+.stock { font-size: 0.68rem; color: var(--muted-warm); }
 
 .skeleton {
   height: 40px;
@@ -79,7 +79,7 @@
 
 .empty {
   font-size: 0.82rem;
-  color: #8B6F5E;
+  color: var(--muted-warm);
   text-align: center;
   padding: 24px 0;
 }
